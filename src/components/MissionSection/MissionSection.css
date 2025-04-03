@@ -1,0 +1,72 @@
+.mission {
+  background-color: #fff;
+  color: #333;
+  padding: 4rem 1.5rem; /* Mais padding e relativo */
+  overflow: hidden; /* Evitar quebras de layout inesperadas */
+}
+
+.mission__container {
+  display: flex;
+  flex-wrap: wrap; /* Permite quebrar para layout de coluna em telas menores */
+  align-items: center; /* Alinha os itens verticalmente */
+  justify-content: center; /* Centraliza os itens horizontalmente */
+  gap: 2rem; /* Espaço entre a imagem e o texto */
+  max-width: 1200px; /* Limita a largura máxima */
+  margin: 0 auto; /* Centraliza o container */
+}
+
+.mission__image-container {
+  flex: 1 1 400px; /* Flex: grow, shrink, basis -> permite crescer/encolher, base de 400px */
+  max-width: 600px; /* Limita o tamanho máximo da imagem */
+}
+
+.mission__image-container img {
+  display: block; /* Remove espaço extra abaixo da imagem */
+  width: 100%; /* Faz a imagem ocupar o container */
+  height: auto; /* Mantém a proporção */
+  border-radius: 15px; /* Bordas arredondadas mais sutis */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra leve */
+}
+
+.mission__text-container {
+  flex: 1 1 400px; /* Permite crescer/encolher, base de 400px */
+  text-align: left; /* Alinhamento do texto */
+}
+
+.mission__text-container h2 {
+  font-size: 2rem; /* 32px */
+  color: #00754A;
+  margin-bottom: 1rem; /* 16px */
+}
+
+.mission__text-container p {
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.6;
+  margin-bottom: 1rem; /* Espaço entre parágrafos */
+}
+
+/* Remover estilos antigos de posicionamento */
+/* .mission-text { margin-top: -80px; } -> Removido */
+/* .info-image img { transform: translateY(-100px); } -> Removido */
+/* Chave } extra removida */
+
+@media (max-width: 768px) {
+  .mission {
+    padding: 2.5rem 1rem; /* Menos padding */
+  }
+  .mission__container {
+    flex-direction: column; /* Empilhar imagem e texto */
+    text-align: center; /* Centralizar texto */
+    gap: 1.5rem;
+  }
+  .mission__text-container {
+     text-align: center; /* Centralizar texto no mobile */
+     max-width: 600px; /* Limitar largura do texto */
+  }
+   .mission__text-container h2 {
+     font-size: 1.75rem;
+   }
+   .mission__text-container p {
+     font-size: 1rem;
+   }
+}

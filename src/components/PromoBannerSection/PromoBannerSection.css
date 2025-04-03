@@ -1,0 +1,67 @@
+.promo-banner {
+  position: relative; /* Necessário para o posicionamento absoluto do overlay */
+  min-height: 60vh; /* Altura mínima */
+  background-color: #ccc; /* Cor de fundo fallback */
+  background-image: url('../../assets/images/placeholder-banner.png'); /* !! SUBSTITUA !! */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff; /* Cor padrão caso overlay falhe */
+  padding: 2rem 1rem;
+}
+
+.promo-banner__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Overlay escuro - ajuste opacidade */
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.promo-banner__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px; /* Limitar largura */
+}
+
+.promo-banner__title {
+  /* Estilo Figma: Poppins, 77px, Bold 700, #00754A, Sombra */
+  font-family: 'Poppins', sans-serif; /* Fallback */
+  font-size: clamp(2.5rem, 8vw, 4.8rem); /* 77px é grande, usar clamp para responsividade */
+  font-weight: 700;
+  color: #00754A; /* Verde Principal */
+  line-height: 1.1; /* Ajustado do Figma (52%) */
+  margin-bottom: 0.5rem;
+  /* Sombra do Figma - pode ser pesada, ajuste ou remova se necessário */
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); /* Apenas uma sombra é suficiente */
+  background-color: rgba(255, 255, 255, 0.8); /* Fundo leve para destacar texto verde */
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  display: inline-block; /* Para o background funcionar bem */
+}
+
+.promo-banner__subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1.25rem, 4vw, 1.875rem);
+  font-weight: 300; 
+  color: #ffffff;
+  line-height: 1.4; 
+  max-width: 460px; 
+  margin: 0 auto; /* Centralizar */
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .promo-banner {
+    min-height: 30vh;
+  }
+}

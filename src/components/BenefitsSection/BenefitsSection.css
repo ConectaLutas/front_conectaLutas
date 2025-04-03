@@ -1,0 +1,138 @@
+.benefits-section {
+  padding: 3rem 1.5rem;
+  background-color: #ffffff;
+  overflow: hidden; /* Adicionado para evitar barras de rolagem se a margem negativa "empurrar" para fora */
+}
+
+.benefits-section__container {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  align-items: center;
+  justify-content: center;
+  /* Removido gap para controlar espaçamento/sobreposição com margens */
+  /* gap: 2rem; */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.benefits-section__text {
+  flex: 1 1 450px;
+  text-align: left;
+  padding-right: 1rem; /* Adiciona um pouco de espaço para não colar nas imagens */
+}
+
+.benefits-section__text h2 {
+  font-family: 'Arimo', sans-serif;
+  font-size: clamp(2rem, 5vw, 2.7rem);
+  font-weight: 700;
+  color: #00754A;
+  line-height: 1.2;
+  letter-spacing: -0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.benefits-section__text h3 {
+  font-family: 'Spectral SC', serif;
+  font-size: clamp(1.3rem, 4vw, 1.7rem);
+  font-weight: 800;
+  color: #1E1616;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.benefits-section__images {
+  flex: 1 1 500px;
+  display: flex;
+  /* Removido gap aqui também */
+  /* gap: 1.5rem; */
+  justify-content: center; /* Centraliza o grupo de imagens */
+  align-items: center; /* Alinha verticalmente se tiverem alturas diferentes */
+  /* Adicionado para que z-index funcione corretamente nos filhos */
+  position: relative;
+  min-height: 400px; /* Defina uma altura mínima ou ajuste conforme necessário */
+}
+
+.benefits-section__img {
+  max-width: 55%; /* Aumentar um pouco para compensar a sobreposição */
+  min-width: 220px;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  /* Adicionado para controle de empilhamento (z-index) */
+  position: relative;
+}
+
+.benefits-section__img:hover {
+   transform: scale(1.03); /* Leve zoom no hover */
+   z-index: 10; /* Garante que a imagem com hover fique por cima */
+}
+
+/* --- AJUSTE PARA SOBREPOSIÇÃO --- */
+
+/* Primeira imagem */
+.benefits-section__img:nth-child(1) {
+  z-index: 1; /* Fica por baixo da segunda */
+  /* Opcional: Pode deslocar levemente para a direita se necessário */
+  /* transform: translateX(1rem); */
+}
+
+/* Segunda imagem */
+.benefits-section__img:nth-child(2) {
+  z-index: 2; /* Fica por cima da primeira */
+  /* Aplicar a margem negativa para puxar para a esquerda, sobrepondo a primeira */
+  /* Ajuste o valor (-3rem) conforme o quanto você quer de sobreposição */
+  margin-left: -6rem;
+  /* Opcional: Pode deslocar levemente para a esquerda se necessário */
+  /* transform: translateX(-1rem); */
+}
+
+
+/* --- AJUSTES RESPONSIVOS --- */
+
+@media (max-width: 992px) {
+   .benefits-section__container {
+      flex-direction: column-reverse;
+      text-align: center;
+      gap: 1.5rem; /* Adiciona espaço vertical entre texto e imagens */
+   }
+    .benefits-section__text {
+      text-align: center;
+      padding-right: 0; /* Remove padding desnecessário */
+   }
+   .benefits-section__images {
+      justify-content: center;
+      flex-wrap: nowrap; /* Evitar que quebre linha aqui */
+      min-height: auto; /* Resetar altura mínima */
+   }
+   .benefits-section__img {
+     max-width: 60%; /* Ajustar tamanho para layout empilhado */
+     /* Resetar sobreposição */
+     margin-bottom: 0; /* Remover margem usada para espaçamento vertical */
+   }
+   /* Resetar sobreposição quando empilhado */
+   .benefits-section__img:nth-child(2) {
+     margin-left: -2rem; /* Manter um pouco de sobreposição ou zerar? Testar. */
+     /* ou margin-left: 0; para remover completamente */
+   }
+   /* Resetar transforms se foram usados */
+   /* .benefits-section__img:nth-child(1),
+   .benefits-section__img:nth-child(2) {
+      transform: translateX(0);
+   } */
+}
+
+ @media (max-width: 576px) {
+    .benefits-section__text h2 {
+      font-size: 1.8rem;
+    }
+     .benefits-section__text h3 {
+      font-size: 1.2rem;
+    }
+    .benefits-section__img {
+     max-width: 70%; /* Ajustar tamanho para mobile */
+   }
+    /* Ajustar sobreposição para telas bem pequenas */
+    .benefits-section__img:nth-child(2) {
+     margin-left: -1.5rem;
+   }
+ }

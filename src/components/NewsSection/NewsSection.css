@@ -1,0 +1,106 @@
+.news-section {
+    padding: 3rem 1.5rem;
+    background-color: #ffffff; /* Fundo branco */
+  }
+  
+  .news-section__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .news-section__title {
+    /* Estilo Figma: Inter, 42px, Bold 700, #000000 */
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1.8rem, 5vw, 2.625rem); /* 42px */
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  
+  .news-section__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .news-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden; /* Garante que a imagem não vaze */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column; /* Empilha imagem e conteúdo */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .news-card:hover {
+     transform: translateY(-5px);
+     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+  }
+  
+  .news-card__image {
+    width: 100%;
+    height: 200px; /* Altura fixa para a imagem */
+    object-fit: cover; /* Cobre o espaço sem distorcer */
+    display: block;
+  }
+  
+  .news-card__content {
+    padding: 1rem;
+    flex-grow: 1; /* Faz o conteúdo ocupar o espaço restante */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .news-card__title {
+    /* Estilo Figma: Poppins, 17px, Bold 700, #000000 */
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem; /* 17px ajustado */
+    font-weight: 700;
+    color: #333;
+    line-height: 1.4; /* Ajustado */
+    margin: 0 0 0.25rem 0; /* Espaçamento */
+  }
+  
+  .news-card__date {
+    /* Estilo Figma: Poppins, 10px, Regular 400 */
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.75rem; /* 10px ajustado */
+    font-weight: 400;
+    color: #777;
+    margin-bottom: 0.5rem;
+    display: block; /* Garante quebra de linha */
+  }
+  
+  .news-card__excerpt {
+    /* Estilo Figma: Poppins, 10px, Regular/Medium 400/500 */
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.875rem; /* 10px é muito pequeno, aumentado para 14px */
+    font-weight: 400;
+    color: #555;
+    line-height: 1.6; /* Ajustado */
+    margin: 0 0 1rem 0;
+    flex-grow: 1; /* Ocupa espaço antes do link/botão */
+  }
+  
+  .news-card__link {
+    /* Estilo Figma: Botão "saiba" */
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 0.8125rem; /* 13px */
+    line-height: 1; /* Ajustado */
+    color: #FFFFFF;
+    background-color: #00754A;
+    border-radius: 27px; /* Raio de borda do Figma */
+    padding: 0.5rem 1rem; /* Espaçamento interno */
+    text-decoration: none;
+    text-align: center;
+    display: inline-block; /* Para padding funcionar */
+    align-self: flex-start; /* Alinha o botão à esquerda */
+    transition: background-color 0.3s ease;
+  }
+  
+  .news-card__link:hover {
+    background-color: #005c3a; /* Tom mais escuro de verde */
+  }

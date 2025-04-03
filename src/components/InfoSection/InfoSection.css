@@ -1,0 +1,44 @@
+/* src/components/InfoSection/InfoSection.css */
+.info {
+  position: relative;
+  display: flex;
+  flex-direction: column; /* Alinha os elementos em coluna */
+  align-items: center;
+  background-color: #00754A;
+  color: #fff;
+  padding: 5px 10px;
+  padding-bottom: 60px;
+
+}
+
+.info__content {
+  max-width: 800px; /* Limita a largura do texto para melhor leitura */
+  width: 100%; /* Ocupa o espaço disponível até o max-width */
+  text-align: left; /* Alinhamento padrão */
+}
+
+.info__content h2 {
+  font-size: 2rem; /* 32px / 16px */
+  margin-bottom: 1rem; /* 16px */
+  color: #fff; /* Garantir contraste */
+}
+
+.info__content p {
+  font-size: 1.25rem; /* 20px / 16px */
+  line-height: 1.6; /* Melhorar legibilidade */
+  margin: 0; /* Remover margem padrão do parágrafo se não necessária */
+}
+
+@media (max-width: 768px) {
+  .info {
+    padding: 2rem 1rem; /* Reduzir padding em telas menores */
+  }
+  .info__content h2 {
+    font-size: 1.75rem; /* Ajustar tamanho da fonte */
+  }
+  .info__content p {
+    font-size: 1.125rem; /* Ajustar tamanho da fonte */
+  }
+}
+
+

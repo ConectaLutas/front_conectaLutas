@@ -1,47 +1,59 @@
 import React from 'react';
-// import { Link } from 'react-router-dom'; // Se estiver usando
-import './Header.css';
-import logo from '../../assets/images/logo.png'; // Verifique o caminho
+// Importa Link para navegação declarativa e useNavigate para navegação programática
+import { Link, useNavigate } from 'react-router-dom';
+import './Header.css'; // Importa o CSS específico do Header
+import logo from '../../assets/images/logo.png'; // Caminho para a logo
 
 const Header = () => {
-  const handleLogin = () => {
-    alert('Botão Login Clicado!');
+  // Hook useNavigate: retorna uma função que permite navegar programaticamente
+  const navigate = useNavigate();
+
+  // Função para lidar com o clique no botão Login
+  const handleLoginClick = () => {
+    console.log('Navegando para /login'); // Log para depuração
+    navigate('/login'); // Usa a função navigate para ir para a rota /login
   };
 
-  const handleRegister = () => {
-    alert('Botão Cadastre-se Clicado!');
+  // Função para lidar com o clique no botão Cadastre-se
+  const handleRegisterClick = () => {
+    console.log('Navegando para /register'); // Log para depuração
+    navigate('/register'); // Usa a função navigate para ir para a rota /register
   };
 
-  // const NavLink = ({ to, children }) => ( // Mantenha sua lógica de Link/a
-  //    <a href={to}>{children}</a>
-  // );
-   // Temporário para o exemplo funcionar
-   const NavLink = ({ to, children }) => <a href={to}>{children}</a>;
-
+  // Componente auxiliar para links de navegação (opcional, mas organiza)
+  // Usa o <Link> do react-router-dom para navegação sem recarregar a página
+  const NavLink = ({ to, children }) => (
+     <li><Link to={to}>{children}</Link></li>
+  );
 
   return (
     <header className="header">
       <div className="header__logo">
-        <NavLink to="/">
+        {/* Logo também é um link para a página inicial */}
+        <Link to="/">
           <img src={logo} alt="Logo Jiujitsu Platform" />
-        </NavLink>
+        </Link>
       </div>
       <nav className="header__nav">
         <ul>
-          <li><NavLink to="/">Início</NavLink></li>
-          <li><NavLink to="/novidades">Novidades</NavLink></li>
-          <li><NavLink to="/divulgue">Divulgue sua Academia</NavLink></li>
-          <li><NavLink to="/quem-somos">Quem Somos</NavLink></li>
+          {/* Links de navegação principais */}
+          <NavLink to="/">Início</NavLink>
+          {/* Links para rotas futuras (precisarão ser definidas no App.jsx) */}
+          <NavLink to="/novidades">Novidades</NavLink>
+          <NavLink to="/divulgue">Divulgue sua Academia</NavLink>
+          <NavLink to="/quem-somos">Quem Somos</NavLink>
         </ul>
       </nav>
       <div className="header__actions">
-        {/* Botão Login (sem classe específica extra) */}
-        <button type="button" onClick={handleLogin}>Login</button>
-        {/* Botão Cadastre-se COM a nova classe */}
+        {/* Botão de Login */}
+        <button type="button" onClick={handleLoginClick}>
+          Login
+        </button>
+        {/* Botão de Cadastro */}
         <button
           type="button"
-          onClick={handleRegister}
-          className="button--register" // <-- ADICIONADO A CLASSE AQUI
+          onClick={handleRegisterClick}
+          className="button--register" // Classe para o estilo amarelo
         >
           Cadastre-se
         </button>

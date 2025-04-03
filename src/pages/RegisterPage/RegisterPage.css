@@ -1,0 +1,85 @@
+/* Baseado no LoginPage.css - copie e cole, depois ajuste os nomes das classes */
+.register-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 150px); /* Ajuste conforme header/footer */
+    padding: 2rem 1rem;
+    background-color: #f4f4f4;
+  }
+  
+  .register-container {
+    background-color: #fff;
+    padding: 2rem 2.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px; /* Pode ser um pouco maior que o login */
+    text-align: center;
+  }
+  
+  .register-container h2 {
+    margin-bottom: 1.5rem;
+    color: #00754A;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .register-form .form-group {
+    margin-bottom: 1rem;
+    text-align: left;
+  }
+  
+  .register-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-weight: 600;
+  }
+  
+  .register-form input[type="text"],
+  .register-form input[type="email"],
+  .register-form input[type="password"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1rem;
+  }
+  
+  .register-button {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #FFD700; /* Botão de cadastro amarelo */
+    color: #333; /* Texto escuro para contraste */
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+  }
+  
+  .register-button:hover {
+    background-color: #e6c300; /* Amarelo mais escuro */
+  }
+  
+  .login-link,
+  .home-link {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  .login-link a,
+  .home-link a {
+    color: #00754A;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  
+  .login-link a:hover,
+  .home-link a:hover {
+    text-decoration: underline;
+  }

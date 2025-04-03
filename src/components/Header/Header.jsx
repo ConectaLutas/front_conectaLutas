@@ -1,37 +1,33 @@
 import React from 'react';
-// Se estiver usando React Router para navegação SPA
-// import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom'; // Se estiver usando
 import './Header.css';
-import logo from '../../assets/images/logo.png'; // Certifique-se que o caminho está correto
+import logo from '../../assets/images/logo.png'; // Verifique o caminho
 
 const Header = () => {
-  // Funções placeholder para os botões
   const handleLogin = () => {
     alert('Botão Login Clicado!');
-    // Aqui iria a lógica de login/redirecionamento
   };
 
   const handleRegister = () => {
     alert('Botão Cadastre-se Clicado!');
-    // Aqui iria a lógica de cadastro/redirecionamento
   };
 
-  // Use <Link> se estiver usando react-router-dom, senão mantenha <a>
-  const NavLink = ({ to, children }) => (
-     // <Link to={to}>{children}</Link> // Opção com React Router
-     <a href={to}>{children}</a> // Opção sem React Router
-  );
+  // const NavLink = ({ to, children }) => ( // Mantenha sua lógica de Link/a
+  //    <a href={to}>{children}</a>
+  // );
+   // Temporário para o exemplo funcionar
+   const NavLink = ({ to, children }) => <a href={to}>{children}</a>;
+
 
   return (
     <header className="header">
       <div className="header__logo">
-        <NavLink to="/"> {/* Link para a página inicial */}
-          <img src={logo} alt="Logo Jiujitsu Platform" /> {/* Alt text mais descritivo */}
+        <NavLink to="/">
+          <img src={logo} alt="Logo Jiujitsu Platform" />
         </NavLink>
       </div>
       <nav className="header__nav">
         <ul>
-          {/* Usando NavLink para consistência */}
           <li><NavLink to="/">Início</NavLink></li>
           <li><NavLink to="/novidades">Novidades</NavLink></li>
           <li><NavLink to="/divulgue">Divulgue sua Academia</NavLink></li>
@@ -39,8 +35,16 @@ const Header = () => {
         </ul>
       </nav>
       <div className="header__actions">
+        {/* Botão Login (sem classe específica extra) */}
         <button type="button" onClick={handleLogin}>Login</button>
-        <button type="button" onClick={handleRegister}>Cadastre-se</button>
+        {/* Botão Cadastre-se COM a nova classe */}
+        <button
+          type="button"
+          onClick={handleRegister}
+          className="button--register" // <-- ADICIONADO A CLASSE AQUI
+        >
+          Cadastre-se
+        </button>
       </div>
     </header>
   );

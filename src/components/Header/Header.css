@@ -92,3 +92,38 @@
       width: 80%; /* Botões ocupam mais largura */
    }
 }
+
+/* Estilos existentes para .header__actions button (mantém a base) */
+.header__actions button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  background-color: #eee; /* Cor padrão para outros botões */
+  color: #00754A;       /* Cor padrão do texto */
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease; /* Adicionado color à transição */
+}
+
+.header__actions button:hover {
+  background-color: #D3D3D3; /* Hover padrão */
+  transform: scale(1.05);
+}
+
+
+/* --- Estilo Específico para o Botão de Cadastro --- */
+
+/* Seleciona o botão com a classe .button--register dentro de .header__actions */
+.header__actions .button--register {
+  background-color: #FFD700; /* Amarelo Ouro - Escolha seu tom preferido! */
+  /* Outras opções de amarelo: #FFC107 (Amber), #FBC02D (Amarelo mais escuro) */
+  color: #333333; /* Cor do texto (preto ou cinza escuro para contraste) */
+}
+
+/* Estilo Hover específico para o botão de cadastro */
+.header__actions .button--register:hover {
+  background-color: #e6c300; /* Tom de amarelo um pouco mais escuro no hover */
+  color: #000000; /* Pode mudar a cor do texto no hover também, se quiser */
+  transform: scale(1.05); /* Mantém o efeito de escala */
+}

@@ -1,41 +1,167 @@
 /* src/index.css */
-/* Reset básico e configuração de fonte */
+:root {
+  /* Cores */
+  --color-primary: #00754A;
+  --color-secondary: #FFD700; /* Amarelo */
+  --color-text-dark: #333333;
+  --color-text-light: #ffffff;
+  --color-text-medium: #555555;
+  --color-text-on-primary: var(--color-text-light);
+  --color-text-on-secondary: var(--color-text-dark);
+  --color-bg-light: #ffffff;
+  --color-bg-medium: #f8f9fa;
+  --color-bg-dark-accent: #eeeeee; /* Era --bg-dark */
+  --color-border: #cccccc;
+  --color-error: #dc3545; /* Cor para erros */
+  --color-success: #28a745; /* Cor para sucesso (opcional) */
+
+  /* Fontes */
+  --font-family-primary: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --font-family-secondary: 'Inter', sans-serif;   /* Exemplo para títulos */
+  --font-family-accent: 'Arimo', sans-serif;    /* Exemplo para destaques */
+  --font-family-code: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+
+  /* Tamanhos de Fonte Base (rem escalará com 'html') */
+  --font-size-sm: 0.875rem; /* 14px base */
+  --font-size-md: 1rem;     /* 16px base */
+  --font-size-lg: 1.125rem; /* 18px base */
+  --font-size-xl: 1.25rem;  /* 20px base */
+  --font-size-h1: 2.5rem;   /* Exemplo H1 */
+  --font-size-h2: 2rem;     /* Exemplo H2 */
+  --font-size-h3: 1.5rem;   /* Exemplo H3 */
+
+  /* Espaçamento (escala comum) */
+  --space-xxs: 0.25rem;  /* 4px */
+  --space-xs: 0.5rem;   /* 8px */
+  --space-sm: 1rem;     /* 16px */
+  --space-md: 1.5rem;   /* 24px */
+  --space-lg: 2rem;     /* 32px */
+  --space-xl: 3rem;     /* 48px */
+
+  /* Bordas e Sombras */
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --box-shadow-light: 0 2px 5px rgba(0, 0, 0, 0.08);
+  --box-shadow-medium: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  /* Transições */
+  --transition-duration: 0.25s;
+  --transition-timing: ease-in-out;
+}
+
+/* Fonte raiz responsiva */
+html {
+  font-size: clamp(15px, 1vw + 0.5rem, 18px); /* Ajuste a fórmula central se necessário */
+  scroll-behavior: smooth; /* Rolagem suave */
+  box-sizing: border-box;
+}
+
+/* Herança de box-sizing */
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  padding: 0;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-md); /* Tamanho padrão */
+  line-height: 1.6; /* Boa legibilidade */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  display: flex; /* Adicionado para flex layout */
-  flex-direction: column; /* Adicionado */
-  min-height: 100vh; /* Adicionado - Garante que o body ocupe pelo menos a altura da tela */
-}
-
-/* Garante que html e o root do React também ocupem a altura */
-html, #root {
-  height: 100%;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--color-bg-medium);
+  color: var(--color-text-dark);
 }
 
-/* Configura o container principal do App para usar Flexbox verticalmente */
-/* Esta classe .App vem do div em App.jsx */
-.App {
+/* Estrutura Flexbox para ocupar altura */
+#root, .App {
   display: flex;
   flex-direction: column;
-  flex-grow: 1; /* Faz o .App crescer para preencher o #root */
+  flex-grow: 1;
 }
 
-/* Garante que a área <main> (onde as páginas são renderizadas) cresça */
 main {
-  flex-grow: 1; /* Essencial para que o conteúdo principal ocupe o espaço */
-  display: flex; /* Para que o filho (.login-page) possa usar flex-grow */
-  flex-direction: column; /* Para alinhar filhos verticalmente */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Garante que main ocupe a largura */
 }
 
+/* Estilos base para Títulos (podem ser sobrescritos nos componentes) */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-secondary);
+  line-height: 1.3;
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-sm);
+  font-weight: 600; /* Peso padrão para títulos */
+}
+
+h1 { font-size: var(--font-size-h1); }
+h2 { font-size: var(--font-size-h2); }
+h3 { font-size: var(--font-size-h3); }
+/* Ajuste H4, H5, H6 se usar */
+
+p {
+  margin-top: 0;
+  margin-bottom: var(--space-sm);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-duration) var(--transition-timing);
+  border-radius: var(--border-radius-sm); /* Adicionar raio para o foco */
+}
+a:hover {
+  text-decoration: underline;
+}
+/* Substituir outline padrão por um box-shadow sutil */
+a:focus-visible { /* Usar :focus-visible para aplicar apenas no foco via teclado/navegação */
+  outline: none; /* Remover outline padrão */
+  box-shadow: 0 0 0 3px rgba(var(--color-secondary-rgb, 255, 215, 0), 0.5); /* Sombra com cor secundária (amarelo), precisa definir --color-secondary-rgb se usar rgba() ou usar cor sólida */
+  /* Alternativa: box-shadow: 0 0 0 2px var(--color-bg-light), 0 0 0 4px var(--color-primary); */ /* Anel duplo */
+}
+
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: var(--border-radius-md);
+  padding: var(--space-xs) var(--space-md);
+  border: 1px solid transparent;
+  font-size: var(--font-size-md);
+  transition: background-color var(--transition-duration) var(--transition-timing),
+              transform var(--transition-duration) ease,
+              box-shadow var(--transition-duration) ease; /* Adicionar sombra à transição */
+}
+button:hover {
+    transform: translateY(-1px);
+}
+/* Substituir outline padrão do botão */
+button:focus-visible {
+  outline: none; /* Remover outline padrão */
+  box-shadow: 0 0 0 3px rgba(var(--color-secondary-rgb, 255, 215, 0), 0.6); /* Sombra similar ao link */
+}
+
+img {
+  max-width: 100%; /* Imagens responsivas por padrão */
+  height: auto;
+  display: block; /* Remove espaço extra abaixo */
+}
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: var(--font-family-code);
+}
+
+/* Classe utilitária para centralizar conteúdo (opcional) */
+.container {
+  width: 90%;
+  max-width: 1200px; /* Limite máximo comum */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-sm);
+  padding-right: var(--space-sm);
 }

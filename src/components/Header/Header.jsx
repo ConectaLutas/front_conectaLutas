@@ -1,51 +1,56 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './Header.css';
+import PropTypes from 'prop-types'; // Importar PropTypes
+import './Header.css'; // Usará variáveis CSS definidas em index.css
 import logo from '../../assets/images/logo.png';
+
+// --- Componente Auxiliar NavLink (interno ou movido para arquivo separado) ---
+// Adicionando PropTypes a ele também
+const NavLink = ({ to, children }) => (
+  <li><Link to={to}>{children}</Link></li>
+);
+
+NavLink.propTypes = {
+  to: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+};
+// --- Fim NavLink ---
+
 
 const Header = () => {
   const navigate = useNavigate();
 
-  const handleLoginClick = () => {
-    navigate('/login');
-  };
-
-  const handleRegisterClick = () => {
-    navigate('/register');
-  };
-
-  // Componente auxiliar NavLink (sem alterações)
-  const NavLink = ({ to, children }) => (
-     <li><Link to={to}>{children}</Link></li>
-  );
+  // Funções de navegação (sem necessidade de mudança)
+  const handleLoginClick = () => navigate('/login');
+  const handleRegisterClick = () => navigate('/register');
 
   return (
     <header className="header">
       <div className="header__logo">
-        <Link to="/">
-          <img src={logo} alt="Logo Jiujitsu Platform" />
+        <Link to="/" aria-label="Página Inicial"> {/* aria-label para link de logo */}
+          <img src={logo} alt="Logo Plataforma JiuJitsu" /> {/* Alt text mais específico */}
         </Link>
       </div>
-      <nav className="header__nav">
+
+      <nav className="header__nav" aria-label="Navegação Principal"> {/* aria-label para nav */}
         <ul>
-          {/* Links existentes */}
+          {/* Usando o componente NavLink */}
           <NavLink to="/">Início</NavLink>
-          <NavLink to="/novidades">Novidades</NavLink> {/* Manteve exemplo */}
-          <NavLink to="/divulgue">Divulgue sua Academia</NavLink> {/* Manteve exemplo */}
-
-          {/* --- ADICIONAR NOVO LINK DE NAVEGAÇÃO --- */}
+          {/* Links de exemplo - Crie as páginas correspondentes se necessário */}
+          <NavLink to="/novidades">Novidades</NavLink>
+          <NavLink to="/divulgue">Divulgue sua Academia</NavLink>
           <NavLink to="/quem-somos">Quem Somos</NavLink>
-
         </ul>
       </nav>
+
       <div className="header__actions">
-        <button type="button" onClick={handleLoginClick}>
+        <button type="button" onClick={handleLoginClick} className="button button--login">
           Login
         </button>
         <button
           type="button"
           onClick={handleRegisterClick}
-          className="button--register"
+          className="button button--register" // Classe específica para estilização
         >
           Cadastre-se
         </button>
@@ -53,5 +58,8 @@ const Header = () => {
     </header>
   );
 };
+
+// Header não recebe props externas, então não precisa de PropTypes aqui.
+// Se recebesse, definiria aqui: Header.propTypes = { ... };
 
 export default Header;

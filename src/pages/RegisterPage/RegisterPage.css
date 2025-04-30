@@ -1,99 +1,153 @@
 /* src/pages/RegisterPage/RegisterPage.css */
+
+/* Importar ou reutilizar estilos base de forms se desejar */
+/* @import '../LoginPage/LoginPage.css'; */ /* Cuidado com especificidade se importar */
+
 .register-page {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* min-height: calc(100vh - 150px); /* REMOVIDO */
-  flex-grow: 1; /* ADICIONADO - Ocupa espaço vertical */
-  padding: 2rem 1rem;
-  /* background-color: #f4f4f4; /* REMOVIDO */
-
-  /* --- NOVAS PROPRIEDADES DE BACKGROUND --- */
-  /* !! Ajuste a URL se quiser usar outra imagem !! */
+  flex-grow: 1;
+  padding: var(--space-lg) var(--space-sm); /* Var */
   background-image:
-      linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), /* Camada escura */
-      url('../../assets/images/login.png'); /* Imagem de fundo */
+      linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+      url('../../assets/images/login.png'); /* Ou outra imagem */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .register-container {
-  /* background-color: #fff; /* ALTERADO ABAIXO */
-  background-color: rgba(255, 255, 255, 0.9); /* Branco com 90% de opacidade */
-  padding: 2rem 2.5rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra um pouco mais escura */
+  background-color: rgba(255, 255, 255, 0.95); /* Quase opaco */
+  padding: var(--space-lg); /* Var */
+  border-radius: var(--border-radius-md); /* Var */
+  box-shadow: var(--box-shadow-medium); /* Var */
   width: 100%;
-  max-width: 450px;
+  max-width: 480px; /* Maior para mais campos */
   text-align: center;
-  /* Adicionado para robustez em telas pequenas/formulários longos */
-  max-height: 90vh;
-  overflow-y: auto; /* Scroll interno se necessário */
+  max-height: 95vh;
+  overflow-y: auto;
 }
 
 .register-container h2 {
-  margin-bottom: 1.5rem;
-  color: #00754A;
-  font-family: 'Poppins', sans-serif;
+  margin-top: 0;
+  margin-bottom: var(--space-md); /* Var */
+  color: var(--color-primary); /* Var */
+  font-size: var(--font-size-h2); /* Var */
 }
 
-.register-form .form-group {
-  margin-bottom: 1rem;
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm); /* Var - Espaço entre grupos */
+}
+
+/* Reutilizando estilos de LoginPage.css para .form-group, label, input */
+.form-group {
+  margin-bottom: 0;
   text-align: left;
 }
 
-.register-form label {
+.form-group label {
   display: block;
-  margin-bottom: 0.5rem;
-  color: #333;
+  margin-bottom: var(--space-xs); /* Var */
+  color: var(--color-text-dark); /* Var */
   font-weight: 600;
+  font-size: var(--font-size-sm); /* Var */
 }
 
-.register-form input[type="text"],
-.register-form input[type="email"],
-.register-form input[type="password"] {
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
   width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  font-size: 1rem;
+  padding: var(--space-xs) var(--space-sm); /* Var */
+  border: 1px solid var(--color-border); /* Var */
+  border-radius: var(--border-radius-sm); /* Var */
+  font-size: var(--font-size-md); /* Var */
+  line-height: 1.5;
+}
+.form-group input:focus {
+  outline: none;
+  border-color: var(--color-primary); /* Var */
+  box-shadow: 0 0 0 2px rgba(0, 117, 74, 0.2);
+}
+.form-group input:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+/* Estilo específico para campos inválidos */
+.form-group input[aria-invalid="true"] {
+    border-color: var(--color-error); /* Var */
+}
+.form-group input[aria-invalid="true"]:focus {
+    box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.25); /* Foco vermelho */
 }
 
-.register-button {
+
+/* Mensagem de erro específica do campo */
+.field-error {
+    color: var(--color-error); /* Var */
+    font-size: var(--font-size-sm); /* Var */
+    margin-top: var(--space-xxs); /* Var */
+    margin-bottom: 0;
+}
+
+
+/* Botão de cadastro */
+.button--submit-register {
   width: 100%;
-  padding: 0.8rem;
-  background-color: #FFD700; /* Botão de cadastro amarelo */
-  color: #333;
+  padding: var(--space-sm); /* Var */
+  background-color: var(--color-secondary); /* Var */
+  color: var(--color-text-on-secondary); /* Var */
   border: none;
-  border-radius: 4px;
-  font-size: 1.1rem;
+  font-size: var(--font-size-lg); /* Var */
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 1rem;
+  transition: background-color var(--transition-duration) var(--transition-timing),
+              opacity var(--transition-duration) var(--transition-timing); /* Var */
+  margin-top: var(--space-xs); /* Var */
 }
-
-.register-button:hover {
+.button--submit-register:hover:not(:disabled) {
   background-color: #e6c300; /* Amarelo mais escuro */
+  transform: translateY(-1px);
+}
+.button--submit-register:disabled {
+  opacity: 0.7;
+  cursor: wait;
 }
 
-.login-link,
-.home-link {
-  margin-top: 1.5rem;
-  font-size: 0.9rem;
-  color: #333; /* Cor um pouco mais escura */
+/* Reutilizando estilos de LoginPage.css para .form-link */
+.form-link {
+  margin-top: var(--space-md); /* Var */
+  font-size: var(--font-size-sm); /* Var */
+  color: var(--color-text-medium); /* Var */
 }
-
-.login-link a,
-.home-link a {
-  color: #00754A;
+.form-link a {
+  color: var(--color-primary); /* Var */
   text-decoration: none;
   font-weight: 600;
 }
-
-.login-link a:hover,
-.home-link a:hover {
+.form-link a:hover,
+.form-link a:focus {
   text-decoration: underline;
+}
+.form-link--secondary a {
+    font-weight: 400;
+    color: var(--color-text-medium); /* Var */
+}
+.form-link--secondary a:hover,
+.form-link--secondary a:focus {
+    color: var(--color-text-dark); /* Var */
+}
+
+/* Reutilizando estilos de LoginPage.css para .form-error */
+.form-error {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: var(--color-error); /* Var */
+    border: 1px solid rgba(220, 53, 69, 0.3);
+    border-radius: var(--border-radius-sm); /* Var */
+    padding: var(--space-sm); /* Var */
+    margin-bottom: var(--space-sm); /* Var */
+    text-align: center;
+    font-size: var(--font-size-sm); /* Var */
 }

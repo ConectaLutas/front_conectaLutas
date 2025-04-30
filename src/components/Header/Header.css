@@ -1,129 +1,147 @@
+/* src/components/Header/Header.css */
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap; /* Permite que os itens quebrem a linha em telas menores */
-  background-color: #00754A;
-  padding: 1rem 2.5rem; /* Unidades relativas */
-  color: #fff;
+  flex-wrap: wrap;
+  background-color: var(--color-primary); /* Var */
+  padding: var(--space-sm) clamp(var(--space-sm), 5vw, var(--space-lg)); /* Var + clamp */
+  color: var(--color-text-on-primary); /* Var */
+  flex-shrink: 0;
+  box-shadow: var(--box-shadow-light); /* Adiciona sombra sutil */
+  position: sticky; /* Opcional: Deixar o header fixo no topo */
+  top: 0;
+  z-index: 100; /* Necessário se for sticky */
 }
 
 .header__logo img {
-  height: 3rem; /* Unidade relativa */
+  height: 3rem; /* Ajuste conforme necessário */
   width: auto;
-  display: block; /* Evita espaço extra abaixo da imagem */
+  display: block;
+}
+
+.header__nav {
+  margin: var(--space-xs) 0; /* Espaço vertical em telas pequenas */
 }
 
 .header__nav ul {
   list-style: none;
   display: flex;
-  flex-wrap: wrap; /* Permite quebrar linha em telas muito pequenas */
+  flex-wrap: wrap;
   padding: 0;
   margin: 0;
-  gap: 1.5rem 3rem; /* Espaçamento relativo entre itens (vertical e horizontal) */
-  justify-content: center; /* Centraliza os itens se quebrar linha */
+  gap: var(--space-sm) clamp(var(--space-sm), 4vw, var(--space-md)); /* Var + clamp */
+  justify-content: center;
 }
 
 .header__nav a {
   text-decoration: none;
-  font-size: 1.125rem; /* 18px / 16px */
-  color: #fff;
-  font-weight: bold;
-  transition: color 0.3s ease;
+  font-size: var(--font-size-md); /* Var */
+  color: var(--color-text-on-primary); /* Var */
+  font-weight: 600; /* Um pouco mais de peso */
+  padding: var(--space-xs) 0; /* Padding para melhor área de clique */
+  transition: color var(--transition-duration) var(--transition-timing); /* Var */
+  position: relative; /* Para pseudo-elemento de sublinhado (opcional) */
 }
+
+/* Efeito de sublinhado animado (opcional) */
+.header__nav a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--color-secondary); /* Var */
+    transform-origin: bottom right;
+    transition: transform var(--transition-duration) var(--transition-timing); /* Var */
+}
+.header__nav a:hover::after,
+.header__nav a:focus::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+/* Fim do efeito animado */
+
 
 .header__nav a:hover,
 .header__nav a:focus {
-   color: #D3D3D3; /* Feedback visual no hover/focus */
-   outline: none; /* Remover outline padrão se customizar o focus */
+   color: var(--color-secondary); /* Var */
+   text-decoration: none; /* Remover sublinhado padrão no hover se usar o efeito ::after */
+   outline: none; /* O foco global do index.css cuidará disso */
 }
 
 .header__actions {
   display: flex;
-  gap: 1rem; /* Espaçamento relativo */
+  gap: var(--space-sm); /* Var */
 }
 
-.header__actions button {
-  padding: 0.75rem 1.5rem; /* 12px 24px */
-  font-size: 1rem; /* 16px */
-  border-radius: 8px;
+/* Estilo base para botões no header */
+.header__actions .button {
+  padding: var(--space-xs) var(--space-md); /* Var */
+  font-size: var(--font-size-sm); /* Var */
+  border-radius: var(--border-radius-md); /* Var */
   cursor: pointer;
   border: none;
-  background-color: #eee; /* Cor de fundo para contraste */
-  color: #00754A; /* Cor do texto */
-  font-weight: bold;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight: 600;
+  transition: background-color var(--transition-duration) var(--transition-timing),
+              transform var(--transition-duration) ease; /* Var */
+}
+.header__actions .button:hover {
+  transform: scale(1.05); /* Efeito de escala no hover */
 }
 
-.header__actions button:hover {
-  background-color: #D3D3D3;
-  transform: scale(1.05);
+/* Botão Login */
+.header__actions .button--login {
+  background-color: var(--color-bg-dark-accent); /* Var */
+  color: var(--color-primary); /* Var */
+}
+.header__actions .button--login:hover {
+  background-color: #dddddd; /* Leve escurecida */
 }
 
-/* Ajustes para telas menores */
-@media (max-width: 992px) { /* Ponto de quebra um pouco maior */
+/* Botão Cadastro */
+.header__actions .button--register {
+  background-color: var(--color-secondary); /* Var */
+  color: var(--color-text-on-secondary); /* Var */
+}
+.header__actions .button--register:hover {
+  background-color: #e6c300; /* Amarelo mais escuro */
+  box-shadow: var(--box-shadow-light);
+}
+
+/* Media Queries */
+@media (max-width: 992px) {
   .header {
-    padding: 1rem 1.5rem;
-    flex-direction: column; /* Empilhar logo, nav e actions */
-    gap: 1rem;
+    padding: var(--space-sm) var(--space-md); /* Var */
+    flex-direction: column;
+    gap: var(--space-sm); /* Var */
+    position: static; /* Remover sticky em mobile se causar problemas */
   }
   .header__nav ul {
-    gap: 1rem 1.5rem; /* Reduzir gap no menu */
-    justify-content: center;
+    gap: var(--space-xs) var(--space-sm); /* Var */
   }
    .header__actions {
      width: 100%;
-     justify-content: center; /* Centralizar botões */
+     justify-content: center;
+     gap: var(--space-md); /* Var */
   }
 }
 
 @media (max-width: 480px) {
    .header__nav ul {
-      flex-direction: column; /* Empilhar links do menu */
+      flex-direction: column;
       align-items: center;
-      gap: 0.8rem;
+      gap: var(--space-xs); /* Var */
    }
     .header__actions {
-      flex-direction: column; /* Empilhar botões */
-      align-items: center;
-      gap: 0.8rem;
+      flex-direction: column;
+      align-items: stretch; /* Botões ocupam largura */
+      gap: var(--space-sm); /* Var */
    }
-   .header__actions button {
-      width: 80%; /* Botões ocupam mais largura */
+   .header__actions .button {
+      width: 100%; /* Ocupa toda a largura no container flex */
+      text-align: center;
    }
-}
-
-/* Estilos existentes para .header__actions button (mantém a base) */
-.header__actions button {
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  border: none;
-  background-color: #eee; /* Cor padrão para outros botões */
-  color: #00754A;       /* Cor padrão do texto */
-  font-weight: bold;
-  transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease; /* Adicionado color à transição */
-}
-
-.header__actions button:hover {
-  background-color: #D3D3D3; /* Hover padrão */
-  transform: scale(1.05);
-}
-
-
-/* --- Estilo Específico para o Botão de Cadastro --- */
-
-/* Seleciona o botão com a classe .button--register dentro de .header__actions */
-.header__actions .button--register {
-  background-color: #FFD700; /* Amarelo Ouro - Escolha seu tom preferido! */
-  /* Outras opções de amarelo: #FFC107 (Amber), #FBC02D (Amarelo mais escuro) */
-  color: #333333; /* Cor do texto (preto ou cinza escuro para contraste) */
-}
-
-/* Estilo Hover específico para o botão de cadastro */
-.header__actions .button--register:hover {
-  background-color: #e6c300; /* Tom de amarelo um pouco mais escuro no hover */
-  color: #000000; /* Pode mudar a cor do texto no hover também, se quiser */
-  transform: scale(1.05); /* Mantém o efeito de escala */
 }

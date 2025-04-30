@@ -1,40 +1,44 @@
 import React from 'react';
-import './Footer.css';
-// Opcional: importar ícones de uma biblioteca (ex: react-icons)
-// import { FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa';
+// import PropTypes from 'prop-types'; // Footer simples, sem props por enquanto
+import './Footer.css'; // Usará variáveis CSS
+
+// Importar ícones (Exemplo com react-icons, instale com 'npm install react-icons')
+// import { FaFacebookF, FaInstagram, FaYoutube } from 'react-icons/fa';
 
 const Footer = () => {
-  // Links corretos ou placeholders
+  const currentYear = new Date().getFullYear();
   const socialLinks = {
-    facebook: 'https://facebook.com', // Use a URL real da sua página
-    instagram: 'https://instagram.com', // Use a URL real da sua página
-    youtube: 'https://youtube.com', // Use a URL real do seu canal
+    facebook: 'https://facebook.com', // Substitua pela URL real
+    instagram: 'https://instagram.com', // Substitua pela URL real
+    youtube: 'https://youtube.com', // Substitua pela URL real
   };
 
   return (
     <footer className="footer">
-      <p>Siga-nos nas Redes Sociais</p>
-      <div className="footer__icons">
-        {/* Usando ícones (exemplo com texto, idealmente usar ícones SVG ou Font Icon) */}
-        <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-          {/* <FaFacebook />  // Exemplo com react-icons */}
-          FB
-        </a>
-        <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-          {/* <FaInstagram /> // Exemplo com react-icons */}
-          IG
-        </a>
-        <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-          {/* <FaYoutube />   // Exemplo com react-icons */}
-          YT {/* Corrigido link placeholder */}
-        </a>
-      </div>
-      <div className="footer__copy">
-         {/* Adicionar ano dinâmico e informações de copyright */}
-         &copy; {new Date().getFullYear()} Sua Plataforma de JiuJitsu. Todos os direitos reservados.
+      <div className="container"> {/* Opcional: Usar container global */}
+        <p className="footer__social-prompt">Siga-nos nas Redes Sociais</p>
+        <div className="footer__icons">
+          <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" aria-label="Nossa página no Facebook">
+            {/* <FaFacebookF /> */} FB {/* Placeholder */}
+          </a>
+          <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" aria-label="Nosso perfil no Instagram">
+            {/* <FaInstagram /> */} IG {/* Placeholder */}
+          </a>
+          <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" aria-label="Nosso canal no YouTube">
+            {/* <FaYoutube /> */} YT {/* Placeholder */}
+          </a>
+        </div>
+        <div className="footer__copy">
+          &copy; {currentYear} Sua Plataforma de JiuJitsu. Todos os direitos reservados.
+          {/* Adicionar links úteis se necessário: | <Link to="/termos">Termos de Uso</Link> | <Link to="/privacidade">Política de Privacidade</Link> */}
+        </div>
       </div>
     </footer>
   );
 };
+
+// Footer.propTypes = {
+//   // Nenhuma prop externa por enquanto
+// };
 
 export default Footer;

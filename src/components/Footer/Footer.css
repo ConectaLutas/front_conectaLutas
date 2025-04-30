@@ -1,42 +1,65 @@
 /* src/components/Footer/Footer.css */
 .footer {
-  background-color: #00754A;
-  color: #fff;
-  /* padding: 1.5rem 1rem; /* Reduzido abaixo */
-  padding: 1rem 1rem; /* Padding vertical reduzido */
+  background-color: var(--color-primary);
+  color: var(--color-text-on-primary);
+  /* Padding vertical bem reduzido */
+  padding: var(--space-sm) var(--space-sm); /* Reduzido */
   text-align: center;
-  /* Adicionado para garantir que não cresça no layout flex */
   flex-shrink: 0;
+  margin-top: auto;
 }
 
-.footer p { /* Estilo para o texto "Siga-nos" */
-  margin-bottom: 0.5rem; /* Reduzido */
-  font-size: 1rem; /* Levemente reduzido */
+.footer .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-sm);
+}
+
+.footer__social-prompt {
+  /* Removido ou pode ser menor */
+  /* margin-bottom: var(--space-xs); */
+  /* font-size: var(--font-size-lg); */
+  /* font-weight: 500; */
+  display: none; /* Ocultar "Siga-nos" para simplificar */
 }
 
 .footer__icons {
-  margin-bottom: 0.8rem; /* Reduzido */
+  /* Menos margem se o texto acima foi removido */
+  margin-bottom: var(--space-xs);
 }
 
 .footer__icons a {
-  color: #fff;
+  color: var(--color-text-on-primary);
   text-decoration: none;
-  margin: 0 0.7rem; /* Espaçamento horizontal levemente reduzido */
-  font-size: 1.3rem; /* Tamanho do ícone/texto reduzido */
-  transition: color 0.3s ease, transform 0.3s ease;
+  margin: 0 var(--space-xs); /* Menos espaço entre ícones */
+  font-size: 1.3rem; /* Tamanho do ícone - um pouco menor */
+  transition: color var(--transition-duration) var(--transition-timing),
+              transform var(--transition-duration) ease;
   display: inline-block;
 }
 
 .footer__icons a:hover,
 .footer__icons a:focus {
-  color: #d3d3d3;
-  transform: scale(1.1);
+  color: var(--color-secondary);
+  transform: scale(1.1); /* Manter efeito leve */
   outline: none;
+  text-decoration: none;
 }
 
-/* Estilo para informações de copyright */
 .footer__copy {
-   font-size: 0.8rem; /* Levemente reduzido */
-   color: rgba(255, 255, 255, 0.8);
-   margin-top: 0.8rem; /* Reduzido */
+   font-size: var(--font-size-sm); /* Manter pequeno */
+   color: rgba(255, 255, 255, 0.8); /* Um pouco mais sutil */
+   /* Margem superior menor ou zero se "Siga-nos" foi removido */
+   margin-top: var(--space-xs);
+}
+
+.footer__copy a {
+    color: var(--color-secondary);
+    margin: 0 var(--space-xs);
+    font-weight: 500; /* Destacar links opcionais */
+}
+.footer__copy a:hover,
+.footer__copy a:focus {
+    color: var(--color-text-on-primary);
 }

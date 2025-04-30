@@ -2,13 +2,13 @@
 .info {
   position: relative;
   display: flex;
-  flex-direction: column; /* Alinha os elementos em coluna */
+  flex-direction: column;
   align-items: center;
-  background-color: #00754A;
-  color: #fff;
-  padding: 5px 10px;
-  padding-bottom: 60px;
-
+  /* background-color: #00754A; */ /* REMOVIDO */
+  background-color: var(--color-primary); /* USANDO VARIÁVEL */
+  color: var(--color-text-on-primary); /* USANDO VARIÁVEL (Texto sobre cor primária) */
+  padding: var(--space-lg) var(--space-md); /* USANDO VARIÁVEIS */
+  /* padding-bottom: 60px; */ /* Removido padding-bottom extra, usar padrão */
 }
 
 .info__content {
@@ -18,10 +18,20 @@
 }
 
 .info__content h2 {
-  font-size: 2rem; /* 32px / 16px */
-  margin-bottom: 1rem; /* 16px */
-  color: #fff; /* Garantir contraste */
+  font-size: var(--font-size-h2);
+  /* margin-bottom: var(--space-sm); */ /* Ajustado abaixo */
+  color: inherit; /* Herda branco do pai */
+  font-family: var(--font-family-secondary);
+
+  /* --- ESTILO DE SUBLINHADO ADICIONADO --- */
+  /* Usar cor secundária (laranja/dourado) que contrastará bem com o fundo azul */
+  border-bottom: 3px solid var(--color-secondary);
+  padding-bottom: var(--space-xs);
+  margin-bottom: var(--space-md); /* Aumentar espaço abaixo da linha */
+  display: inline-block;
+   /* --- FIM SUBLINHADO --- */
 }
+
 
 .info__content p {
   font-size: 1.25rem; /* 20px / 16px */
@@ -35,6 +45,8 @@
   }
   .info__content h2 {
     font-size: 1.75rem; /* Ajustar tamanho da fonte */
+    display: block; /* Ocupa linha no mobile */
+       border-bottom: none; /* Remover no mobile se preferir */
   }
   .info__content p {
     font-size: 1.125rem; /* Ajustar tamanho da fonte */

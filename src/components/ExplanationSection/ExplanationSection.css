@@ -1,54 +1,87 @@
+/* src/components/ExplanationSection/ExplanationSection.css */
 .explanation-section {
-    padding: 3rem 1.5rem;
-    background-color: #00754A; /* Verde escuro, conforme imagem */
-    color: #fff; /* Texto branco para contraste */
-  }
-  
-  .explanation-section__container {
+    padding: var(--space-xl) var(--space-sm); /* USANDO VARIÁVEIS */
+    /* background-color: #00754A; */ /* REMOVIDO */
+    background-color: var(--color-primary); /* USANDO VARIÁVEL */
+    color: var(--color-text-on-primary); /* USANDO VARIÁVEL */
+}
+
+.explanation-section__container {
     display: flex;
-    flex-wrap: wrap; /* Quebra para coluna em telas menores */
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
+    gap: var(--space-lg); /* USANDO VARIÁVEL */
     max-width: 1200px;
     margin: 0 auto;
-  }
-  
-  .explanation-section__text {
-    flex: 1 1 500px; /* Cresce, encolhe, base de 500px */
-    max-width: 700px; /* Limita largura do texto */
-  }
-  
-  .explanation-section__text p {
-    /* Estilo Figma: Poppins, 30px, SemiBold 600, #1E1616 (cor ajustada para branco) */
-    font-family: 'Poppins', sans-serif;
-    font-size: clamp(1.25rem, 4vw, 1.875rem); /* 30px */
-    font-weight: 600;
-    color: #ffffff; /* Ajustado para branco */
-    line-height: 1.6; /* Ajustado do Figma (45px / 30px = 1.5) */
+}
+
+.explanation-section__text {
+    flex: 1 1 500px;
+    max-width: 700px;
+}
+
+.explanation-section__text p {
+    font-family: var(--font-family-primary); /* USANDO VARIÁVEL */
+    font-size: clamp(1.2rem, 3vw, 1.75rem); /* Ajustar clamp */
+    font-weight: 500; /* Um pouco menos pesado que 600 */
+    color: inherit; /* Herda do pai (.explanation-section) */
+    line-height: 1.6;
     margin: 0;
-  }
-  
-  .explanation-section__image {
-    flex: 1 1 400px; /* Cresce, encolhe, base de 400px */
-    text-align: center; /* Centraliza a imagem se for menor que o container */
-  }
-  
-  .explanation-section__image img {
+}
+
+.explanation-section__image {
+    flex: 1 1 400px;
+    text-align: center;
+}
+
+.explanation-section__image img {
     max-width: 100%;
     height: auto;
-    border-radius: 8px;
+    border-radius: var(--border-radius-md); /* USANDO VARIÁVEL */
     display: block;
-    margin: 0 auto; /* Garante centralização */
-    box-shadow: 0 4px 15px rgba(0,0,0, 0.2);
-  }
-  
-  @media (max-width: 768px) {
+    margin: 0 auto;
+    box-shadow: var(--box-shadow-medium); /* USANDO VARIÁVEL */
+}
+
+.benefits-section__text h2 {
+  font-family: var(--font-family-accent);
+  font-size: clamp(2rem, 5vw, 2.7rem);
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1.2;
+  letter-spacing: -0.05em;
+  /* margin-bottom: var(--space-xs); */ /* Ajustado abaixo com padding */
+
+  /* --- ESTILO DE SUBLINHADO ADICIONADO --- */
+  border-bottom: 3px solid var(--color-secondary); /* Linha com cor secundária */
+  padding-bottom: var(--space-xs); /* Espaço entre texto e linha */
+  margin-bottom: var(--space-sm); /* Ajustar margem inferior */
+  display: inline-block; /* Linha apenas sob o texto */
+  /* --- FIM SUBLINHADO --- */
+}
+
+.benefits-section__text h3 {
+  font-family: 'Spectral SC', serif;
+  font-size: clamp(1.3rem, 4vw, 1.7rem);
+  font-weight: 800;
+  color: var(--color-text-dark);
+  line-height: 1.5;
+  margin: 0;
+}
+
+
+@media (max-width: 768px) {
     .explanation-section__container {
-      flex-direction: column; /* Empilha em telas menores */
+      flex-direction: column;
       text-align: center;
     }
     .explanation-section__text {
-       margin-bottom: 1.5rem;
-    }
-  }
+       margin-bottom: var(--space-md); /* USANDO VARIÁVEL */
+        }
+        .benefits-section__text h2 {
+          display: block; /* Em telas menores centralizadas, a linha ocupa a largura */
+          border-bottom: none; /* Ou remover a borda no mobile */
+          /* Se quiser manter a linha curta e centrada no mobile, usar ::after aqui também */
+       }
+}

@@ -1,68 +1,70 @@
+/* src/components/TestimonialsSection/TestimonialsSection.css */
 .testimonials-section {
-    padding: 3rem 1.5rem;
-    background-color: #f8f9fa; /* Fundo levemente cinza */
-  }
-  
-  .testimonials-section__container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .testimonials-section__title {
-    /* Estilo Figma: Inter, 42px, Bold 700, #000000 */
-    font-family: 'Inter', sans-serif;
-    font-size: clamp(1.8rem, 5vw, 2.625rem); /* 42px */
-    font-weight: 700;
-    color: #000000;
-    text-align: center;
-    margin-bottom: 2.5rem;
-  }
-  
-  .testimonials-section__grid {
-    display: grid;
-    /* Cria colunas que se ajustam, com tamanho mínimo e máximo */
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.5rem;
-  }
-  
-  .testimonial-card {
-    background-color: #ffffff;
-    border-radius: 8px;
-    padding: 1.5rem;
-    text-align: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .testimonial-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px S15px rgba(0, 0, 0, 0.12);
-  }
-  
-  .testimonial-card__image {
-    width: 80px; /* Tamanho da imagem de perfil */
-    height: 80px;
-    border-radius: 50%; /* Círculo */
-    object-fit: cover;
-    margin: 0 auto 1rem auto; /* Centraliza e adiciona espaço abaixo */
-    border: 3px solid #00754A; /* Borda verde opcional */
-  }
-  
-  .testimonial-card__name {
-    font-family: 'Inter', sans-serif; /* Manter consistência da fonte */
-    font-size: 1.1rem;
-    font-weight: 600; /* Um pouco mais de destaque */
-    color: #333;
-    margin-bottom: 0.5rem;
-  }
-  
-  .testimonial-card__quote {
-    /* Estilo Figma: Inter, 21px, Medium 500, #000000 */
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem; /* 21px pode ser grande para cards, ajustado */
-    font-weight: 500;
-    color: #555; /* Cor um pouco mais suave */
-    line-height: 1.5; /* Ajustado do Figma (25px/21px) */
-    font-style: italic; /* Citações ficam bem em itálico */
-    margin: 0;
-  }
+  padding: var(--space-xl) var(--space-sm); /* USANDO VARIÁVEIS */
+  background-color: var(--color-bg-medium); /* USANDO VARIÁVEL */
+}
+
+.testimonials-section__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonials-section__title {
+  font-family: var(--font-family-secondary); /* USANDO VARIÁVEL */
+  font-size: var(--font-size-h2); /* USANDO VARIÁVEL */
+  font-weight: 700;
+  color: var(--color-text-dark); /* USANDO VARIÁVEL */
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: var(--space-lg); /* USANDO VARIÁVEL */
+}
+
+.testimonials-section__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-md); /* USANDO VARIÁVEL */
+}
+
+.testimonial-card {
+  background-color: var(--color-bg-light); /* USANDO VARIÁVEL */
+  border-radius: var(--border-radius-md); /* USANDO VARIÁVEL */
+  padding: var(--space-md); /* USANDO VARIÁVEL */
+  text-align: center;
+  box-shadow: var(--box-shadow-light); /* USANDO VARIÁVEL */
+  transition: transform var(--transition-duration) ease,
+              box-shadow var(--transition-duration) ease; /* USANDO VARIÁVEL */
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--box-shadow-medium); /* USANDO VARIÁVEL */
+}
+
+.testimonial-card__image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto var(--space-sm) auto; /* USANDO VARIÁVEL */
+  /* border: 3px solid #00754A; */ /* REMOVIDO */
+  border: 3px solid var(--color-primary); /* USANDO VARIÁVEL primária ou secundária? */
+  /* Ou usar a secundária: border: 3px solid var(--color-secondary); */
+}
+
+.testimonial-card__name {
+  font-family: var(--font-family-secondary); /* USANDO VARIÁVEL */
+  font-size: var(--font-size-lg); /* USANDO VARIÁVEL */
+  font-weight: 600;
+  color: var(--color-text-dark); /* USANDO VARIÁVEL */
+  margin-bottom: var(--space-xs); /* USANDO VARIÁVEL */
+}
+
+.testimonial-card__quote {
+  font-family: var(--font-family-primary); /* USANDO VARIÁVEL */
+  font-size: var(--font-size-md); /* USANDO VARIÁVEL */
+  font-weight: 400; /* Normal weight */
+  color: var(--color-text-medium); /* USANDO VARIÁVEL */
+  line-height: 1.5;
+  font-style: italic;
+  margin: 0;
+}

@@ -1,72 +1,75 @@
+/* src/components/MissionSection/MissionSection.css */
 .mission {
-  background-color: #fff;
-  color: #333;
-  padding: 4rem 1.5rem; /* Mais padding e relativo */
-  overflow: hidden; /* Evitar quebras de layout inesperadas */
+  background-color: var(--color-bg-light); /* USANDO VARIÁVEL */
+  color: var(--color-text-dark); /* USANDO VARIÁVEL */
+  padding: var(--space-xl) var(--space-sm); /* USANDO VARIÁVEIS */
+  overflow: hidden;
 }
 
 .mission__container {
   display: flex;
-  flex-wrap: wrap; /* Permite quebrar para layout de coluna em telas menores */
-  align-items: center; /* Alinha os itens verticalmente */
-  justify-content: center; /* Centraliza os itens horizontalmente */
-  gap: 2rem; /* Espaço entre a imagem e o texto */
-  max-width: 1200px; /* Limita a largura máxima */
-  margin: 0 auto; /* Centraliza o container */
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-lg); /* USANDO VARIÁVEL */
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .mission__image-container {
-  flex: 1 1 400px; /* Flex: grow, shrink, basis -> permite crescer/encolher, base de 400px */
-  max-width: 600px; /* Limita o tamanho máximo da imagem */
+  flex: 1 1 400px;
+  max-width: 600px;
 }
 
 .mission__image-container img {
-  display: block; /* Remove espaço extra abaixo da imagem */
-  width: 100%; /* Faz a imagem ocupar o container */
-  height: auto; /* Mantém a proporção */
-  border-radius: 15px; /* Bordas arredondadas mais sutis */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra leve */
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--border-radius-md); /* USANDO VARIÁVEL */
+  box-shadow: var(--box-shadow-medium); /* USANDO VARIÁVEL */
 }
 
 .mission__text-container {
-  flex: 1 1 400px; /* Permite crescer/encolher, base de 400px */
-  text-align: left; /* Alinhamento do texto */
+  flex: 1 1 400px;
+  text-align: left;
 }
 
 .mission__text-container h2 {
-  font-size: 2rem; /* 32px */
-  color: #00754A;
-  margin-bottom: 1rem; /* 16px */
+  font-size: var(--font-size-h2); /* USANDO VARIÁVEL */
+  /* color: #00754A; */ /* REMOVIDO */
+  color: var(--color-primary); /* USANDO VARIÁVEL */
+  font-family: var(--font-family-secondary); /* USANDO VARIÁVEL */
+  margin-bottom: var(--space-sm); /* USANDO VARIÁVEL */
+  border-bottom: 2px solid var(--color-secondary); /* Opcional: Borda com cor secundária */
+  padding-bottom: var(--space-xs); /* USANDO VARIÁVEL */
+  display: inline-block; /* Para a borda não ocupar a linha toda */
 }
 
 .mission__text-container p {
-  font-size: 1.125rem; /* 18px */
+  font-size: var(--font-size-lg); /* USANDO VARIÁVEL */
   line-height: 1.6;
-  margin-bottom: 1rem; /* Espaço entre parágrafos */
+  margin-bottom: var(--space-sm); /* USANDO VARIÁVEL */
+  color: var(--color-text-medium); /* USANDO VARIÁVEL */
 }
 
-/* Remover estilos antigos de posicionamento */
-/* .mission-text { margin-top: -80px; } -> Removido */
-/* .info-image img { transform: translateY(-100px); } -> Removido */
-/* Chave } extra removida */
 
 @media (max-width: 768px) {
   .mission {
-    padding: 2.5rem 1rem; /* Menos padding */
+    padding: var(--space-lg) var(--space-sm); /* USANDO VARIÁVEIS */
   }
   .mission__container {
-    flex-direction: column; /* Empilhar imagem e texto */
-    text-align: center; /* Centralizar texto */
-    gap: 1.5rem;
+    flex-direction: column;
+    text-align: center;
+    gap: var(--space-md); /* USANDO VARIÁVEL */
   }
   .mission__text-container {
-     text-align: center; /* Centralizar texto no mobile */
-     max-width: 600px; /* Limitar largura do texto */
+     text-align: center;
+     max-width: 600px;
   }
    .mission__text-container h2 {
-     font-size: 1.75rem;
+     /* Tamanho da fonte já responsivo */
+     border-bottom: none; /* Remover borda no mobile se preferir */
+     display: block; /* Ocupar linha toda no mobile */
    }
-   .mission__text-container p {
-     font-size: 1rem;
-   }
+   /* Tamanho da fonte já responsivo */
 }

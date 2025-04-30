@@ -6,36 +6,36 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
 // Page Components
-import Home from './pages/Home/Home';
+import Home from './pages/Home/Home'; // Este é o NOVO Home (placeholder)
 import LoginPage from './pages/LoginPage/LoginPage';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
-import AboutPage from './pages/AboutPage/AboutPage'; // Assumindo que foi criada
-// import NovidadesPage from './pages/NovidadesPage/NovidadesPage'; // Exemplo
-// import NotFoundPage from './pages/NotFoundPage/NotFoundPage'; // Exemplo 404
+import AboutPage from './pages/AboutPage/AboutPage';
+import PromoteAcademyPage from './pages/PromoteAcademyPage/PromoteAcademyPage'; // <<< IMPORTAR A NOVA PÁGINA
 
-// Estilos Globais são importados em index.js, não aqui diretamente
+// import NovidadesPage from './pages/NovidadesPage/NovidadesPage';
+// import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
 function App() {
   return (
-    // O Router envolve toda a aplicação
     <Router>
-      {/* A div com class="App" é usada pelo index.css para layout flex */}
       <div className="App">
         <Header />
 
-        {/* Conteúdo principal - <main> é estilizado globalmente */}
         <main>
           <Routes>
-            {/* Definição das Rotas */}
+            {/* Rota da Home agora aponta para o novo componente Home */}
             <Route path="/" element={<Home />} />
+
+            {/* Rotas existentes */}
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/quem-somos" element={<AboutPage />} />
 
+            {/* <<< NOVA ROTA para a página "Divulgue sua Academia" >>> */}
+            <Route path="/divulgue" element={<PromoteAcademyPage />} />
+
             {/* Adicione outras rotas aqui */}
             {/* <Route path="/novidades" element={<NovidadesPage />} /> */}
-
-            {/* Rota para página não encontrada (404) - opcional */}
             {/* <Route path="*" element={<NotFoundPage />} /> */}
           </Routes>
         </main>

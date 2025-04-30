@@ -32,12 +32,11 @@ const Header = () => {
         </Link>
       </div>
 
-      <nav className="header__nav" aria-label="Navegação Principal"> {/* aria-label para nav */}
+      <nav className="header__nav" aria-label="Navegação Principal">
         <ul>
-          {/* Usando o componente NavLink */}
           <NavLink to="/">Início</NavLink>
-          {/* Links de exemplo - Crie as páginas correspondentes se necessário */}
           <NavLink to="/novidades">Novidades</NavLink>
+          {/* <<< GARANTIR QUE O 'to' CORRESPONDE À ROTA DEFINIDA NO App.jsx >>> */}
           <NavLink to="/divulgue">Divulgue sua Academia</NavLink>
           <NavLink to="/quem-somos">Quem Somos</NavLink>
         </ul>
@@ -50,7 +49,7 @@ const Header = () => {
         <button
           type="button"
           onClick={handleRegisterClick}
-          className="button button--register" // Classe específica para estilização
+          className="button button--register"
         >
           Cadastre-se
         </button>
@@ -58,8 +57,5 @@ const Header = () => {
     </header>
   );
 };
-
-// Header não recebe props externas, então não precisa de PropTypes aqui.
-// Se recebesse, definiria aqui: Header.propTypes = { ... };
 
 export default Header;

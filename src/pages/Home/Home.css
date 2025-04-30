@@ -1,0 +1,172 @@
+/* src/pages/Home/Home.css */
+
+.home-container {
+    width: 100%;
+  }
+  
+  /* Seção de Boas-Vindas e Busca (sem alterações) */
+  .welcome-search-section {
+    background-color: var(--color-primary);
+    color: var(--color-text-on-primary);
+    padding: var(--space-xl) var(--space-sm);
+    text-align: center;
+  }
+  
+  .home-title {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-family: var(--font-family-secondary);
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: var(--space-xs);
+    color: inherit;
+  }
+  
+  .home-subtitle {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    font-family: var(--font-family-primary);
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: var(--space-lg);
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Barra de Busca (sem alterações) */
+  .search-bar-container {
+    display: flex;
+    max-width: 700px;
+    margin: 0 auto;
+    background-color: var(--color-bg-light);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--box-shadow-medium);
+    overflow: hidden;
+  }
+  
+  .search-input {
+    flex-grow: 1;
+    border: none;
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--font-size-lg);
+    color: var(--color-text-dark);
+    background-color: transparent;
+  }
+  .search-input:focus {
+    outline: none;
+  }
+  .search-input::placeholder {
+    color: var(--color-text-medium);
+    opacity: 0.8;
+  }
+  
+  .search-button {
+    background-color: var(--color-secondary);
+    color: var(--color-text-on-secondary);
+    border: none;
+    padding: 0 var(--space-lg);
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color var(--transition-duration) var(--transition-timing);
+    border-radius: 0;
+  }
+  .search-button:hover,
+  .search-button:focus {
+    background-color: var(--color-secondary-darker);
+    outline: none;
+    box-shadow: none;
+  }
+  
+  .championships-section {
+    padding: var(--space-xl) var(--space-sm); 
+    background-color: var(--color-bg-medium);
+  }
+  
+  
+  .championships-section h2 {
+    font-size: var(--font-size-h2);
+    font-family: var(--font-family-secondary);
+    color: var(--color-text-dark);
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: var(--space-lg);
+    position: relative;
+    padding-bottom: var(--space-sm);
+  }
+  .championships-section h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background-color: var(--color-secondary);
+      border-radius: 2px;
+  }
+  
+  .championships-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    /* Centralizar a grid DENTRO da seção (que já tem padding) */
+    /* Definir uma largura máxima para a grade */
+    max-width: 1700px; /* Ou outro valor desejado */
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%; /* Garante que ocupa o espaço até max-width */
+  }
+  
+  /* Mensagens (sem alterações) */
+  .loading-message,
+  .empty-message {
+      text-align: center;
+      padding: var(--space-xl);
+      font-size: var(--font-size-lg);
+      color: var(--color-text-medium);
+  }
+  
+  /* Botão Carregar Mais (sem alterações) */
+  .load-more-container {
+    text-align: center;
+    padding-top: var(--space-lg);
+    /* padding-bottom: var(--space-lg); */ /* Removido, seção já tem padding */
+     max-width: 1300px; /* Alinhar com a grid */
+     margin: 0 auto; /* Centralizar */
+  }
+  
+  .button--load-more {
+    background-color: var(--color-primary);
+    color: var(--color-text-on-primary);
+    border: none;
+    padding: var(--space-sm) var(--space-lg);
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    transition: background-color var(--transition-duration) var(--transition-timing),
+                transform var(--transition-duration) ease;
+  }
+  .button--load-more:hover:not(:disabled) {
+    background-color: var(--color-primary-darker);
+    transform: translateY(-2px);
+  }
+  .button--load-more:disabled {
+    opacity: 0.7;
+    cursor: wait;
+  }
+  
+  
+  /* Layout da Grid Responsivo (sem alterações) */
+  @media (min-width: 768px) {
+    .championships-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .championships-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }

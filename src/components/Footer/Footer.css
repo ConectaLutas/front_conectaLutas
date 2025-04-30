@@ -1,38 +1,42 @@
+/* src/components/Footer/Footer.css */
 .footer {
   background-color: #00754A;
   color: #fff;
-  padding: 1.5rem 1rem; /* Padding relativo */
+  /* padding: 1.5rem 1rem; /* Reduzido abaixo */
+  padding: 1rem 1rem; /* Padding vertical reduzido */
   text-align: center;
+  /* Adicionado para garantir que não cresça no layout flex */
+  flex-shrink: 0;
 }
 
 .footer p { /* Estilo para o texto "Siga-nos" */
-  margin-bottom: 0.8rem;
-  font-size: 1.1rem;
+  margin-bottom: 0.5rem; /* Reduzido */
+  font-size: 1rem; /* Levemente reduzido */
 }
 
 .footer__icons {
-  margin-bottom: 1rem; /* Espaço antes do copyright */
+  margin-bottom: 0.8rem; /* Reduzido */
 }
 
 .footer__icons a {
   color: #fff;
   text-decoration: none;
-  margin: 0 0.8rem; /* Espaçamento relativo */
-  font-size: 1.5rem; /* Tamanho do ícone/texto */
+  margin: 0 0.7rem; /* Espaçamento horizontal levemente reduzido */
+  font-size: 1.3rem; /* Tamanho do ícone/texto reduzido */
   transition: color 0.3s ease, transform 0.3s ease;
-  display: inline-block; /* Permite aplicar transform */
+  display: inline-block;
 }
 
 .footer__icons a:hover,
 .footer__icons a:focus {
-  color: #d3d3d3; /* Cor mais clara */
-  transform: scale(1.1); /* Efeito de zoom leve */
+  color: #d3d3d3;
+  transform: scale(1.1);
   outline: none;
 }
 
 /* Estilo para informações de copyright */
 .footer__copy {
-   font-size: 0.875rem; /* 14px */
-   color: rgba(255, 255, 255, 0.8); /* Cor um pouco mais suave */
-   margin-top: 1rem;
+   font-size: 0.8rem; /* Levemente reduzido */
+   color: rgba(255, 255, 255, 0.8);
+   margin-top: 0.8rem; /* Reduzido */
 }

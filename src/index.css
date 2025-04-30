@@ -1,3 +1,5 @@
+/* src/index.css */
+/* Reset básico e configuração de fonte */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,7 +7,33 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex; /* Adicionado para flex layout */
+  flex-direction: column; /* Adicionado */
+  min-height: 100vh; /* Adicionado - Garante que o body ocupe pelo menos a altura da tela */
 }
+
+/* Garante que html e o root do React também ocupem a altura */
+html, #root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Configura o container principal do App para usar Flexbox verticalmente */
+/* Esta classe .App vem do div em App.jsx */
+.App {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Faz o .App crescer para preencher o #root */
+}
+
+/* Garante que a área <main> (onde as páginas são renderizadas) cresça */
+main {
+  flex-grow: 1; /* Essencial para que o conteúdo principal ocupe o espaço */
+  display: flex; /* Para que o filho (.login-page) possa usar flex-grow */
+  flex-direction: column; /* Para alinhar filhos verticalmente */
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

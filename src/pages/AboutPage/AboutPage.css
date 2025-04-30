@@ -1,0 +1,65 @@
+/* src/pages/AboutPage/AboutPage.css */
+
+.about-page {
+    padding: 2rem 1.5rem; /* Espaçamento interno */
+    background-color: #f8f9fa; /* Um fundo levemente diferente da home, opcional */
+    flex-grow: 1; /* Para ocupar espaço vertical como as outras páginas */
+    display: flex;
+    justify-content: center;
+  }
+  
+  .about-content {
+    max-width: 900px; /* Limita a largura do conteúdo para melhor leitura */
+    width: 100%;
+    background-color: #ffffff; /* Fundo branco para o conteúdo */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  }
+  
+  .about-content h1 {
+    color: #00754A; /* Cor principal */
+    text-align: center;
+    margin-bottom: 2rem;
+    font-family: 'Poppins', sans-serif; /* Exemplo de fonte */
+  }
+  
+  .about-content h2 {
+    color: #333;
+    margin-top: 1.5rem;
+    margin-bottom: 0.8rem;
+    border-bottom: 2px solid #00754A; /* Linha separadora sutil */
+    padding-bottom: 0.3rem;
+    font-family: 'Poppins', sans-serif; /* Exemplo de fonte */
+  }
+  
+  .about-content p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #555;
+    text-align: justify; /* Opcional: justificar texto */
+    margin-bottom: 1rem;
+  }
+  
+  .about-content section {
+    margin-bottom: 1.5rem; /* Espaço entre as seções */
+  }
+  
+  /* Ajustes para telas menores */
+  @media (max-width: 768px) {
+    .about-page {
+      padding: 1.5rem 1rem;
+    }
+    .about-content {
+      padding: 1.5rem;
+    }
+    .about-content h1 {
+      font-size: 1.8rem;
+    }
+    .about-content h2 {
+      font-size: 1.4rem;
+    }
+    .about-content p {
+      font-size: 1rem;
+    }
+  }

@@ -1,68 +1,61 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import './LoginPage.css'; // Precisa conter o estilo .field-error (ou estar global)
+import './LoginPage.css';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null); // Erro geral do formulário (ex: API)
-  const [fieldErrors, setFieldErrors] = useState({}); // Estado para erros por campo
+  const [error, setError] = useState(null);
+  const [fieldErrors, setFieldErrors] = useState({});
   const navigate = useNavigate();
 
-  // --- NOVA FUNÇÃO DE VALIDAÇÃO ---
   const validateForm = () => {
     const errors = {};
     if (!email.trim()) {
       errors.email = "Email é obrigatório.";
-    } else if (!/\S+@\S+\.\S+/.test(email)) { // Validação básica de formato
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
       errors.email = "Formato de email inválido.";
     }
-    if (!password.trim()) { // Verifica se a senha não está vazia (após remover espaços)
-        errors.password = "Senha é obrigatória.";
+    if (!password.trim()) {
+      errors.password = "Senha é obrigatória.";
     }
-    // Adicione outras validações de front-end se desejar (ex: tamanho mínimo da senha)
-
-    setFieldErrors(errors); // Atualiza o estado com os erros encontrados
-    return Object.keys(errors).length === 0; // Retorna true se NENHUM erro foi encontrado
+    setFieldErrors(errors);
+    return Object.keys(errors).length === 0;
   };
-  // --- FIM VALIDAÇÃO ---
-
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setError(null);     // Limpa erro geral
-    setFieldErrors({}); // Limpa erros de campo anteriores
+    setError(null);
+    setFieldErrors({});
 
-    // --- Executa a validação ---
-    if (!validateForm()) {
-      // Se a validação falhar, interrompe aqui
-      return;
-    }
-    // --- Fim da validação ---
+    if (!validateForm()) return;
 
-    // Só continua se a validação passou
     setIsLoading(true);
-    console.log('Tentativa de Login com:', { email, password });
-
-    // --- Simulação/Placeholder para Chamada de API ---
     try {
-      // TODO: Chamar API...
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      // throw new Error("Usuário ou senha inválidos."); // Teste de erro API
+      const response = await fetch('http://localhost:5001/Usuario/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
 
-      console.log('Login bem-sucedido (simulado)!');
-      navigate('/');
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Erro ao fazer login.');
+      }
 
+      const data = await response.json();
+      const token = data.token;
+      localStorage.setItem('authToken', token);
+      console.log('Token armazenado:', token);
+
+      navigate('/perfil');
     } catch (err) {
       console.error("Erro no login:", err);
-      // Define o erro geral (vindo da API, por exemplo)
-      setError(err.message || 'Ocorreu um erro ao tentar fazer login.');
+      setError(err.message || 'Erro ao tentar fazer login.');
     } finally {
       setIsLoading(false);
     }
-    // --- Fim da Simulação ---
   };
 
   return (
@@ -70,10 +63,8 @@ const LoginPage = () => {
       <div className="login-container">
         <h2>Login</h2>
         <form onSubmit={handleSubmit} className="login-form" noValidate>
-          {/* Exibição de Erro Geral (vindo da API, etc) */}
           {error && <p className="form-error">{error}</p>}
 
-          {/* Campo Email com Erro Específico */}
           <div className="form-group">
             <label htmlFor="email">Email:</label>
             <input
@@ -81,18 +72,15 @@ const LoginPage = () => {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              // required // 'required' HTML pode ser mantido, mas nossa validação JS é mais flexível
               aria-required="true"
               disabled={isLoading}
               autoComplete="email"
-              aria-invalid={!!fieldErrors.email} // True se houver erro para este campo
-              aria-describedby={fieldErrors.email ? "email-login-error" : undefined} // Linka com a msg de erro
+              aria-invalid={!!fieldErrors.email}
+              aria-describedby={fieldErrors.email ? "email-login-error" : undefined}
             />
-            {/* Exibe a mensagem de erro específica do campo */}
             {fieldErrors.email && <p id="email-login-error" className="field-error">{fieldErrors.email}</p>}
           </div>
 
-          {/* Campo Senha com Erro Específico */}
           <div className="form-group">
             <label htmlFor="password">Senha:</label>
             <input
@@ -100,14 +88,12 @@ const LoginPage = () => {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              // required
               aria-required="true"
               disabled={isLoading}
               autoComplete="current-password"
               aria-invalid={!!fieldErrors.password}
               aria-describedby={fieldErrors.password ? "password-login-error" : undefined}
             />
-            {/* Exibe a mensagem de erro específica do campo */}
             {fieldErrors.password && <p id="password-login-error" className="field-error">{fieldErrors.password}</p>}
           </div>
 
@@ -126,7 +112,5 @@ const LoginPage = () => {
     </div>
   );
 };
-
-// LoginPage.propTypes = {}; // Se não houver props externas
 
 export default LoginPage;

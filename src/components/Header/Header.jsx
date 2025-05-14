@@ -28,7 +28,7 @@ const Header = () => {
     <header className="header">
       <div className="header__logo">
         <Link to="/" aria-label="Página Inicial"> {/* aria-label para link de logo */}
-          <img src={logo} alt="Logo Plataforma JiuJitsu" /> {/* Alt text mais específico */}
+          <img src={logo} alt="Logo Conecta Lutas" /> {/* Alt text mais específico */}
         </Link>
       </div>
 

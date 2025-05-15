@@ -76,7 +76,7 @@ const Home = () => {
                 title={champ.nome}
                 date={new Date(champ.dataInicio).toLocaleDateString()}
                 location={champ.localEvento}
-                image={champ.fotoUrl ? `https://api-conectalutas.onrender.com/${champ.fotoUrl}` : "https://placehold.co/600x400"}
+                image={champ.fotoUrl ? `https://api-conectalutas.onrender.com${champ.fotoUrl}` : "https://placehold.co/600x400"}
                 detailsLink={champ.linkRegulamento || '#'}
               />
               ))}

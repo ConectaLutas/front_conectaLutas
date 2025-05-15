@@ -33,7 +33,7 @@ const LoginPage = () => {
 
     setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:5001/Usuario/login', {
+      const response = await fetch('https://api-conectalutas.onrender.com/Usuario/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })

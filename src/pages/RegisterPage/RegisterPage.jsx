@@ -89,7 +89,7 @@ const RegisterPage = () => {
     try {
       const response = await api.post('/api/Atleta/cadastrar-atleta', dataToSend);
       console.log('Cadastro realizado com sucesso:', response.data);
-      // Redirecionar após sucesso
+      // aqui você pode limpar o formulário ou redirecionar
     } catch (err) {
       console.error('Erro ao chamar API de cadastro:', err);
       setError(err.response?.data?.message || 'Falha na comunicação com o servidor.');
@@ -104,7 +104,161 @@ const RegisterPage = () => {
         <h2>Cadastro de Atleta</h2>
         <form onSubmit={handleSubmit} className="register-form" noValidate>
           {error && <p className="form-error">{error}</p>}
-          {/* Inputs para nome, email, senha, etc. */}
+
+          <div>
+            <label>Nome Completo</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className={fieldErrors.name ? 'input-error' : ''}
+            />
+            {fieldErrors.name && <span className="error-msg">{fieldErrors.name}</span>}
+          </div>
+
+          <div>
+            <label>Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className={fieldErrors.email ? 'input-error' : ''}
+            />
+            {fieldErrors.email && <span className="error-msg">{fieldErrors.email}</span>}
+          </div>
+
+          <div>
+            <label>Senha</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className={fieldErrors.password ? 'input-error' : ''}
+            />
+            {fieldErrors.password && <span className="error-msg">{fieldErrors.password}</span>}
+          </div>
+
+          <div>
+            <label>Confirmar Senha</label>
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className={fieldErrors.confirmPassword ? 'input-error' : ''}
+            />
+            {fieldErrors.confirmPassword && <span className="error-msg">{fieldErrors.confirmPassword}</span>}
+          </div>
+
+          <div>
+            <label>Data de Nascimento</label>
+            <input
+              type="date"
+              value={dataNascimento}
+              onChange={(e) => setDataNascimento(e.target.value)}
+              className={fieldErrors.dataNascimento ? 'input-error' : ''}
+            />
+            {fieldErrors.dataNascimento && <span className="error-msg">{fieldErrors.dataNascimento}</span>}
+          </div>
+
+          <div>
+            <label>CPF</label>
+            <input
+              type="text"
+              value={cpf}
+              onChange={(e) => setCpf(e.target.value)}
+              maxLength={14} // formato 000.000.000-00
+              className={fieldErrors.cpf ? 'input-error' : ''}
+              placeholder="000.000.000-00"
+            />
+            {fieldErrors.cpf && <span className="error-msg">{fieldErrors.cpf}</span>}
+          </div>
+
+          <div>
+            <label>Sexo</label>
+            <select
+              value={sexo}
+              onChange={(e) => setSexo(e.target.value)}
+              className={fieldErrors.sexo ? 'input-error' : ''}
+            >
+              <option value="">Selecione</option>
+              <option value="1">Masculino</option>
+              <option value="2">Feminino</option>
+              <option value="3">Outro</option>
+            </select>
+            {fieldErrors.sexo && <span className="error-msg">{fieldErrors.sexo}</span>}
+          </div>
+
+          <div>
+            <label>Graduação</label>
+            <select
+              value={graduacaoId}
+              onChange={(e) => setGraduacaoId(e.target.value)}
+              className={fieldErrors.graduacaoId ? 'input-error' : ''}
+            >
+              <option value="">Selecione</option>
+              {graduacoes.map(g => (
+                <option key={g.id} value={g.id}>{g.nome}</option>
+              ))}
+            </select>
+            {fieldErrors.graduacaoId && <span className="error-msg">{fieldErrors.graduacaoId}</span>}
+          </div>
+
+          <div>
+            <label>Peso (kg)</label>
+            <input
+              type="number"
+              value={peso}
+              onChange={(e) => setPeso(e.target.value)}
+              className={fieldErrors.peso ? 'input-error' : ''}
+              step="0.1"
+            />
+            {fieldErrors.peso && <span className="error-msg">{fieldErrors.peso}</span>}
+          </div>
+
+          <div>
+            <label>Esporte</label>
+            <select
+              value={esporteId}
+              onChange={(e) => setEsporteId(e.target.value)}
+              className={fieldErrors.esporteId ? 'input-error' : ''}
+            >
+              <option value="">Selecione</option>
+              {esportes.map(e => (
+                <option key={e.id} value={e.id}>{e.nome}</option>
+              ))}
+            </select>
+            {fieldErrors.esporteId && <span className="error-msg">{fieldErrors.esporteId}</span>}
+          </div>
+
+          <div>
+            <label>Academia</label>
+            <select
+              value={academiaId}
+              onChange={(e) => setAcademiaId(e.target.value)}
+            >
+              <option value="">Selecione (opcional)</option>
+              {academias.map(a => (
+                <option key={a.id} value={a.id}>{a.nome}</option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label>Professor</label>
+            <select
+              value={professorId}
+              onChange={(e) => setProfessorId(e.target.value)}
+            >
+              <option value="">Selecione (opcional)</option>
+              {professores.map(p => (
+                <option key={p.id} value={p.id}>{p.nome}</option>
+              ))}
+            </select>
+          </div>
+
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? 'Cadastrando...' : 'Cadastrar'}
+          </button>
         </form>
       </div>
     </div>

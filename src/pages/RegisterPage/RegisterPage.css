@@ -1,29 +1,24 @@
 /* src/pages/RegisterPage/RegisterPage.css */
 
-/* Importar ou reutilizar estilos base de forms se desejar */
-/* @import '../LoginPage/LoginPage.css'; */ /* Cuidado com especificidade se importar */
-
 .register-page {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-grow: 1;
-  padding: var(--space-lg) var(--space-sm); /* Var */
-  background-image:
-      linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
-      url('../../assets/images/login.png'); /* Ou outra imagem */
+  padding: 2rem 1rem;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('../../assets/images/login.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .register-container {
-  background-color: rgba(255, 255, 255, 0.95); /* Quase opaco */
-  padding: var(--space-lg); /* Var */
-  border-radius: var(--border-radius-md); /* Var */
-  box-shadow: var(--box-shadow-medium); /* Var */
+  background-color: #ffffffcc;
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   width: 100%;
-  max-width: 480px; /* Maior para mais campos */
+  max-width: 480px;
   text-align: center;
   max-height: 95vh;
   overflow-y: auto;
@@ -31,154 +26,81 @@
 
 .register-container h2 {
   margin-top: 0;
-  margin-bottom: var(--space-md); /* Var */
-  color: var(--color-primary); /* Var */
-  font-size: var(--font-size-h2); /* Var */
+  margin-bottom: 1.5rem;
+  color: #00754a;
+  font-size: 2rem;
+  font-weight: 700;
 }
 
-.register-form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm); /* Var - Espaço entre grupos */
-}
-
-/* Reutilizando estilos de LoginPage.css para .form-group, label, input */
 .form-group {
-  margin-bottom: 0;
+  margin-bottom: 1.5rem;
   text-align: left;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: var(--space-xs); /* Var */
-  color: var(--color-text-dark); /* Var */
+  margin-bottom: 0.5rem;
+  color: #333;
   font-weight: 600;
-  font-size: var(--font-size-sm); /* Var */
+  font-size: 0.875rem;
 }
 
 .form-group input[type="text"],
 .form-group input[type="email"],
-.form-group input[type="password"] {
-  width: 100%;
-  padding: var(--space-xs) var(--space-sm); /* Var */
-  border: 1px solid var(--color-border); /* Var */
-  border-radius: var(--border-radius-sm); /* Var */
-  font-size: var(--font-size-md); /* Var */
-  line-height: 1.5;
-}
-.form-group input:focus {
-  outline: none;
-  border-color: var(--color-primary); /* Var */
-  box-shadow: 0 0 0 2px rgba(0, 117, 74, 0.2);
-}
-.form-group input:disabled {
-    background-color: #e9ecef;
-    cursor: not-allowed;
-}
-/* Estilo específico para campos inválidos */
-.form-group input[aria-invalid="true"] {
-    border-color: var(--color-error); /* Var */
-}
-.form-group input[aria-invalid="true"]:focus {
-    box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.25); /* Foco vermelho */
-}
-
-
-/* Mensagem de erro específica do campo */
-.field-error {
-    color: var(--color-error); /* Var */
-    font-size: var(--font-size-sm); /* Var */
-    margin-top: var(--space-xxs); /* Var */
-    margin-bottom: 0;
-}
-
-
-/* Botão de cadastro */
-.button--submit-register {
-  width: 100%;
-  padding: var(--space-sm); /* Var */
-  background-color: var(--color-secondary); /* Var */
-  color: var(--color-text-on-secondary); /* Var */
-  border: none;
-  font-size: var(--font-size-lg); /* Var */
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color var(--transition-duration) var(--transition-timing),
-              opacity var(--transition-duration) var(--transition-timing); /* Var */
-  margin-top: var(--space-xs); /* Var */
-}
-.button--submit-register:hover:not(:disabled) {
-  background-color: #e6c300; /* Amarelo mais escuro */
-  transform: translateY(-1px);
-}
-.button--submit-register:disabled {
-  opacity: 0.7;
-  cursor: wait;
-}
-
-/* Reutilizando estilos de LoginPage.css para .form-link */
-.form-link {
-  margin-top: var(--space-md); /* Var */
-  font-size: var(--font-size-sm); /* Var */
-  color: var(--color-text-medium); /* Var */
-}
-.form-link a {
-  color: var(--color-primary); /* Var */
-  text-decoration: none;
-  font-weight: 600;
-}
-.form-link a:hover,
-.form-link a:focus {
-  text-decoration: underline;
-}
-.form-link--secondary a {
-    font-weight: 400;
-    color: var(--color-text-medium); /* Var */
-}
-.form-link--secondary a:hover,
-.form-link--secondary a:focus {
-    color: var(--color-text-dark); /* Var */
-}
-
-/* Reutilizando estilos de LoginPage.css para .form-error */
-.form-error {
-    background-color: rgba(220, 53, 69, 0.1);
-    color: var(--color-error); /* Var */
-    border: 1px solid rgba(220, 53, 69, 0.3);
-    border-radius: var(--border-radius-sm); /* Var */
-    padding: var(--space-sm); /* Var */
-    margin-bottom: var(--space-sm); /* Var */
-    text-align: center;
-    font-size: var(--font-size-sm); /* Var */
-}
-
+.form-group input[type="password"],
+.form-group input[type="date"],
 .form-group select {
   width: 100%;
-  padding: var(--space-xs) var(--space-sm);
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-sm);
-  font-size: var(--font-size-md);
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
   line-height: 1.5;
-  background-color: var(--color-bg-light); /* Fundo branco */
-  color: var(--color-text-dark); /* Cor do texto */
-  cursor: pointer;
-   /* Aparência para se parecer com input */
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  /* Adicionar seta (pode precisar de um SVG ou caractere) */
-  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2300754A%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
-  background-repeat: no-repeat;
-  background-position: right var(--space-sm) center;
-  background-size: 0.65em auto;
+  background-color: #f9f9f9;
+  transition: all 0.2s ease-in-out;
 }
-.form-group select:focus {
+
+.form-group input:focus, .form-group select:focus {
   outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb, 0, 117, 74), 0.2); /* Precisa definir --color-primary-rgb */
+  border-color: #00754a;
+  box-shadow: 0 0 0 3px rgba(0, 117, 74, 0.25);
 }
-.form-group select[aria-invalid="true"] {
-    border-color: var(--color-error);
+
+.form-group input[aria-invalid="true"], .form-group select[aria-invalid="true"] {
+  border-color: #dc3545;
 }
-.form-group select[aria-invalid="true"]:focus {
-    box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.25);}
+
+.form-group input[aria-invalid="true"]:focus, .form-group select[aria-invalid="true"]:focus {
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.25);
+}
+
+.field-error {
+  color: #dc3545;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.button--submit-register {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: #f4b400;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease;
+  margin-top: 1rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.button--submit-register:hover:not(:disabled) {
+  background-color: #dba400;
+  transform: translateY(-2px);
+}
+
+.button--submit-register:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}

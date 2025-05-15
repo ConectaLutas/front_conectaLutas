@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from '../../api/api';
 import './RegisterPage.css';
 
@@ -21,7 +22,9 @@ const RegisterPage = () => {
   const [professores, setProfessores] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState('');
   const [fieldErrors, setFieldErrors] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -66,6 +69,7 @@ const RegisterPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError(null);
+    setSuccessMessage('');
     setFieldErrors({});
 
     if (!validateForm()) return;
@@ -88,8 +92,22 @@ const RegisterPage = () => {
 
     try {
       const response = await api.post('/api/Atleta/cadastrar-atleta', dataToSend);
-      console.log('Cadastro realizado com sucesso:', response.data);
-      // aqui você pode limpar o formulário ou redirecionar
+      if (response.status === 200) {
+        setSuccessMessage('Cadastro realizado com sucesso!');
+        setName('');
+        setEmail('');
+        setPassword('');
+        setConfirmPassword('');
+        setDataNascimento('');
+        setCpf('');
+        setSexo('');
+        setGraduacaoId('');
+        setPeso('');
+        setEsporteId('');
+        setAcademiaId('');
+        setProfessorId('');
+        setTimeout(() => navigate('/perfil'), 2000);
+      }
     } catch (err) {
       console.error('Erro ao chamar API de cadastro:', err);
       setError(err.response?.data?.message || 'Falha na comunicação com o servidor.');
@@ -183,7 +201,6 @@ const RegisterPage = () => {
               <option value="">Selecione</option>
               <option value="1">Masculino</option>
               <option value="2">Feminino</option>
-              <option value="3">Outro</option>
             </select>
             {fieldErrors.sexo && <span className="error-msg">{fieldErrors.sexo}</span>}
           </div>

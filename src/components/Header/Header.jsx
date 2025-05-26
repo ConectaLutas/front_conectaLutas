@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types'; // Importar PropTypes
 import './Header.css'; // Usará variáveis CSS definidas em index.css
-import logo from '../../assets/images/logo.png';
+import logo from '../../assets/images/logo.jpg';
 
 // --- Componente Auxiliar NavLink (interno ou movido para arquivo separado) ---
 // Adicionando PropTypes a ele também

@@ -92,7 +92,7 @@ const RegisterPage = () => {
 
     try {
       const response = await api.post('/api/Atleta/cadastrar-atleta', dataToSend);
-      if (response.status === 200) {
+      if (response.status === 201) {
         setSuccessMessage('Cadastro realizado com sucesso!');
         setName('');
         setEmail('');
@@ -106,7 +106,7 @@ const RegisterPage = () => {
         setEsporteId('');
         setAcademiaId('');
         setProfessorId('');
-        setTimeout(() => navigate('/perfil'), 2000);
+        setTimeout(() => navigate('/login'));
       }
     } catch (err) {
       console.error('Erro ao chamar API de cadastro:', err);

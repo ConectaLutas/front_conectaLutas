@@ -59,7 +59,7 @@ const ChampionshipDetails = () => {
       <img
         src={
           championship.fotoUrl
-            ? `http://localhost:5001${championship.fotoUrl}`
+            ? `https://api-conectalutas.onrender.com${championship.fotoUrl}`
             : 'https://placehold.co/600x400'
         }
         alt={championship.nome}

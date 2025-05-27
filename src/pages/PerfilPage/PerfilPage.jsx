@@ -24,7 +24,7 @@ const PerfilPage = () => {
         }
 
         // Se não houver cache ou for outro ID, faz a chamada
-        const response = await fetch(`http://localhost:5001/api/Atleta/${id}`, {
+        const response = await fetch(`https://api-conectalutas.onrender.com/api/Atleta/${id}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Accept': 'application/json'

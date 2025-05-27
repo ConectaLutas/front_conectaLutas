@@ -16,7 +16,7 @@ const Home = () => {
     const fetchChampionships = async () => {
       try {
         setIsLoading(true);
-        const response = await api.get('https://api-conectalutas.onrender.com/Campeonato?skip=0&take=50');
+        const response = await api.get('http://localhost:5001/Campeonato?skip=0&take=50');
         console.log(response.data);
         setAllChampionships(response.data);
       } catch (error) {
@@ -76,7 +76,7 @@ const Home = () => {
                 title={champ.nome}
                 date={new Date(champ.dataInicio).toLocaleDateString()}
                 location={champ.localEvento}
-                image={champ.fotoUrl ? `https://api-conectalutas.onrender.com${champ.fotoUrl}` : "https://placehold.co/600x400"}
+                image={champ.fotoUrl ? `http://localhost:5001${champ.fotoUrl}` : "https://placehold.co/600x400"}
                 detailsLink={`/campeonato/${champ.id}`}
               />
               ))}

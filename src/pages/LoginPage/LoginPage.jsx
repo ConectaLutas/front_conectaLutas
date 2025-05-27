@@ -37,14 +37,9 @@ const LoginPage = () => {
       localStorage.setItem('authToken', token);
 
       const decoded = jwtDecode(token);
-      const usuarioId = decoded['nameidentifier']; // ou 'nameid' dependendo do token
-
-      // buscar atleta usando api e token no header (automaticamente pelo interceptor)
-      const atletaResponse = await api.get(`/api/Atleta/${usuarioId}`);
-
+      const usuarioId = decoded.userId || decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+      const atletaResponse = await api.get(`/api/Atleta/por-usuario/${usuarioId}`);
       const atleta = atletaResponse.data;
-      localStorage.setItem('atletaId', atleta.id);
-      localStorage.setItem('atletaData', JSON.stringify(atleta));
 
       navigate(`/perfil/${atleta.id}`);
     } catch (err) {

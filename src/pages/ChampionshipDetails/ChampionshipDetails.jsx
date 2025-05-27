@@ -27,10 +27,8 @@ const ChampionshipDetails = () => {
   }, [id]);
 
   const handleInscricao = async () => {
-    // Não é necessário buscar o token manualmente aqui se você tiver um interceptor
-    // ou se o 'api' já lida com isso.
-    // No entanto, é bom ter uma checagem básica para informar o usuário.
-    const token = localStorage.getItem('authToken'); 
+    const token = localStorage.getItem('authToken');
+    console.log('Token:', token);
 
     if (!token) {
       alert('Você precisa estar logado para se inscrever.');
@@ -38,28 +36,17 @@ const ChampionshipDetails = () => {
     }
 
     try {
-      // **MUDANÇA AQUI: Usando a instância 'api' do Axios**
       const response = await api.post(
         `/api/Inscricao/${id}/inscrever`,
-        {}, // O corpo da requisição está vazio, como na sua chamada curl
-        // Se você tiver um interceptor Axios configurado, o header de autorização
-        // será adicionado automaticamente. Se não tiver, pode adicioná-lo aqui:
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`, // Garante que o token é enviado
-          },
-        }
+        {}
       );
-
-      console.log(response.data); // Log da resposta completa para debug
+      console.log('Resposta:', response.data);
       setInscriptionStatus(response.data.mensagem || 'Inscrição realizada com sucesso!');
-      
     } catch (error) {
       console.error('Erro na requisição de inscrição:', error);
-      // Tratamento de erro mais robusto para exibir mensagens da API
-      const errorMessage = error.response?.data?.message || error.response?.data || error.message || 'Erro ao realizar inscrição.';
-      setInscriptionStatus(`Erro na inscrição: ${errorMessage}`);
+      setInscriptionStatus(
+        `Erro na inscrição: ${JSON.stringify(error.response?.data) || error.message}`
+      );
     }
   };
 
@@ -72,7 +59,7 @@ const ChampionshipDetails = () => {
       <img
         src={
           championship.fotoUrl
-            ? `https://api-conectalutas.onrender.com${championship.fotoUrl}`
+            ? `http://localhost:5001${championship.fotoUrl}`
             : 'https://placehold.co/600x400'
         }
         alt={championship.nome}

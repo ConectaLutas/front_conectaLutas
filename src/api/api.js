@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5001',    //'https://api-conectalutas.onrender.com',
+  baseURL: 'https://api-conectalutas.onrender.com',    //'https://api-conectalutas.onrender.com',
   headers: {
     'Content-Type': 'application/json',
   },

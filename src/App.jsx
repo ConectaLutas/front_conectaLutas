@@ -11,7 +11,8 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
 import AboutPage from './pages/AboutPage/AboutPage';
 import PromoteAcademyPage from './pages/PromoteAcademyPage/PromoteAcademyPage'; // <<< IMPORTAR A NOVA PÁGINA
-import ChampionshipDetails  from './pages/ChampionshipDetails/ChampionshipDetails'; // <<< IMPORTAR A NOVA PÁGINA
+import ChampionshipDetails  from './pages/ChampionshipDetails/ChampionshipDetails'; 
+import PerfilPage from './pages/PerfilPage/PerfilPage'// <<< IMPORTAR A NOVA PÁGINA
 
 // import NovidadesPage from './pages/NovidadesPage/NovidadesPage';
 // import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
@@ -28,6 +29,7 @@ function App() {
             <Route path="/" element={<Home />} />
             {/* Rota da Home para ver detalhes do campeoanto */}
             <Route path="/campeonato/:id" element={<ChampionshipDetails />} />
+            <Route path="/perfil/:id" element={<PerfilPage />} />
 
             {/* Rotas existentes */}
             <Route path="/login" element={<LoginPage />} />

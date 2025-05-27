@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
+import api from '../../api/api';           // importe seu axios configurado
 import './LoginPage.css';
 
 const LoginPage = () => {
@@ -12,14 +14,9 @@ const LoginPage = () => {
 
   const validateForm = () => {
     const errors = {};
-    if (!email.trim()) {
-      errors.email = "Email é obrigatório.";
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      errors.email = "Formato de email inválido.";
-    }
-    if (!password.trim()) {
-      errors.password = "Senha é obrigatória.";
-    }
+    if (!email.trim()) errors.email = "Email é obrigatório.";
+    else if (!/\S+@\S+\.\S+/.test(email)) errors.email = "Formato de email inválido.";
+    if (!password.trim()) errors.password = "Senha é obrigatória.";
     setFieldErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -33,26 +30,26 @@ const LoginPage = () => {
 
     setIsLoading(true);
     try {
-      const response = await fetch('https://api-conectalutas.onrender.com/Usuario/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
+      // login usando api (axios)
+      const { data } = await api.post('/Usuario/login', { email, password });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Erro ao fazer login.');
-      }
-
-      const data = await response.json();
       const token = data.token;
       localStorage.setItem('authToken', token);
-      console.log('Token armazenado:', token);
 
-      navigate('/perfil');
+      const decoded = jwtDecode(token);
+      const usuarioId = decoded['nameidentifier']; // ou 'nameid' dependendo do token
+
+      // buscar atleta usando api e token no header (automaticamente pelo interceptor)
+      const atletaResponse = await api.get(`/api/Atleta/${usuarioId}`);
+
+      const atleta = atletaResponse.data;
+      localStorage.setItem('atletaId', atleta.id);
+      localStorage.setItem('atletaData', JSON.stringify(atleta));
+
+      navigate(`/perfil/${atleta.id}`);
     } catch (err) {
       console.error("Erro no login:", err);
-      setError(err.message || 'Erro ao tentar fazer login.');
+      setError(err.response?.data?.message || err.message || 'Erro ao tentar fazer login.');
     } finally {
       setIsLoading(false);
     }
@@ -61,8 +58,8 @@ const LoginPage = () => {
   return (
     <div className="login-page">
       <div className="login-container">
-        <h2>Login</h2>
-        <form onSubmit={handleSubmit} className="login-form" noValidate>
+        <h2 id="login-title">Login</h2>
+        <form onSubmit={handleSubmit} className="login-form" noValidate aria-labelledby="login-title">
           {error && <p className="form-error">{error}</p>}
 
           <div className="form-group">

@@ -94,7 +94,7 @@ const Home = () => {
             )}
           </>
         ) : (
-          <p className="empty-message">Nenhum campeonato encontrado no momento.</p>
+          <p className="empty-message">Nenhum campeonato encontrado.</p>
         )}
       </section>
     </div>

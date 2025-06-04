@@ -1,59 +1,239 @@
-.perfil-page {
+/* src/pages/PerfilPage/PerfilPage.css */
+.perfil-page-container {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
-  background-color: #f4f4f4;
-  padding: 40px 20px;
-  box-sizing: border-box;
+  gap: var(--space-md); /* Espaço entre as colunas */
+  padding: var(--space-lg) var(--space-md);
+  background-color: var(--color-bg-medium); /* Fundo da página inteira */
+  flex-grow: 1; /* Para ocupar o espaço disponível */
 }
 
-.perfil-container {
-  background-color: #fff;
-  padding: 30px 40px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-  width: 100%;
+.perfil-main-content {
+  flex-grow: 1; /* Coluna central ocupa o espaço restante */
+  background-color: var(--color-bg-light);
+  padding: var(--space-lg);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--box-shadow-light);
 }
 
-.perfil-container h2 {
-  margin-bottom: 20px;
-  font-size: 28px;
-  color: #333;
-  border-bottom: 2px solid #eee;
-  padding-bottom: 10px;
-}
-
-.perfil-info {
+.perfil-info-header {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  align-items: center;
+  margin-bottom: var(--space-lg);
+  gap: var(--space-md);
 }
 
-.perfil-info p {
+.perfil-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--color-primary);
+}
+
+.perfil-header-text h1 {
+  margin: 0 0 var(--space-xxs) 0;
+  font-size: var(--font-size-h1);
+  color: var(--color-text-dark);
+}
+
+.perfil-header-text .perfil-idade {
   margin: 0;
-  font-size: 16px;
-  color: #444;
+  font-size: var(--font-size-md);
+  color: var(--color-text-medium);
 }
 
-.perfil-info strong {
+.perfil-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsivo */
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.perfil-detail-item strong {
+  display: block;
+  font-size: var(--font-size-sm);
+  color: var(--color-primary);
+  margin-bottom: var(--space-xxs);
   font-weight: 600;
-  color: #222;
+}
+
+.perfil-detail-item p {
+  margin: 0;
+  font-size: var(--font-size-md);
+  color: var(--color-text-dark);
+}
+
+.perfil-stats-section h3 {
+  font-size: var(--font-size-h3);
+  color: var(--color-text-dark);
+  margin-bottom: var(--space-md);
+  border-bottom: 2px solid var(--color-border);
+  padding-bottom: var(--space-xs);
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-sm);
+  gap: var(--space-sm);
+}
+
+.stat-label {
+  flex-basis: 80px; /* Largura fixa para os labels 1º, 2º, 3º */
+  font-size: var(--font-size-sm);
+  color: var(--color-text-medium);
+  font-weight: 500;
+}
+
+.stat-bar-container {
+  flex-grow: 1;
+  background-color: var(--color-bg-dark-accent);
+  border-radius: var(--border-radius-sm);
+  height: 16px; /* Altura da barra de progresso */
+  overflow: hidden;
+}
+
+.stat-bar {
+  height: 100%;
+  background-color: var(--color-secondary); /* Cor para 1º lugar (dourado) */
+  border-radius: var(--border-radius-sm);
+  transition: width 0.5s ease-in-out;
+}
+.stat-bar--second {
+  background-color: #C0C0C0; /* Cinza para 2º lugar (prata) */
+}
+.stat-bar--third {
+  background-color: #CD7F32; /* Bronze para 3º lugar */
+}
+
+.stat-value {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-dark);
+  min-width: 40px; /* Espaço para o valor % */
+  text-align: right;
+}
+
+/* Barra Lateral Direita */
+.perfil-right-sidebar {
+  min-width: 250px;
+  max-width: 300px;
+  background-color: var(--color-primary); /* Mesmo azul do menu esquerdo, mas mais escuro */
+  color: var(--color-text-on-primary);
+  padding: var(--space-md);
+  border-radius: var(--border-radius-md);
+  align-self: flex-start; /* Para não esticar */
+  box-shadow: var(--box-shadow-light);
+}
+
+.recent-events {
+  margin-bottom: var(--space-lg);
+}
+
+.recent-events-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--color-secondary); /* Cor do ícone e título */
+  margin-bottom: var(--space-sm);
+}
+.recent-events-header h4 {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--color-text-on-primary);
+}
+.recent-events-header svg { /* Se usar ícone SVG */
+  font-size: 1.5em;
+}
+
+.recent-events ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.recent-events li {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--border-radius-sm);
+  margin-bottom: var(--space-xs);
+  font-size: var(--font-size-sm);
+}
+.recent-events .event-name {
+  display: block;
+  font-weight: 500;
+}
+.recent-events .event-date {
+  font-size: 0.8em;
+  opacity: 0.8;
 }
 
 .button-logout {
-  margin-top: 30px;
-  padding: 10px 20px;
-  background-color: #d9534f;
-  color: #fff;
+  width: 100%;
+  padding: var(--space-sm);
+  background-color: var(--color-error);
+  color: var(--color-text-on-primary);
   border: none;
-  border-radius: 8px;
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-md);
+  font-weight: 600;
   cursor: pointer;
-  font-size: 15px;
-  transition: background-color 0.3s ease;
+  text-align: center;
+}
+.button-logout:hover {
+  background-color: #c9302c; /* Vermelho mais escuro */
 }
 
-.button-logout:hover {
-  background-color: #c9302c;
+
+/* Mensagens de feedback */
+.perfil-loading,
+.perfil-error {
+  text-align: center;
+  padding: var(--space-xl);
+  font-size: var(--font-size-lg);
+  color: var(--color-text-medium);
+  width: 100%;
+}
+.perfil-error {
+  color: var(--color-error);
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 1024px) {
+  .perfil-page-container {
+    flex-direction: column;
+  }
+  .profile-sidebar,
+  .perfil-right-sidebar {
+    width: 100%;
+    max-width: none;
+    align-self: stretch; /* Ocupar largura total */
+  }
+  .perfil-main-content {
+    order: -1; /* Colocar o conteúdo principal primeiro na ordem visual em telas menores se o sidebar for exibido como menu hamburguer no futuro */
+  }
+}
+
+@media (max-width: 768px) {
+  .perfil-info-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  .perfil-details-grid {
+    grid-template-columns: 1fr; /* Uma coluna em telas pequenas */
+  }
+  .stat-item {
+     flex-direction: column;
+     align-items: stretch;
+     text-align: center;
+  }
+  .stat-label {
+    flex-basis: auto;
+    margin-bottom: var(--space-xxs);
+  }
+  .stat-value {
+     text-align: center;
+     margin-top: var(--space-xxs);
+  }
 }

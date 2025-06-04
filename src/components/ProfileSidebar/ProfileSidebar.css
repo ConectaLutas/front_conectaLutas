@@ -1,0 +1,47 @@
+/* src/components/ProfileSidebar/ProfileSidebar.css */
+.profile-sidebar {
+  background-color: var(--color-primary-darker); /* Um azul um pouco mais escuro que o header */
+  padding: var(--space-md);
+  border-radius: var(--border-radius-md);
+  color: var(--color-text-on-primary);
+  min-width: 220px; /* Largura mínima */
+  align-self: flex-start; /* Para não esticar com o conteúdo principal */
+}
+
+.profile-sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-sidebar nav li a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  text-decoration: none;
+  color: var(--color-text-on-primary);
+  border-radius: var(--border-radius-sm);
+  margin-bottom: var(--space-xs);
+  font-weight: 500;
+  transition: background-color var(--transition-duration) var(--transition-timing),
+              color var(--transition-duration) var(--transition-timing);
+}
+
+.profile-sidebar nav li a:hover,
+.profile-sidebar nav li a:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--color-secondary); /* Laranja/Dourado para destaque */
+  outline: none;
+}
+
+/* Estilo para o link ativo (cor do botão "Meu Perfil" no Figma) */
+.profile-sidebar nav li a.active {
+  background-color: var(--color-secondary);
+  color: var(--color-text-on-secondary); /* Texto escuro sobre fundo laranja */
+  font-weight: 700;
+}
+
+.profile-sidebar nav li a svg { /* Estilo para ícones, se usar react-icons */
+  font-size: 1.2em;
+}

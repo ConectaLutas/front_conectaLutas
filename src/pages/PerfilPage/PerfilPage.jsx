@@ -1,91 +1,112 @@
 // src/pages/PerfilPage/PerfilPage.jsx
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import ProfileSidebar from '../../components/ProfileSidebar/ProfileSidebar'; // Importar
-import './PerfilPage.css'; // Seu CSS atualizado
-// import api from '../../api/api'; // Descomente se for usar a chamada API real
+import ProfileSidebar from '../../components/ProfileSidebar/ProfileSidebar';
+import api from '../../api/api'; // Usando a instância configurada do Axios
+import './PerfilPage.css';
 
 const PerfilPage = () => {
-  const { id } = useParams(); // O 'id' do atleta da URL
+  const { id: atletaIdFromParams } = useParams();
   const [atleta, setAtleta] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null); // Estado para mensagens de erro
   const navigate = useNavigate();
   const token = localStorage.getItem('authToken');
 
   useEffect(() => {
-    const fetchPerfil = async () => {
+    const fetchPerfil = async (id) => {
       setLoading(true);
+      setError(null);
       try {
-        // Simulação de dados por enquanto, baseado no Figma
-        // TODO: Substituir pela chamada API real e ajustar os dados
-        const mockAtletaData = {
-          id: id, // Usar o ID da URL para consistência
-          nomeCompleto: "Kayque Milhome",
-          idade: 27, // Adicionar
-          email: "kayque.milhome@example.com",
-          modalidade: "Atleta de Jiu-Jitsu", // Adicionar
-          localizacao: "São Paulo - SP, Brasil", // Adicionar
-          faixaPeso: "Preta + 75 kg", // Adicionar
-          equipe: "TEAM REIS", // Adicionar
-          participacoesCampeonatos: 3, // Adicionar
-          // Data de nascimento pode ser usada para calcular a idade se a API não fornecer a idade diretamente
-          dataNascimento: "1997-05-15",
-          peso: 78.5,
-          estatisticas: { // Adicionar
-            primeiroLugar: 67, // %
-            segundoLugar: 40, // % (esses valores do Figma parecem estranhos, talvez sejam nº de vitórias)
-            terceiroLugar: 20,  // %
+        // Chamada real à API
+        const response = await api.get(`/api/Atleta/${id}`);
+        const dadosApi = response.data;
+
+        // Mapeando os dados da API para o estado 'atleta'
+        setAtleta({
+          id: dadosApi.id,
+          nomeCompleto: dadosApi.usuario?.nomeCompleto,
+          email: dadosApi.usuario?.email,
+          dataNascimento: dadosApi.usuario?.dataNascimento,
+          peso: dadosApi.peso,
+          sexo: dadosApi.sexo,
+          graduacaoNome: dadosApi.graduacao?.nome,
+          esporteNome: dadosApi.esporte?.nome,
+          academiaNome: dadosApi.academia?.nome, // Usado para "Equipe"
+
+          // --- Campos que AINDA PRECISAM de confirmação/dados da API ou serão simulados ---
+          fotoUrl: dadosApi.usuario?.fotoUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(dadosApi.usuario?.nomeCompleto || 'Atleta')}&background=0D3B66&color=fff&size=100`, // Usar ui-avatars se fotoUrl não vier
+          
+          localizacao: dadosApi.usuario?.localizacao || "Localização não informada", // CAMPO PENDENTE NA API (simulado)
+          
+          // "Modalidade" virá de esporteNome
+          // "Faixa e Peso" será formatado no JSX
+          // "Equipe" virá de academiaNome
+
+          participacoesCampeonatos: dadosApi.inscricoes?.length || 0, // Usando o tamanho do array 'inscricoes'
+                                                                      // CONFIRMAR se 'inscricoes' sempre vem e se é a contagem correta.
+
+          estatisticas: dadosApi.estatisticas || { // CAMPO PENDENTE NA API (simulado)
+            primeiroLugar: Math.floor(Math.random() * 50) + 20, // Simulação aleatória
+            segundoLugar: Math.floor(Math.random() * 30) + 10,  // Simulação aleatória
+            terceiroLugar: Math.floor(Math.random() * 20) + 5,   // Simulação aleatória
           },
-          ultimosEventos: [ // Adicionar
-            { id: 1, nome: "Torneio Paulista de Jiu-Jitsu", data: "05/04/2025" }
-          ]
-        };
 
-        // Simular delay da API
-        await new Promise(resolve => setTimeout(resolve, 1000));
+          // Processar 'inscricoes' para 'Últimos Eventos'
+          // CONFIRMAR estrutura do objeto 'campeonato' dentro de 'inscricoes'
+          ultimosEventos: dadosApi.inscricoes?.slice(0, 3).map(insc => ({
+            id: insc.campeonato?.id || insc.campeonatoId || insc.id, // Priorizar IDs
+            nome: insc.campeonato?.nome || "Evento Desconhecido",
+            // A data do evento provavelmente estará em insc.campeonato.dataInicio ou similar
+            data: insc.campeonato?.dataInicio ? new Date(insc.campeonato.dataInicio).toLocaleDateString() : (insc.dataInscricao ? new Date(insc.dataInscricao).toLocaleDateString() : "Data Indisponível")
+          })) || [], // Se 'inscricoes' não vier ou for vazio, retorna array vazio
+        });
 
-        // Se fosse uma chamada real:
-        // const response = await api.get(`/api/Atleta/${id}`);
-        // if (response.status === 401) {
-        //   localStorage.removeItem('authToken');
-        //   navigate('/login');
-        //   return;
-        // }
-        // if (!response.ok) throw new Error('Erro ao buscar perfil');
-        // const data = await response.json();
-        // setAtleta(data); // Use os dados da API
-
-        setAtleta(mockAtletaData); // Usando dados mockados
-
-      } catch (error) {
-        console.error('Erro ao buscar perfil:', error);
-        if (error.response && error.response.status === 401) {
-          localStorage.removeItem('authToken');
-          navigate('/login');
+      } catch (err) {
+        console.error('Erro ao buscar perfil:', err);
+        let errorMessage = 'Falha ao carregar perfil. Tente novamente.';
+        if (err.response) {
+          if (err.response.status === 401) {
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('loggedInAtletaId');
+            navigate('/login');
+            return; // Evita setar erro se já está redirecionando
+          }
+          errorMessage = err.response.data?.message || err.response.data?.title || errorMessage;
         }
-        // Tratar outros erros, talvez definir um estado de erro para exibir na UI
+        setError(errorMessage);
       } finally {
         setLoading(false);
       }
     };
 
-    if (id && token) { // Garante que temos ID e token (ou ajuste conforme sua lógica de autenticação)
-      fetchPerfil();
-    } else if (!token) {
-      navigate('/login'); // Redireciona se não houver token
+    const idParaBuscar = atletaIdFromParams;
+
+    if (idParaBuscar) {
+      if (!token) {
+        setError("Autenticação necessária.");
+        setLoading(false);
+        navigate('/login');
+        return;
+      }
+      fetchPerfil(idParaBuscar);
+    } else {
+      setError("ID do atleta não fornecido na URL.");
+      setLoading(false);
+      // Idealmente, se esta página SÓ deve ser acessada com um ID,
+      // talvez redirecionar ou mostrar uma mensagem mais específica.
+      // Se houver uma rota "/meu-perfil" sem ID, a lógica para obter o ID do logado seria aqui.
     }
-  }, [id, token, navigate]);
+
+  }, [atletaIdFromParams, token, navigate]);
+
 
   const handleLogout = () => {
     localStorage.removeItem('authToken');
-    // localStorage.removeItem('atletaData'); // Limpar o cache do atleta se estiver usando
+    localStorage.removeItem('loggedInAtletaId');
     navigate('/login');
   };
 
-  if (loading) return <p className="perfil-loading">Carregando perfil...</p>;
-  if (!atleta) return <p className="perfil-error">Perfil não encontrado ou não autorizado.</p>;
-
-  // Função para calcular a idade (se a API não fornecer)
   const calcularIdade = (dataNasc) => {
     if (!dataNasc) return null;
     const hoje = new Date();
@@ -95,52 +116,59 @@ const PerfilPage = () => {
     if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
       idade--;
     }
-    return idade;
+    return idade >= 0 ? idade : null; // Evitar idade negativa se dataNascimento for futura
   };
-  // Se a API já trouxer a idade, use atleta.idade diretamente
-  const idadeCalculada = atleta.idade || calcularIdade(atleta.dataNascimento);
 
+  if (loading) return <p className="perfil-loading">Carregando perfil...</p>;
+  if (error) return <p className="perfil-error">{error}</p>;
+  if (!atleta) return <p className="perfil-error">Perfil não encontrado.</p>;
+
+  const idadeCalculada = calcularIdade(atleta.dataNascimento);
+  const faixaPesoFormatado = `${atleta.graduacaoNome || 'Não informada'} ${atleta.peso ? `- ${atleta.peso.toFixed(1)} kg` : ''}`;
+  const sexoFormatado = atleta.sexo === 1 ? 'Masculino' : atleta.sexo === 2 ? 'Feminino' : 'Não informado';
+  const modalidadeFormatada = atleta.esporteNome || 'Não informado';
+  const equipeFormatada = atleta.academiaNome || 'Não informada';
 
   return (
-    <div className="perfil-page-container"> {/* Novo container geral da página */}
+    <div className="perfil-page-container">
       <ProfileSidebar />
       <main className="perfil-main-content">
         <div className="perfil-info-header">
           <img
-            src={atleta.fotoUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(atleta.nomeCompleto)}&background=0D3B66&color=fff&size=100`}
+            src={atleta.fotoUrl} // Vem do mapeamento (pode ser ui-avatars)
             alt={`Foto de ${atleta.nomeCompleto}`}
             className="perfil-avatar"
           />
           <div className="perfil-header-text">
-            <h1>{atleta.nomeCompleto}</h1>
-            {idadeCalculada && <p className="perfil-idade">{idadeCalculada} anos</p>}
+            <h1>{atleta.nomeCompleto || 'Nome não disponível'}</h1>
+            {idadeCalculada !== null && <p className="perfil-idade">{idadeCalculada} anos</p>}
           </div>
         </div>
 
         <div className="perfil-details-grid">
           <div className="perfil-detail-item">
             <strong>Modalidade:</strong>
-            <p>{atleta.modalidade || 'Jiu-Jitsu'}</p>
+            <p>{modalidadeFormatada}</p>
           </div>
           <div className="perfil-detail-item">
             <strong>Localização:</strong>
-            <p>{atleta.localizacao || 'Não informada'}</p>
+            <p>{atleta.localizacao}</p> {/* Ainda simulado/pendente da API */}
           </div>
           <div className="perfil-detail-item">
             <strong>Faixa / Peso:</strong>
-            <p>{atleta.faixaPeso || 'Não informado'}</p>
+            <p>{faixaPesoFormatado}</p>
           </div>
           <div className="perfil-detail-item">
             <strong>Equipe:</strong>
-            <p>{atleta.equipe || 'Não informada'}</p>
+            <p>{equipeFormatada}</p>
           </div>
           <div className="perfil-detail-item">
             <strong>Email:</strong>
-            <p>{atleta.email}</p>
+            <p>{atleta.email || 'Não informado'}</p>
           </div>
           <div className="perfil-detail-item">
-            <strong>Peso Registrado:</strong>
-            <p>{atleta.peso} kg</p>
+            <strong>Sexo:</strong>
+            <p>{sexoFormatado}</p>
           </div>
           <div className="perfil-detail-item">
             <strong>Participações:</strong>
@@ -155,31 +183,30 @@ const PerfilPage = () => {
             <div className="stat-bar-container">
               <div
                 className="stat-bar"
-                style={{ width: `${atleta.estatisticas?.primeiroLugar || 0}%` }}
+                style={{ width: `${atleta.estatisticas.primeiroLugar}%` }}
               ></div>
             </div>
-            <span className="stat-value">{atleta.estatisticas?.primeiroLugar || 0}%</span>
+            <span className="stat-value">{atleta.estatisticas.primeiroLugar}%</span>
           </div>
-          {/* Repetir para 2º e 3º lugar */}
           <div className="stat-item">
             <span className="stat-label">2º Lugar</span>
             <div className="stat-bar-container">
               <div
                 className="stat-bar stat-bar--second"
-                style={{ width: `${atleta.estatisticas?.segundoLugar || 0}%` }}
+                style={{ width: `${atleta.estatisticas.segundoLugar}%` }}
               ></div>
             </div>
-            <span className="stat-value">{atleta.estatisticas?.segundoLugar || 0}%</span>
+            <span className="stat-value">{atleta.estatisticas.segundoLugar}%</span>
           </div>
           <div className="stat-item">
             <span className="stat-label">3º Lugar</span>
             <div className="stat-bar-container">
               <div
                 className="stat-bar stat-bar--third"
-                style={{ width: `${atleta.estatisticas?.terceiroLugar || 0}%` }}
+                style={{ width: `${atleta.estatisticas.terceiroLugar}%` }}
               ></div>
             </div>
-            <span className="stat-value">{atleta.estatisticas?.terceiroLugar || 0}%</span>
+            <span className="stat-value">{atleta.estatisticas.terceiroLugar}%</span>
           </div>
         </section>
       </main>
@@ -187,7 +214,6 @@ const PerfilPage = () => {
       <aside className="perfil-right-sidebar">
         <div className="recent-events">
           <div className="recent-events-header">
-            {/* Ícone de troféu aqui (ex: <FaTrophy />) */}
             🏆
             <h4>Últimos eventos que participei</h4>
           </div>

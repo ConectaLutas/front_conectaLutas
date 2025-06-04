@@ -148,4 +148,10 @@
       width: 100%; /* Ocupa toda a largura no container flex */
       text-align: center;
    }
+
+   .header__nav a.active-nav-link {
+  color: var(--color-secondary); /* Cor de destaque para o link ativo */
+  /* Você pode adicionar outros estilos, como um sublinhado sutil, se desejar */
+  /* border-bottom: 2px solid var(--color-secondary); */
+}
 }

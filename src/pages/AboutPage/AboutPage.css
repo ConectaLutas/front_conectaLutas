@@ -1,55 +1,55 @@
 /* src/pages/AboutPage/AboutPage.css */
 
 .about-page {
-  padding: var(--space-lg) var(--space-sm); /* USANDO VARIÁVEIS */
-  background-color: var(--color-bg-medium); /* USANDO VARIÁVEL */
+  padding: var(--space-lg) var(--space-sm);
+  background-color: var(--color-bg-medium); /* Mantém o fundo cinza claro da página */
   flex-grow: 1;
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* Alinha o container no topo */
+  align-items: flex-start;
 }
 
 .about-content {
   max-width: 900px;
   width: 100%;
-  background-color: var(--color-bg-light); /* USANDO VARIÁVEL */
-  padding: var(--space-lg); /* USANDO VARIÁVEL */
-  border-radius: var(--border-radius-md); /* USANDO VARIÁVEL */
-  box-shadow: var(--box-shadow-light); /* USANDO VARIÁVEL */
+  background-color: var(--color-bg-light); /* Conteúdo com fundo branco */
+  padding: var(--space-xl); /* Aumentar um pouco o padding interno se necessário */
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--box-shadow-light);
 }
 
 .about-content h1 {
-  /* color: #00754A; */ /* REMOVIDO */
-  color: var(--color-primary); /* USANDO VARIÁVEL */
+  /* AJUSTE: Cor do título principal */
+  color: var(--color-text-dark); /* Alterado de var(--color-primary) */
   text-align: center;
   margin-top: 0;
-  margin-bottom: var(--space-lg); /* USANDO VARIÁVEL */
-  font-family: var(--font-family-secondary); /* USANDO VARIÁVEL */
-  font-size: var(--font-size-h1); /* USANDO VARIÁVEL */
+  margin-bottom: var(--space-xl); /* Mais espaço abaixo do título principal */
+  font-family: var(--font-family-secondary);
+  font-size: var(--font-size-h1); /* Ajustar se o Figma indicar um tamanho diferente */
+  font-weight: 700; /* Ajustar se o Figma indicar um peso diferente */
 }
 
 .about-content h2 {
-  color: var(--color-text-dark); /* USANDO VARIÁVEL */
-  margin-top: var(--space-md); /* USANDO VARIÁVEL */
-  margin-bottom: var(--space-sm); /* USANDO VARIÁVEL */
-  /* border-bottom: 2px solid #00754A; */ /* REMOVIDO */
-  border-bottom: 2px solid var(--color-secondary); /* USANDO VARIÁVEL - Borda com cor secundária */
-  padding-bottom: var(--space-xs); /* USANDO VARIÁVEL */
-  font-family: var(--font-family-secondary); /* USANDO VARIÁVEL */
-  font-size: var(--font-size-h2); /* USANDO VARIÁVEL */
-  display: inline-block; /* Borda apenas no texto */
+  color: var(--color-text-dark);
+  margin-top: var(--space-lg); /* Aumentar espaço acima de cada subtítulo */
+  margin-bottom: var(--space-sm);
+  border-bottom: 3px solid var(--color-secondary); /* Aumentar levemente a espessura da borda */
+  padding-bottom: var(--space-xs);
+  font-family: var(--font-family-secondary);
+  font-size: var(--font-size-h2);
+  display: inline-block; /* Para a borda não ocupar a linha toda */
 }
 
 .about-content p {
-  font-size: var(--font-size-lg); /* USANDO VARIÁVEL */
+  font-size: var(--font-size-lg);
   line-height: 1.7;
-  color: var(--color-text-medium); /* USANDO VARIÁVEL */
-  text-align: left; /* Ou justify se preferir */
-  margin-bottom: var(--space-sm); /* USANDO VARIÁVEL */
+  color: var(--color-text-medium);
+  text-align: left;
+  margin-bottom: var(--space-md); /* Aumentar espaço abaixo dos parágrafos */
 }
 
 .about-content section {
-  margin-bottom: var(--space-md); /* USANDO VARIÁVEL */
+  margin-bottom: var(--space-lg); /* Aumentar espaço entre as seções */
 }
 
 /* Responsivo já tratado globalmente e com 'rem' */

@@ -1,0 +1,157 @@
+/* src/pages/UserEventsPage/UserEventsPage.css */
+.user-events-page {
+  max-width: 960px; /* Ajuste conforme necessário */
+  margin: var(--space-lg) auto;
+  padding: 0 var(--space-md);
+}
+
+.events-section {
+  margin-bottom: var(--space-xl);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-sm) 0;
+  border-bottom: 2px solid var(--color-border-light, #eee); /* Linha sutil abaixo do título da seção */
+  margin-bottom: var(--space-md);
+  cursor: pointer; /* Para indicar que é clicável para expandir/recolher */
+}
+
+.section-header h2 {
+  font-family: var(--font-family-secondary);
+  font-size: var(--font-size-h2);
+  color: var(--color-text-dark);
+  margin: 0;
+}
+
+.section-header .toggle-icon {
+  font-size: 1.2rem;
+  color: var(--color-primary);
+}
+
+.events-list {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.events-list p { /* Mensagem de 'nenhum evento' */
+  color: var(--color-text-medium);
+  padding: var(--space-md);
+  background-color: var(--color-bg-medium);
+  border-radius: var(--border-radius-sm);
+  text-align: center;
+}
+
+.event-card {
+  background-color: var(--color-bg-light);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--box-shadow-light);
+  padding: var(--space-md);
+  border: 1px solid var(--color-border);
+  transition: box-shadow var(--transition-duration) ease;
+}
+.event-card:hover {
+  box-shadow: var(--box-shadow-medium);
+}
+
+.event-card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.event-card-header .event-icon {
+  color: var(--color-secondary);
+  font-size: 1.5rem;
+}
+
+.event-card-header h3 {
+  margin: 0;
+  font-family: var(--font-family-secondary);
+  font-size: var(--font-size-h3);
+  color: var(--color-primary);
+}
+
+.event-card-body p {
+  margin: var(--space-xs) 0;
+  font-size: var(--font-size-md);
+  color: var(--color-text-medium);
+}
+.event-card-body p strong {
+  color: var(--color-text-dark);
+  min-width: 90px; /* Alinhar os 'labels' */
+  display: inline-block;
+}
+.event-card-body .status-confirmada {
+  color: var(--color-success);
+  font-weight: bold;
+}
+.event-card-body .status-aguardando-pagamento {
+  color: var(--color-warning, #F9A826); /* Usar uma cor de aviso */
+  font-weight: bold;
+}
+
+.event-card-actions {
+  margin-top: var(--space-md);
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap; /* Para botões quebrarem em telas menores */
+}
+
+.button-event-action {
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--transition-duration) ease, transform 0.1s ease;
+}
+.button-event-action:hover {
+  transform: translateY(-1px);
+}
+
+.button-details {
+  background-color: var(--color-primary);
+  color: var(--color-text-on-primary);
+  border: 1px solid var(--color-primary);
+}
+.button-details:hover {
+  background-color: var(--color-primary-darker);
+}
+
+.button-comprovante,
+.button-pagamento {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+}
+.button-comprovante:hover,
+.button-pagamento:hover {
+  background-color: var(--color-bg-dark-accent);
+}
+
+.button-pagamento {
+  color: var(--color-secondary);
+  border-color: var(--color-secondary);
+}
+.button-pagamento:hover {
+  color: var(--color-secondary-darker);
+  border-color: var(--color-secondary-darker);
+  background-color: rgba(var(--color-secondary-rgb), 0.1);
+}
+
+/* Mensagens de feedback */
+.loading-message,
+.error-message {
+    text-align: center;
+    padding: var(--space-xl);
+    font-size: var(--font-size-lg);
+    color: var(--color-text-medium);
+}
+.error-message {
+    color: var(--color-error);
+}

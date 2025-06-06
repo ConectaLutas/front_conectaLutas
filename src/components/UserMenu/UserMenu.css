@@ -1,0 +1,108 @@
+/* src/components/UserMenu/UserMenu.css */
+.user-menu-container {
+  position: relative;
+  display: inline-block;
+}
+
+.user-menu-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-xxs) var(--space-xs);
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  color: var(--color-text-on-primary);
+}
+.user-menu-button:hover,
+.user-menu-button:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+  outline: none;
+}
+.user-menu-button:focus-visible { /* Para acessibilidade via teclado */
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+.icon-placeholder {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.header-user-icon {
+  font-size: 1.6rem;
+  /* Se o seu ícone placeholder não for naturalmente branco sobre fundo escuro: */
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(200%) contrast(100%);
+}
+.dropdown-arrow {
+  font-size: 0.7em;
+  margin-left: var(--space-xxs);
+  color: var(--color-text-on-primary);
+  transition: transform 0.2s ease-in-out;
+}
+.user-menu-button[aria-expanded="true"] .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.user-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px); /* Espaço entre o botão e o dropdown */
+  right: 0;
+  background-color: var(--color-primary-darker, #082644); /* Cor de fundo escura como no Figma */
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--box-shadow-medium);
+  min-width: 220px;
+  z-index: 1000;
+  overflow: hidden;
+  padding: var(--space-xs) 0; /* Padding vertical interno no dropdown */
+}
+
+.user-dropdown-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Estilo geral para itens do dropdown (Links e Botões) */
+.user-dropdown-menu .dropdown-item,
+.user-dropdown-menu .dropdown-item-button {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm); /* Espaço entre ícone e texto */
+  padding: var(--space-sm) var(--space-md);
+  text-decoration: none;
+  color: var(--color-text-on-primary); /* Texto claro */
+  font-size: var(--font-size-md);
+  background: none; /* Para o botão de Sair */
+  border: none;     /* Para o botão de Sair */
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.user-dropdown-menu .dropdown-item:hover,
+.user-dropdown-menu .dropdown-item-button:hover {
+  background-color: var(--color-primary); /* Azul um pouco mais claro no hover */
+}
+
+/* Estilo específico para o item de perfil ativo */
+.user-dropdown-menu .dropdown-item.active-profile-link {
+  background-color: var(--color-secondary); /* Amarelo/Dourado */
+  color: var(--color-text-on-secondary); /* Texto escuro sobre amarelo */
+  font-weight: bold;
+}
+.user-dropdown-menu .dropdown-item.active-profile-link .icon-placeholder {
+  /* Se precisar, ajuste a cor do ícone no item ativo */
+  color: var(--color-text-on-secondary);
+  filter: none; /* Remover filtro do ícone placeholder se houver */
+}
+
+.user-dropdown-menu .icon-placeholder {
+  font-size: 1.1em;
+  width: 20px; /* Para alinhar o texto mesmo sem ícones reais */
+  text-align: center;
+  color: var(--color-text-on-primary); /* Cor padrão dos ícones */
+}

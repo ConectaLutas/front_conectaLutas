@@ -265,66 +265,6 @@
   font-size: 2rem;
 }
 
-.inscritos-count {
-  background-color: var(--color-bg-light);
-  padding: var(--space-md);
-  border-radius: var(--border-radius-sm);
-  margin-bottom: var(--space-lg);
-  border-left: 4px solid var(--color-primary);
-}
-
-.inscritos-count p {
-  margin: 0;
-  color: var(--color-primary-darker);
-  font-size: 1.1rem;
-}
-
-.inscritos-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: var(--space-md);
-}
-
-.inscrito-card {
-  background-color: white;
-  border-radius: var(--border-radius-md);
-  padding: var(--space-lg);
-  box-shadow: var(--box-shadow-light);
-  border: 1px solid var(--color-border-light);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.inscrito-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--box-shadow-medium);
-}
-
-.inscrito-info h3 {
-  color: var(--color-primary-darker);
-  margin: 0 0 var(--space-sm) 0;
-  font-family: var(--font-family-secondary);
-  font-size: 1.3rem;
-}
-
-.inscrito-info p {
-  margin: var(--space-xs) 0;
-  color: var(--color-text-secondary);
-  font-size: 0.95rem;
-}
-
-.inscrito-info p strong {
-  color: var(--color-text-primary);
-}
-
-.no-inscritos {
-  text-align: center;
-  color: var(--color-text-secondary);
-  font-style: italic;
-  padding: var(--space-xl);
-  background-color: var(--color-bg-light);
-  border-radius: var(--border-radius-sm);
-}
-
 .loading-message, .error-message {
   text-align: center;
   padding: var(--space-xl);
@@ -342,18 +282,115 @@
   border: 1px solid #feb2b2;
 }
 
-/* Responsividade para inscritos */
+.inscritos-count {
+  background-color: var(--color-bg-light);
+  padding: var(--space-md);
+  border-radius: var(--border-radius-sm);
+  margin-bottom: var(--space-lg);
+  border-left: 4px solid var(--color-primary);
+}
+
+.inscritos-count p {
+  margin: 0;
+  color: var(--color-primary-darker);
+  font-size: 1.1rem;
+}
+
+.no-inscritos {
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-style: italic;
+  padding: var(--space-xl);
+  background-color: var(--color-bg-light);
+  border-radius: var(--border-radius-sm);
+  border: 2px dashed var(--color-border-light);
+}
+
+/* Estilos para a lista de inscritos */
+.inscritos-lista {
+  background-color: white;
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  box-shadow: var(--box-shadow-light);
+  border: 1px solid var(--color-border-light);
+}
+
+.lista-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--color-primary);
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.header-item {
+  padding: var(--space-md) var(--space-lg);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.header-item:last-child {
+  border-right: none;
+}
+
+.inscrito-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--color-border-light);
+  transition: background-color 0.2s ease;
+}
+
+.inscrito-item:hover {
+  background-color: var(--color-bg-light);
+}
+
+.inscrito-item:last-child {
+  border-bottom: none;
+}
+
+.inscrito-nome, .inscrito-data {
+  padding: var(--space-md) var(--space-lg);
+  border-right: 1px solid var(--color-border-light);
+  display: flex;
+  align-items: center;
+}
+
+.inscrito-data {
+  border-right: none;
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+}
+
+.inscrito-nome {
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+/* Responsividade para a lista */
 @media (max-width: 768px) {
-  .inscritos-grid {
+  .lista-header,
+  .inscrito-item {
     grid-template-columns: 1fr;
   }
   
-  .inscrito-card {
-    padding: var(--space-md);
+  .header-item,
+  .inscrito-nome,
+  .inscrito-data {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   }
   
-  .inscrito-info h3 {
-    font-size: 1.2rem;
+  .inscrito-item .inscrito-nome {
+    border-bottom: 1px solid var(--color-border-light);
+  }
+  
+  .inscrito-item .inscrito-data {
+    border-bottom: none;
+    padding-top: var(--space-sm);
+  }
+  
+  .tab-inscritos-content {
+    padding: var(--space-md);
   }
 }
 

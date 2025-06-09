@@ -331,16 +331,27 @@ const ChampionshipDetails = () => {
                     <div className="inscritos-count">
                       <p><strong>Total de inscritos: {inscritos.length}</strong></p>
                     </div>
-                    <div className="inscritos-grid">
+                    <div className="inscritos-lista">
+                      <div className="lista-header">
+                        <div className="header-item">Nome do Atleta</div>
+                        <div className="header-item">Data de Inscrição</div>
+                      </div>
                       {inscritos.map((inscrito, index) => (
-                        <div key={index} className="inscrito-card">
-                          <div className="inscrito-info">
-                            <h3>{inscrito.nome || 'Nome não informado'}</h3>
-                            <p><strong>Email:</strong> {inscrito.email || 'Não informado'}</p>
-                            {inscrito.equipe && <p><strong>Equipe:</strong> {inscrito.equipe}</p>}
-                            {inscrito.faixa && <p><strong>Faixa:</strong> {inscrito.faixa}</p>}
-                            {inscrito.peso && <p><strong>Peso:</strong> {inscrito.peso} kg</p>}
-                            {inscrito.categoria && <p><strong>Categoria:</strong> {inscrito.categoria}</p>}
+                        <div key={inscrito.atletaId || index} className="inscrito-item">
+                          <div className="inscrito-nome">
+                            {inscrito.nomeAtleta || 'Nome não informado'}
+                          </div>
+                          <div className="inscrito-data">
+                            {inscrito.dataInscricao 
+                              ? new Date(inscrito.dataInscricao).toLocaleDateString('pt-BR', {
+                                  day: '2-digit',
+                                  month: '2-digit', 
+                                  year: 'numeric',
+                                  hour: '2-digit',
+                                  minute: '2-digit'
+                                })
+                              : 'Data não informada'
+                            }
                           </div>
                         </div>
                       ))}

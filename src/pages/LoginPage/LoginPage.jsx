@@ -38,6 +38,8 @@ try {
       localStorage.setItem('authToken', token);
 
       const decoded = jwtDecode(token);
+      console.log('Token decodificado:', decoded); 
+
       const usuarioId = decoded.userId || decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
       
       try {

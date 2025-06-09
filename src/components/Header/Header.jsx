@@ -1,6 +1,7 @@
 // src/components/Header/Header.jsx
 import React, { useState, useEffect } from 'react';
 import { Link, NavLink as RouterNavLink, useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 import PropTypes from 'prop-types';
 import './Header.css';
 import logo from '../../assets/images/logo.jpg';
@@ -22,16 +23,31 @@ NavLinkItem.defaultProps = {
 const Header = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('authToken')); // Inicializa o estado lendo o localStorage
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const handleAuthChange = () => {
       // console.log('AuthChange event detected or storage changed'); // Para depuração
       const token = localStorage.getItem('authToken');
       setIsLoggedIn(!!token);
+      
+      // Verificar se o usuário é administrador
+      if (token) {
+        try {
+          const decoded = jwtDecode(token);
+          const tipoUsuario = decoded.tipoUsuario;
+          setIsAdmin(tipoUsuario === 'Administrador');
+        } catch (error) {
+          console.error('Erro ao decodificar token:', error);
+          setIsAdmin(false);
+        }
+      } else {
+        setIsAdmin(false);
+      }
     };
 
     // Verifica no mount (o estado inicial já faz isso, mas podemos manter para consistência se preferir)
-    // handleAuthChange(); 
+    handleAuthChange(); 
 
     // Ouve o evento customizado 'authChange' disparado pelo Login/Logout na mesma aba
     window.addEventListener('authChange', handleAuthChange);
@@ -95,7 +111,19 @@ const Header = () => {
 
       <div className="header__actions">
         {isLoggedIn ? (
-          <UserMenu onLogout={handleLogout} />
+          <>
+            {isAdmin && (
+              <button 
+                type="button" 
+                onClick={() => navigate('/criar-campeonato')} 
+                className="button button--create-championship"
+                title="Criar Novo Campeonato"
+              >
+                Criar Campeonato
+              </button>
+            )}
+            <UserMenu onLogout={handleLogout} />
+          </>
         ) : (
           <>
             <button type="button" onClick={handleLoginClick} className="button button--login">

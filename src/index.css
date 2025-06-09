@@ -171,3 +171,8 @@ code {
   padding-left: var(--space-sm);
   padding-right: var(--space-sm);
 }
+/* Importando melhorias de formulários */
+@import url("./form-improvements.css");
+
+/* Importando melhorias de performance e acessibilidade */
+@import url("./performance-improvements.css");

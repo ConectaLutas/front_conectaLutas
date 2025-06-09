@@ -25,6 +25,7 @@ const RegisterPage = () => {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
   const [fieldErrors, setFieldErrors] = useState({});
+  const [showPasswordTooltip, setShowPasswordTooltip] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -48,18 +49,56 @@ const RegisterPage = () => {
     fetchData();
   }, []);
 
+  // Função para validar senha com requisitos específicos
+  const validatePassword = (password) => {
+    const requirements = {
+      minLength: password.length >= 8,
+      hasUppercase: /[A-Z]/.test(password),
+      hasLowercase: /[a-z]/.test(password),
+      hasNumber: /[0-9]/.test(password),
+      hasSpecialChar: /[@#$%&*!?]/.test(password)
+    };
+    return requirements;
+  };
+
   const validateForm = () => {
     const errors = {};
     if (!name.trim()) errors.name = "Nome completo é obrigatório.";
     if (!email.trim()) errors.email = "Email é obrigatório.";
     else if (!/\S+@\S+\.\S+/.test(email)) errors.email = "Formato de email inválido.";
-    if (!password) errors.password = "Senha é obrigatória.";
-    else if (password.length < 6) errors.password = "Senha deve ter pelo menos 6 caracteres.";
+    
+    if (!password) {
+      errors.password = "Senha é obrigatória.";
+    } else {
+      const passwordValidation = validatePassword(password);
+      const failedRequirements = [];
+      
+      if (!passwordValidation.minLength) failedRequirements.push("mínimo 8 caracteres");
+      if (!passwordValidation.hasUppercase) failedRequirements.push("ao menos 1 letra maiúscula");
+      if (!passwordValidation.hasLowercase) failedRequirements.push("ao menos 1 letra minúscula");
+      if (!passwordValidation.hasNumber) failedRequirements.push("ao menos 1 número");
+      if (!passwordValidation.hasSpecialChar) failedRequirements.push("ao menos 1 caractere especial");
+      
+      if (failedRequirements.length > 0) {
+        errors.password = `A senha deve conter: ${failedRequirements.join(", ")}.`;
+      }
+    }
+    
     if (password !== confirmPassword) errors.confirmPassword = "As senhas não coincidem.";
     if (!dataNascimento) errors.dataNascimento = "Data de nascimento é obrigatória.";
-    // Adicionar máscara/validação de CPF mais robusta se necessário
-    if (!cpf.trim()) errors.cpf = "CPF é obrigatório.";
-    else if (cpf.trim().replace(/\D/g, '').length !== 11) errors.cpf = "CPF inválido.";
+    
+    // Validação de CPF mais robusta
+    if (!cpf.trim()) {
+      errors.cpf = "CPF é obrigatório.";
+    } else {
+      const cpfNumbers = cpf.trim().replace(/\D/g, '');
+      if (cpfNumbers.length !== 11) {
+        errors.cpf = "CPF deve conter 11 dígitos.";
+      } else if (!isValidCPF(cpfNumbers)) {
+        errors.cpf = "CPF inválido.";
+      }
+    }
+    
     if (!sexo) errors.sexo = "Sexo é obrigatório.";
     if (!graduacaoId) errors.graduacaoId = "Graduação é obrigatória.";
     if (!peso) errors.peso = "Peso é obrigatório.";
@@ -68,6 +107,43 @@ const RegisterPage = () => {
     // Academia e Professor são opcionais no Figma, então não validar obrigatoriedade aqui
     setFieldErrors(errors);
     return Object.keys(errors).length === 0;
+  };
+
+  // Função para validar CPF
+  const isValidCPF = (cpf) => {
+    // Elimina CPFs conhecidos como inválidos
+    if (cpf === "00000000000" || 
+        cpf === "11111111111" || 
+        cpf === "22222222222" || 
+        cpf === "33333333333" || 
+        cpf === "44444444444" || 
+        cpf === "55555555555" || 
+        cpf === "66666666666" || 
+        cpf === "77777777777" || 
+        cpf === "88888888888" || 
+        cpf === "99999999999") {
+      return false;
+    }
+
+    // Valida 1º dígito
+    let add = 0;
+    for (let i = 0; i < 9; i++) {
+      add += parseInt(cpf.charAt(i)) * (10 - i);
+    }
+    let rev = 11 - (add % 11);
+    if (rev === 10 || rev === 11) rev = 0;
+    if (rev !== parseInt(cpf.charAt(9))) return false;
+
+    // Valida 2º dígito
+    add = 0;
+    for (let i = 0; i < 10; i++) {
+      add += parseInt(cpf.charAt(i)) * (11 - i);
+    }
+    rev = 11 - (add % 11);
+    if (rev === 10 || rev === 11) rev = 0;
+    if (rev !== parseInt(cpf.charAt(10))) return false;
+
+    return true;
   };
 
   const handleSubmit = async (event) => {
@@ -186,18 +262,50 @@ const RegisterPage = () => {
             {fieldErrors.email && <span id="email-error" className="error-msg">{fieldErrors.email}</span>}
           </div>
 
-          <div className="form-group">
+          <div className="form-group password-field-container">
             <label htmlFor="password">Senha</label>
             <input
               id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onFocus={() => setShowPasswordTooltip(true)}
+              onBlur={() => setShowPasswordTooltip(false)}
               placeholder="Crie uma senha"
               className={fieldErrors.password ? 'input-error' : ''}
               aria-describedby={fieldErrors.password ? "password-error" : undefined}
             />
             {fieldErrors.password && <span id="password-error" className="error-msg">{fieldErrors.password}</span>}
+            
+            {/* Tooltip com indicadores visuais dos requisitos da senha */}
+            {password && showPasswordTooltip && (
+              <div className="password-tooltip">
+                <div className="tooltip-arrow"></div>
+                <p className="tooltip-title">A senha deve conter:</p>
+                <ul className="tooltip-requirements">
+                  <li className={validatePassword(password).minLength ? 'requirement-met' : 'requirement-unmet'}>
+                    <span className="requirement-icon">{validatePassword(password).minLength ? '✓' : '✗'}</span>
+                    No mínimo 8 caracteres
+                  </li>
+                  <li className={validatePassword(password).hasUppercase ? 'requirement-met' : 'requirement-unmet'}>
+                    <span className="requirement-icon">{validatePassword(password).hasUppercase ? '✓' : '✗'}</span>
+                    Ao menos 1 letra maiúscula (A-Z)
+                  </li>
+                  <li className={validatePassword(password).hasLowercase ? 'requirement-met' : 'requirement-unmet'}>
+                    <span className="requirement-icon">{validatePassword(password).hasLowercase ? '✓' : '✗'}</span>
+                    Ao menos 1 letra minúscula (a-z)
+                  </li>
+                  <li className={validatePassword(password).hasNumber ? 'requirement-met' : 'requirement-unmet'}>
+                    <span className="requirement-icon">{validatePassword(password).hasNumber ? '✓' : '✗'}</span>
+                    Ao menos 1 número (0-9)
+                  </li>
+                  <li className={validatePassword(password).hasSpecialChar ? 'requirement-met' : 'requirement-unmet'}>
+                    <span className="requirement-icon">{validatePassword(password).hasSpecialChar ? '✓' : '✗'}</span>
+                    Ao menos 1 caractere especial (@, #, $, %, &, *, etc.)
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
 
           <div className="form-group">

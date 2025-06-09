@@ -81,35 +81,23 @@ const ChampionshipDetails = () => {
     });
   };
 
+  const getStatusText = (status) => {
+    switch (status) {
+      case 0:
+        return 'Pendente';
+      case 1:
+        return 'Em Andamento';
+      case 2:
+        return 'Encerrado';
+      default:
+        return 'Status não definido';
+    }
+  };
+
 
   if (isLoading) return <p className="loading-message">Carregando detalhes do campeonato...</p>;
   if (error) return <p className="error-message">{error}</p>;
   if (!championship) return <p className="empty-message">Campeonato não encontrado.</p>;
-
-  // Textos placeholder para as listas que não vêm da API diretamente
-  const categoriasParticipantes = [
-    "Crianças, Juvenis e Adultos",
-    "Masters",
-    "Faixas Branca até Preta",
-    "Masculino e Feminino",
-    "Modalidades Gi e No-Gi"
-  ];
-  const objetivoEvento = "Promover o Jiu-Jitsu regional, estimular o desenvolvimento técnico dos atletas e criar laços entre equipes de diferentes estados.";
-  const confirmacoesEvento = [
-    "Academias renomadas do Norte e Nordeste",
-    "Árbitros credenciados por federações reconhecidas",
-    "Premiação especial para a categoria Absoluto",
-    "Cobertura fotográfica profissional no local",
-    "Ambulância e equipe médica à disposição",
-    "Estrutura com praça de alimentação e área de convivência"
-  ];
-  // Placeholder para Datas Importantes (ajustar quando a API fornecer)
-  const datasImportantes = {
-    inscricoes: `De ${formatDate(championship.dataInicioInscricao) || 'DD/MM/AAAA'} até ${formatDate(championship.dataFimInscricao) || 'DD/MM/AAAA'}`,
-    pagamento: `Até ${formatDate(championship.dataLimitePagamento) || 'DD/MM/AAAA'}`,
-    divulgacaoChaves: `${formatDate(championship.dataDivulgacaoChaves) || 'DD/MM'}`,
-    inicioCompeticao: `${formatDateTime(championship.dataInicio) || 'DD/MM/AAAA às HH:mm'}`
-  };
 
 
   return (
@@ -170,35 +158,103 @@ const ChampionshipDetails = () => {
               <h2>SOBRE O EVENTO</h2>
               <p>{championship.sobreEvento}</p>
 
+              {/* Informações dinâmicas baseadas nos dados da API */}
+              {championship.premiacoes && (
+                <>
+                  <h3>Premiações:</h3>
+                  <p>{championship.premiacoes}</p>
+                </>
+              )}
+
+              {(championship.idadeMinima || championship.idadeMaxima) && (
+                <>
+                  <h3>Faixa Etária:</h3>
+                  <p>
+                    {championship.idadeMinima && championship.idadeMaxima 
+                      ? `${championship.idadeMinima} a ${championship.idadeMaxima} anos`
+                      : championship.idadeMinima 
+                        ? `A partir de ${championship.idadeMinima} anos`
+                        : `Até ${championship.idadeMaxima} anos`
+                    }
+                  </p>
+                </>
+              )}
+
+              {championship.maxInscritos && (
+                <>
+                  <h3>Vagas Disponíveis:</h3>
+                  <p>Máximo de {championship.maxInscritos} atletas inscritos</p>
+                </>
+              )}
+
+              {championship.taxaInscricao > 0 && (
+                <>
+                  <h3>Taxa de Inscrição:</h3>
+                  <p>R$ {championship.taxaInscricao.toFixed(2)}</p>
+                </>
+              )}
+
+              {championship.linkRegulamento && (
+                <>
+                  <h3>Regulamento:</h3>
+                  <p>
+                    <a 
+                      href={championship.linkRegulamento} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="external-link"
+                    >
+                      Consulte o regulamento completo
+                    </a>
+                  </p>
+                </>
+              )}
+
+              {/* Informações gerais sobre categorias - mantendo algumas informações estáticas úteis */}
               <h3>O evento contará com categorias para:</h3>
               <ul>
-                {categoriasParticipantes.map((item, index) => <li key={index}>{item}</li>)}
+                <li>Diferentes faixas etárias e graduações</li>
+                <li>Categorias masculina e feminina</li>
+                <li>Divisões por peso</li>
+                <li>Modalidades Gi e No-Gi (conforme regulamento)</li>
               </ul>
 
-              <h3>Objetivo:</h3>
-              <p>{objetivoEvento}</p>
-              
-              <h3>Confirmado no evento:</h3>
+              <h3>Estrutura do Evento:</h3>
               <ul>
-                {confirmacoesEvento.map((item, index) => <li key={index}>{item}</li>)}
+                <li>Árbitros credenciados por federações reconhecidas</li>
+                <li>Cobertura fotográfica profissional</li>
+                <li>Equipe médica à disposição</li>
+                <li>Estrutura com praça de alimentação</li>
+                <li>Área de aquecimento para atletas</li>
               </ul>
-              
-              {championship.taxaInscricao && <p><strong>Taxa de Inscrição:</strong> R$ {championship.taxaInscricao.toFixed(2)}</p>}
-              {championship.premiacoes && <p><strong>Premiações:</strong> {championship.premiacoes}</p>}
-              {(championship.idadeMinima && championship.idadeMaxima) && <p><strong>Idade Permitida:</strong> {championship.idadeMinima} - {championship.idadeMaxima} anos</p>}
-              {championship.maxInscritos && <p><strong>Máximo de Inscritos:</strong> {championship.maxInscritos}</p>}
-              {championship.linkRegulamento && <p><a href={championship.linkRegulamento} target="_blank" rel="noopener noreferrer" className="external-link">Regulamento Completo</a></p>}
-              {/* O link de inscrição original pode ser removido se o botão interno for o principal */}
-              {/* {championship.linkInscricao && <p><a href={championship.linkInscricao} target="_blank" rel="noopener noreferrer">Link de Inscrição Externo</a></p>} */}
             </div>
             <aside className="info-sidebar-column">
-              <h3>Datas importantes</h3>
+              <h3>Informações do Campeonato</h3>
               <ul>
-                <li><strong>Inscrições:</strong> {datasImportantes.inscricoes}</li>
-                <li><strong>Pagamento:</strong> {datasImportantes.pagamento}</li>
-                <li><strong>Divulgação das Chaves:</strong> {datasImportantes.divulgacaoChaves}</li>
-                <li><strong>Início da Competição:</strong> {datasImportantes.inicioCompeticao}</li>
+                <li><strong>Data de Início:</strong> {formatDateTime(championship.dataInicio)}</li>
+                <li><strong>Data de Término:</strong> {formatDateTime(championship.dataFim)}</li>
+                <li><strong>Local:</strong> {championship.localEvento}</li>
+                <li><strong>Status:</strong> {getStatusText(championship.status)}</li>
+                {championship.taxaInscricao > 0 && (
+                  <li><strong>Taxa:</strong> R$ {championship.taxaInscricao.toFixed(2)}</li>
+                )}
+                {championship.maxInscritos && (
+                  <li><strong>Máx. Inscritos:</strong> {championship.maxInscritos}</li>
+                )}
               </ul>
+              
+              {championship.linkInscricao && (
+                <div style={{ marginTop: 'var(--space-md)' }}>
+                  <a 
+                    href={championship.linkInscricao} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="external-link"
+                  >
+                    Link de Inscrição Externo
+                  </a>
+                </div>
+              )}
             </aside>
           </div>
         )}

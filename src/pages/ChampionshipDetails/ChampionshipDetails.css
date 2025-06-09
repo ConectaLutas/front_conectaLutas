@@ -135,12 +135,7 @@
   font-weight: 600;
 }
 
-/* Conteúdo das Abas */
-.champ-tab-content {
-  /* background-color: #fff; */ /* Se precisar de um fundo diferente para o conteúdo das abas */
-  /* padding: var(--space-md); */
-  /* border-radius: var(--border-radius-sm); */
-}
+
 
 .tab-info-content {
   display: flex;

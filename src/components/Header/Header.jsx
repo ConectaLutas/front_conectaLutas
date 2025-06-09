@@ -76,7 +76,7 @@ const Header = () => {
 
   const navLinksLoggedOut = [
     { to: "/", label: "Início", end: true },
-    { to: "/novidades", label: "Novidades" },
+    // { to: "/novidades", label: "Novidades" }, // Comentado conforme solicitado
     { to: "/divulgue", label: "Divulgue sua Academia" },
     { to: "/quem-somos", label: "Quem Somos" },
   ];
@@ -84,12 +84,17 @@ const Header = () => {
   const navLinksLoggedIn = [
     { to: "/", label: "Início", end: true },
     { to: "/eventos", label: "Eventos" },
-    { to: "/atletas", label: "Atletas" },
-    { to: "/chaves", label: "Chaves" },
-    { to: "/ranking", label: "Ranking" },
+    // { to: "/atletas", label: "Atletas" }, // Comentado conforme solicitado
+    // { to: "/ranking", label: "Ranking" }, // Comentado conforme solicitado
   ];
 
-  const currentNavLinks = isLoggedIn ? navLinksLoggedIn : navLinksLoggedOut;
+  // Adicionar link de chaves apenas para administradores
+  const navLinksWithChaves = isAdmin ? [
+    ...navLinksLoggedIn,
+    { to: "/chaves", label: "Chaves" },
+  ] : navLinksLoggedIn;
+
+  const currentNavLinks = isLoggedIn ? navLinksWithChaves : navLinksLoggedOut;
 
   return (
     <header className="header">

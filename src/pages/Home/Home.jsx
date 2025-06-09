@@ -29,19 +29,31 @@ const Home = () => {
     fetchChampionships();
   }, []);
 
+  // Resetar visibleCount quando o termo de pesquisa mudar
+  useEffect(() => {
+    setVisibleCount(ITEMS_PER_PAGE);
+  }, [searchTerm]);
+
   const handleSearchChange = (event) => setSearchTerm(event.target.value);
   const handleSearchSubmit = (event) => {
     event.preventDefault();
-    console.log('Buscando por:', searchTerm);
+    // A pesquisa agora é feita em tempo real, não precisa de submit
   };
+
+  // Filtrar campeonatos baseado no termo de pesquisa
+  const filteredChampionships = allChampionships.filter(champ => 
+    champ.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    champ.localEvento.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   const handleLoadMore = () => {
     setTimeout(() => {
       setVisibleCount((prevCount) => prevCount + ITEMS_PER_PAGE);
     }, 300);
   };
 
-  const visibleChampionships = allChampionships.slice(0, visibleCount);
-  const hasMore = visibleCount < allChampionships.length;
+  const visibleChampionships = filteredChampionships.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredChampionships.length;
 
   return (
     <div className="home-container">
@@ -52,7 +64,7 @@ const Home = () => {
           <input
             type="search"
             className="search-input"
-            placeholder="Busque por localidade, eventos..."
+            placeholder="Busque por nome do campeonato ou localidade..."
             value={searchTerm}
             onChange={handleSearchChange}
             aria-label="Buscar campeonatos"

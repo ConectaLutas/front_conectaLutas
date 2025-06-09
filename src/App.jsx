@@ -16,6 +16,7 @@ import PromoteAcademyPage from './pages/PromoteAcademyPage/PromoteAcademyPage'; 
 import ChampionshipDetails  from './pages/ChampionshipDetails/ChampionshipDetails'; 
 import PerfilPage from './pages/PerfilPage/PerfilPage'// <<< IMPORTAR A NOVA PÁGINA
 import CreateChampionshipPage from './pages/CreateChampionshipPage/CreateChampionshipPage'; // <<< NOVA PÁGINA
+import ChavesPage from './pages/ChavesPage/ChavesPage'; // <<< PÁGINA DE CHAVES
 
 // import NovidadesPage from './pages/NovidadesPage/NovidadesPage';
 // import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
@@ -43,6 +44,8 @@ function App() {
             <Route path="/divulgue" element={<PromoteAcademyPage />} />
             {/* <<< NOVA ROTA para criar campeonatos (apenas admins) >>> */}
             <Route path="/criar-campeonato" element={<CreateChampionshipPage />} />
+            {/* <<< NOVA ROTA para chaves (apenas admins) >>> */}
+            <Route path="/chaves" element={<ChavesPage />} />
 
             {/* Adicione outras rotas aqui */}
             {/* <Route path="/novidades" element={<NovidadesPage />} /> */}

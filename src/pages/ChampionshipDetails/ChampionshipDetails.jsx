@@ -12,6 +12,9 @@ const ChampionshipDetails = () => {
   const [error, setError] = useState(null);
   const [inscriptionStatus, setInscriptionStatus] = useState(null);
   const [activeTab, setActiveTab] = useState('info'); // Para controlar a aba ativa
+  const [inscritos, setInscritos] = useState([]);
+  const [inscritosLoading, setInscritosLoading] = useState(false);
+  const [inscritosError, setInscritosError] = useState(null);
   const navigate = useNavigate(); // Para o botão Inscrever-se
 
   useEffect(() => {
@@ -31,6 +34,30 @@ const ChampionshipDetails = () => {
 
     fetchDetails();
   }, [id]);
+
+  // Função para buscar inscritos
+  const fetchInscritos = async () => {
+    if (inscritosLoading || inscritos.length > 0) return; // Evita múltiplas chamadas
+    
+    setInscritosLoading(true);
+    setInscritosError(null);
+    try {
+      const response = await api.get(`/Campeonato/${id}/inscritos`);
+      setInscritos(response.data);
+    } catch (err) {
+      console.error('Erro ao buscar inscritos:', err);
+      setInscritosError('Erro ao carregar lista de inscritos.');
+    } finally {
+      setInscritosLoading(false);
+    }
+  };
+
+  // Carregar inscritos quando a aba for selecionada
+  useEffect(() => {
+    if (activeTab === 'inscritos') {
+      fetchInscritos();
+    }
+  }, [activeTab]);
 
   const handleInscricao = async () => {
     const token = localStorage.getItem('authToken');
@@ -147,6 +174,12 @@ const ChampionshipDetails = () => {
           onClick={() => setActiveTab('categorias')}
         >
           Categorias
+        </button>
+        <button
+          className={`tab-button ${activeTab === 'inscritos' ? 'active' : ''}`}
+          onClick={() => setActiveTab('inscritos')}
+        >
+          Inscritos
         </button>
         {/* Adicionar outras abas como Chaves, Resultados, etc. quando necessário */}
       </nav>
@@ -273,6 +306,49 @@ const ChampionshipDetails = () => {
             {/* Idealmente, aqui você listaria as categorias específicas do campeonato,
                 que podem vir de um endpoint como /Campeonato/{id}/categorias */}
             <p><em>(Conteúdo das Categorias em desenvolvimento. Aqui seriam listadas as categorias de peso, idade, faixa, etc.)</em></p>
+          </div>
+        )}
+
+        {activeTab === 'inscritos' && (
+          <div className="tab-inscritos-content">
+            <h2>Atletas Inscritos</h2>
+            {inscritosLoading && (
+              <div className="loading-message">
+                <p>Carregando lista de inscritos...</p>
+              </div>
+            )}
+            {inscritosError && (
+              <div className="error-message">
+                <p>{inscritosError}</p>
+              </div>
+            )}
+            {!inscritosLoading && !inscritosError && (
+              <div className="inscritos-list">
+                {inscritos.length === 0 ? (
+                  <p className="no-inscritos">Nenhum atleta inscrito ainda.</p>
+                ) : (
+                  <>
+                    <div className="inscritos-count">
+                      <p><strong>Total de inscritos: {inscritos.length}</strong></p>
+                    </div>
+                    <div className="inscritos-grid">
+                      {inscritos.map((inscrito, index) => (
+                        <div key={index} className="inscrito-card">
+                          <div className="inscrito-info">
+                            <h3>{inscrito.nome || 'Nome não informado'}</h3>
+                            <p><strong>Email:</strong> {inscrito.email || 'Não informado'}</p>
+                            {inscrito.equipe && <p><strong>Equipe:</strong> {inscrito.equipe}</p>}
+                            {inscrito.faixa && <p><strong>Faixa:</strong> {inscrito.faixa}</p>}
+                            {inscrito.peso && <p><strong>Peso:</strong> {inscrito.peso} kg</p>}
+                            {inscrito.categoria && <p><strong>Categoria:</strong> {inscrito.categoria}</p>}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+            )}
           </div>
         )}
       </section>

@@ -135,7 +135,12 @@
   font-weight: 600;
 }
 
-
+/* Conteúdo das Abas */
+.champ-tab-content {
+  /* background-color: #fff; */ /* Se precisar de um fundo diferente para o conteúdo das abas */
+  /* padding: var(--space-md); */
+  /* border-radius: var(--border-radius-sm); */
+}
 
 .tab-info-content {
   display: flex;
@@ -248,3 +253,107 @@
 .error-message {
     color: var(--color-error);
 }
+/* Estilos para a aba de Inscritos */
+.tab-inscritos-content {
+  padding: var(--space-lg);
+}
+
+.tab-inscritos-content h2 {
+  color: var(--color-primary-darker);
+  margin-bottom: var(--space-lg);
+  font-family: var(--font-family-secondary);
+  font-size: 2rem;
+}
+
+.inscritos-count {
+  background-color: var(--color-bg-light);
+  padding: var(--space-md);
+  border-radius: var(--border-radius-sm);
+  margin-bottom: var(--space-lg);
+  border-left: 4px solid var(--color-primary);
+}
+
+.inscritos-count p {
+  margin: 0;
+  color: var(--color-primary-darker);
+  font-size: 1.1rem;
+}
+
+.inscritos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-md);
+}
+
+.inscrito-card {
+  background-color: white;
+  border-radius: var(--border-radius-md);
+  padding: var(--space-lg);
+  box-shadow: var(--box-shadow-light);
+  border: 1px solid var(--color-border-light);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.inscrito-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--box-shadow-medium);
+}
+
+.inscrito-info h3 {
+  color: var(--color-primary-darker);
+  margin: 0 0 var(--space-sm) 0;
+  font-family: var(--font-family-secondary);
+  font-size: 1.3rem;
+}
+
+.inscrito-info p {
+  margin: var(--space-xs) 0;
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+}
+
+.inscrito-info p strong {
+  color: var(--color-text-primary);
+}
+
+.no-inscritos {
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-style: italic;
+  padding: var(--space-xl);
+  background-color: var(--color-bg-light);
+  border-radius: var(--border-radius-sm);
+}
+
+.loading-message, .error-message {
+  text-align: center;
+  padding: var(--space-xl);
+  border-radius: var(--border-radius-sm);
+}
+
+.loading-message {
+  background-color: var(--color-bg-light);
+  color: var(--color-text-secondary);
+}
+
+.error-message {
+  background-color: #fee;
+  color: #c53030;
+  border: 1px solid #feb2b2;
+}
+
+/* Responsividade para inscritos */
+@media (max-width: 768px) {
+  .inscritos-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .inscrito-card {
+    padding: var(--space-md);
+  }
+  
+  .inscrito-info h3 {
+    font-size: 1.2rem;
+  }
+}
+

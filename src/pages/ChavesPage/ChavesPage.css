@@ -1,0 +1,325 @@
+/* src/pages/ChavesPage/ChavesPage.css */
+
+.chaves-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  padding: var(--space-lg) var(--space-md);
+}
+
+.chaves-container {
+  background: var(--color-bg-light);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-xl);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.chaves-container h2 {
+  text-align: center;
+  color: var(--color-text-dark);
+  margin-bottom: var(--space-xl);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+}
+
+.chaves-controls {
+  display: flex;
+  gap: var(--space-lg);
+  align-items: end;
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--color-text-dark);
+  font-size: var(--font-size-sm);
+}
+
+.campeonato-select {
+  padding: var(--space-sm);
+  border: 2px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-base);
+  background-color: var(--color-bg-light);
+  transition: border-color var(--transition-duration) ease-in-out;
+}
+
+.campeonato-select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(13, 59, 102, 0.1);
+}
+
+.campeonato-select:disabled {
+  background-color: var(--color-bg-medium);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.button--generate-chaves {
+  background-color: #28a745;
+  color: white;
+  padding: var(--space-sm) var(--space-lg);
+  border: none;
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-duration) ease-in-out;
+  min-width: 150px;
+}
+
+.button--generate-chaves:hover:not(:disabled) {
+  background-color: #218838;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.button--generate-chaves:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.error-message {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: var(--color-error, #dc3545);
+  padding: var(--space-sm);
+  border-radius: var(--border-radius-sm);
+  border: 1px solid rgba(220, 53, 69, 0.3);
+  margin-bottom: var(--space-md);
+  text-align: center;
+}
+
+.loading-message {
+  text-align: center;
+  color: var(--color-text-medium);
+  padding: var(--space-lg);
+  font-style: italic;
+}
+
+.chaves-content h3 {
+  color: var(--color-text-dark);
+  margin-bottom: var(--space-lg);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+}
+
+.no-chaves {
+  text-align: center;
+  color: var(--color-text-medium);
+  padding: var(--space-xl);
+  font-style: italic;
+  background-color: var(--color-bg-medium);
+  border-radius: var(--border-radius-sm);
+}
+
+.chaves-tree {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.rodada {
+  background-color: var(--color-bg-medium);
+  border-radius: var(--border-radius-md);
+  padding: var(--space-lg);
+}
+
+.rodada h3 {
+  margin: 0 0 var(--space-md) 0;
+  color: var(--color-primary);
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  text-align: center;
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.chaves-rodada {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-md);
+}
+
+.chave-item {
+  background-color: var(--color-bg-light);
+  border: 2px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  padding: var(--space-md);
+  transition: all var(--transition-duration) ease-in-out;
+}
+
+.chave-item:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.chave-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-sm);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.chave-numero {
+  font-weight: 700;
+  color: var(--color-primary);
+  font-size: var(--font-size-sm);
+}
+
+.chave-categoria {
+  background-color: var(--color-secondary);
+  color: var(--color-text-dark);
+  padding: var(--space-xxs) var(--space-xs);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+}
+
+.chave-participantes {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-sm);
+}
+
+.participante {
+  flex: 1;
+  text-align: center;
+  padding: var(--space-xs);
+}
+
+.participante .nome {
+  display: block;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  margin-bottom: var(--space-xxs);
+}
+
+.participante .resultado {
+  display: block;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.vs {
+  font-weight: 700;
+  color: var(--color-text-medium);
+  padding: 0 var(--space-sm);
+  font-size: var(--font-size-sm);
+}
+
+.vencedor {
+  background-color: rgba(40, 167, 69, 0.1);
+  color: #28a745;
+  padding: var(--space-xs);
+  border-radius: var(--border-radius-sm);
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: var(--space-xs);
+  border: 1px solid rgba(40, 167, 69, 0.3);
+}
+
+.chave-status {
+  text-align: center;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-medium);
+  font-style: italic;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .chaves-page {
+    padding: var(--space-md) var(--space-sm);
+  }
+
+  .chaves-container {
+    padding: var(--space-lg);
+  }
+
+  .chaves-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .chaves-rodada {
+    grid-template-columns: 1fr;
+  }
+
+  .chave-participantes {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .vs {
+    padding: var(--space-xs) 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .chaves-container {
+    padding: var(--space-md);
+  }
+
+  .chaves-container h2 {
+    font-size: var(--font-size-lg);
+  }
+
+  .chave-item {
+    padding: var(--space-sm);
+  }
+}
+
+/* Animações */
+.chave-item {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estados de carregamento */
+.campeonato-select:disabled,
+.button--generate-chaves:disabled {
+  cursor: not-allowed;
+}
+
+/* Melhorias visuais */
+.chaves-tree {
+  position: relative;
+}
+
+.chaves-tree::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--color-primary), transparent);
+  transform: translateX(-50%);
+  z-index: -1;
+}
+

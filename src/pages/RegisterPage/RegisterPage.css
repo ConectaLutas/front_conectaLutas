@@ -1,102 +1,161 @@
 /* src/pages/RegisterPage/RegisterPage.css */
-
 .register-page {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start; /* ALTERADO: de 'center' para 'flex-start' para alinhar ao topo se o conteúdo for maior */
   flex-grow: 1;
-  padding: 2rem 1rem;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('../../assets/images/login.png');
+  padding: var(--space-lg) var(--space-sm);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('../../assets/images/login.png'); /* Mantenha sua imagem aqui */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed; /* ADICIONADO: Para manter a imagem de fundo fixa durante a rolagem da página */
+  min-height: 100vh; /* Garante que a página ocupe pelo menos a altura da viewport */
+  overflow-y: auto; /* Garante que a página principal tenha scroll se necessário */
 }
 
 .register-container {
-  background-color: #ffffffcc;
-  padding: 2.5rem;
-  border-radius: 1.5rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  background-color: var(--color-bg-light);
+  padding: var(--space-lg);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--box-shadow-medium);
   width: 100%;
-  max-width: 480px;
-  text-align: center;
-  max-height: 95vh;
-  overflow-y: auto;
+  max-width: 520px;
+  text-align: left;
+  /* REMOVIDO: max-height: 90vh; */
+  /* REMOVIDO: overflow-y: auto; */
+  margin-top: var(--space-md); /* Adiciona uma margem no topo */
+  margin-bottom: var(--space-md); /* Adiciona uma margem na base para não colar no footer */
 }
 
 .register-container h2 {
+  text-align: center; /* Centralizar título */
   margin-top: 0;
-  margin-bottom: 1.5rem;
-  color: #00754a;
-  font-size: 2rem;
+  margin-bottom: var(--space-lg);
+  color: var(--color-text-dark); /* Cor do texto escura */
+  font-family: var(--font-family-secondary);
+  font-size: var(--font-size-h2);
   font-weight: 700;
 }
 
-.form-group {
-  margin-bottom: 1.5rem;
-  text-align: left;
+.register-form .form-group {
+  margin-bottom: var(--space-md); /* Espaçamento padrão entre grupos */
 }
 
-.form-group label {
+.register-form label {
   display: block;
-  margin-bottom: 0.5rem;
-  color: #333;
+  margin-bottom: var(--space-xs);
+  color: var(--color-text-medium); /* Cor mais suave para labels */
   font-weight: 600;
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
 }
 
-.form-group input[type="text"],
-.form-group input[type="email"],
-.form-group input[type="password"],
-.form-group input[type="date"],
-.form-group select {
+.register-form input[type="text"],
+.register-form input[type="email"],
+.register-form input[type="password"],
+.register-form input[type="date"],
+.register-form input[type="number"],
+.register-form select {
   width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1px solid #ccc;
-  border-radius: 0.75rem;
-  font-size: 0.875rem;
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-border); /* Borda sutil */
+  border-radius: var(--border-radius-sm); /* Raio menor */
+  font-size: var(--font-size-md);
   line-height: 1.5;
-  background-color: #f9f9f9;
-  transition: all 0.2s ease-in-out;
+  background-color: var(--color-bg-light); /* Fundo branco */
+  color: var(--color-text-dark);
+  transition: border-color var(--transition-duration) ease-in-out,
+              box-shadow var(--transition-duration) ease-in-out;
 }
 
-.form-group input:focus, .form-group select:focus {
+.register-form input::placeholder,
+.register-form select {
+  color: var(--color-text-medium);
+  opacity: 0.8;
+}
+/* Estilo para quando o select não tem valor selecionado */
+.register-form select:invalid {
+  color: var(--color-text-medium);
+  opacity: 0.8;
+}
+
+
+.register-form input:focus,
+.register-form select:focus {
   outline: none;
-  border-color: #00754a;
-  box-shadow: 0 0 0 3px rgba(0, 117, 74, 0.25);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb, 13, 59, 102), 0.25); /* Usar RGB da cor primária */
 }
 
-.form-group input[aria-invalid="true"], .form-group select[aria-invalid="true"] {
-  border-color: #dc3545;
+/* Estilo para inputs e selects com erro */
+.register-form input.input-error,
+.register-form select.input-error {
+  border-color: var(--color-error);
+}
+.register-form input.input-error:focus,
+.register-form select.input-error:focus {
+  box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.25); /* Cor de erro */
 }
 
-.form-group input[aria-invalid="true"]:focus, .form-group select[aria-invalid="true"]:focus {
-  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.25);
+.error-msg {
+  color: var(--color-error);
+  font-size: var(--font-size-sm);
+  margin-top: var(--space-xxs);
+  display: block;
 }
 
-.field-error {
-  color: #dc3545;
-  font-size: 0.75rem;
-  margin-top: 0.25rem;
+/* Mensagem de erro da API e sucesso */
+.form-error-api {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: var(--color-error);
+  border: 1px solid rgba(220, 53, 69, 0.3);
+  border-radius: var(--border-radius-sm);
+  padding: var(--space-sm);
+  margin-bottom: var(--space-md);
+  text-align: center;
+  font-size: var(--font-size-sm);
+}
+.form-success {
+  background-color: rgba(25, 135, 84, 0.1); /* Verde sucesso */
+  color: var(--color-success);
+  border: 1px solid rgba(25, 135, 84, 0.3);
+  border-radius: var(--border-radius-sm);
+  padding: var(--space-sm);
+  margin-bottom: var(--space-md);
+  text-align: center;
+  font-size: var(--font-size-sm);
 }
 
+
+/* Campos lado a lado */
+.form-row {
+  display: flex;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+.form-row .form-group {
+  flex: 1;
+  margin-bottom: 0; /* Remover margem do form-group individual */
+}
+
+/* Botão Cadastrar */
 .button--submit-register {
   width: 100%;
-  padding: 0.75rem 1rem;
-  background-color: #f4b400;
-  color: #ffffff;
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--color-text-dark); /* Cor escura para o botão */
+  color: var(--color-bg-light); /* Texto claro */
   border: none;
-  border-radius: 0.75rem;
-  font-size: 1rem;
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-lg);
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out, transform 0.2s ease;
-  margin-top: 1rem;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transition: background-color var(--transition-duration) ease-in-out, transform 0.2s ease;
+  margin-top: var(--space-sm); /* Pequena margem acima do botão */
+  box-shadow: var(--box-shadow-light);
 }
 
 .button--submit-register:hover:not(:disabled) {
-  background-color: #dba400;
+  background-color: var(--color-primary); /* Azul no hover */
   transform: translateY(-2px);
 }
 
@@ -104,3 +163,175 @@
   opacity: 0.7;
   cursor: not-allowed;
 }
+
+/* Link para Login */
+.login-link {
+  text-align: center;
+  margin-top: var(--space-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-medium);
+}
+
+.login-link a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-link a:hover,
+.login-link a:focus {
+  text-decoration: underline;
+}
+
+
+/* Ajustes para telas menores */
+@media (max-width: 768px) {
+  .register-container {
+    padding: var(--space-md);
+    margin: var(--space-sm); /* Adicionar margem na página em vez de no container */
+  }
+  .form-row {
+    flex-direction: column;
+    gap: var(--space-md); /* Manter o gap original, mas a direção da coluna cuidará do espaçamento */
+    margin-bottom: 0; /* O form-group dentro da row terá o margin-bottom */
+  }
+  .form-row .form-group {
+    margin-bottom: var(--space-md); /* Adicionar de volta para quando estiverem empilhados */
+  }
+  .form-row .form-group:last-child {
+    margin-bottom: 0; /* Evitar margem dupla no final da linha */
+  }
+
+  /* Se o último elemento antes do botão for uma form-row, e o próximo for o botão */
+  .register-form > .form-row:last-of-type + .button--submit-register,
+  .register-form > .form-group:last-of-type + .button--submit-register {
+     margin-top: var(--space-lg); /* Aumentar espaço antes do botão */
+  }
+
+  /* Assegurar que o último elemento antes do link de login tenha margem */
+   .register-form > .button--submit-register:last-child {
+    margin-bottom: var(--space-md);
+  }
+}
+
+/* Container para o campo de senha com posicionamento relativo */
+.password-field-container {
+  position: relative;
+}
+
+/* Estilos para o tooltip de requisitos da senha */
+.password-tooltip {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: var(--color-bg-light);
+  border: 1px solid rgba(13, 59, 102, 0.2);
+  border-radius: var(--border-radius-sm);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: var(--space-sm);
+  margin-top: var(--space-xs);
+  animation: fadeInTooltip 0.2s ease-in-out;
+}
+
+/* Seta do tooltip */
+.tooltip-arrow {
+  position: absolute;
+  top: -6px;
+  left: 20px;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid var(--color-bg-light);
+}
+
+.tooltip-arrow::before {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: -6px;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid rgba(13, 59, 102, 0.2);
+}
+
+.tooltip-title {
+  margin: 0 0 var(--space-xs) 0;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-medium);
+}
+
+.tooltip-requirements {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tooltip-requirements li {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-xxs);
+  font-size: var(--font-size-sm);
+  transition: color var(--transition-duration) ease-in-out;
+}
+
+.tooltip-requirements li:last-child {
+  margin-bottom: 0;
+}
+
+.requirement-icon {
+  margin-right: var(--space-xs);
+  font-weight: bold;
+  width: 16px;
+  text-align: center;
+}
+
+.requirement-met {
+  color: var(--color-success, #198754);
+}
+
+.requirement-met .requirement-icon {
+  color: var(--color-success, #198754);
+}
+
+.requirement-unmet {
+  color: var(--color-text-medium);
+}
+
+.requirement-unmet .requirement-icon {
+  color: var(--color-error, #dc3545);
+}
+
+/* Animação de fade in para o tooltip */
+@keyframes fadeInTooltip {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsividade para o tooltip */
+@media (max-width: 768px) {
+  .password-tooltip {
+    padding: var(--space-xs);
+    font-size: var(--font-size-xs);
+  }
+  
+  .tooltip-requirements li {
+    font-size: var(--font-size-xs);
+  }
+  
+  .tooltip-arrow {
+    left: 15px;
+  }
+}
+

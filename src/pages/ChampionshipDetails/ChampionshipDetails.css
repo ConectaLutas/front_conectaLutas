@@ -1,16 +1,396 @@
-.champ-details-container {
-  max-width: 800px;
+/* src/pages/ChampionshipDetails/ChampionshipDetails.css */
+.championship-details-page {
+  max-width: 1200px; /* Ou a largura que preferir para o conteúdo */
   margin: 0 auto;
-  padding: 2rem;
+  padding: var(--space-lg) var(--space-md);
+  background-color: var(--color-bg-light);
 }
 
-.champ-details-image {
-  max-width: 100%;
-  border-radius: 8px;
-  margin-bottom: 1rem;
+/* Seção Header do Campeonato */
+.champ-header-section {
+  background-color: var(--color-primary-darker); /* Fundo escuro para o header do campeonato */
+  color: var(--color-text-on-primary);
+  padding: var(--space-lg);
+  border-radius: var(--border-radius-md);
+  margin-bottom: var(--space-lg);
 }
 
-.champ-details-container p {
-  margin: 0.5rem 0;
+.champ-header-content {
+  display: flex;
+  gap: var(--space-lg);
+  align-items: flex-start; /* Alinhar itens no topo */
+}
+
+.champ-image-container {
+  flex-basis: 300px; /* Largura da imagem */
+  flex-shrink: 0;
+}
+
+.champ-main-image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--border-radius-sm);
+  border: 3px solid var(--color-secondary);
+  object-fit: cover;
+  max-height: 300px; /* Limitar altura da imagem principal */
+}
+
+.champ-info-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.champ-info-container h1 {
+  font-family: var(--font-family-secondary);
+  font-size: clamp(1.8rem, 4vw, 2.8rem); /* Responsivo */
+  color: var(--color-secondary); /* Título em cor de destaque */
+  margin-top: 0;
+  margin-bottom: var(--space-sm);
+  line-height: 1.2;
+}
+
+.champ-info-container .champ-date,
+.champ-info-container .champ-location {
+  font-size: var(--font-size-md);
+  margin-bottom: var(--space-xs);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+.champ-info-container .champ-date span[role="img"],
+.champ-info-container .champ-location span[role="img"] {
+  color: var(--color-secondary);
+}
+
+
+.button--inscricao-principal {
+  background-color: var(--color-secondary);
+  color: var(--color-text-on-secondary);
+  font-size: var(--font-size-lg);
+  padding: var(--space-sm) var(--space-xl);
+  border-radius: var(--border-radius-md);
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: var(--space-md);
+  align-self: flex-start; /* Para não esticar o botão */
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.button--inscricao-principal:hover:not(:disabled) {
+  background-color: var(--color-secondary-darker);
+  transform: translateY(-2px);
+}
+.button--inscricao-principal:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.inscription-status {
+  margin-top: var(--space-sm);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-sm);
+}
+.inscription-status.success {
+  background-color: rgba(var(--color-success-rgb, 25, 135, 84), 0.1);
+  color: var(--color-success);
+  border: 1px solid var(--color-success);
+}
+.inscription-status.error {
+  background-color: rgba(var(--color-error-rgb, 220, 53, 69), 0.1);
+  color: var(--color-error);
+  border: 1px solid var(--color-error);
+}
+
+
+/* Abas de Navegação */
+.champ-tabs-nav {
+  display: flex;
+  border-bottom: 2px solid var(--color-border);
+  margin-bottom: var(--space-lg);
+}
+
+.tab-button {
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  color: var(--color-text-medium);
+  border-bottom: 3px solid transparent; /* Para efeito de aba ativa */
+  margin-bottom: -2px; /* Alinhar com a borda da nav */
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.tab-button:hover {
+  color: var(--color-primary);
+}
+
+.tab-button.active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* Conteúdo das Abas */
+.champ-tab-content {
+  /* background-color: #fff; */ /* Se precisar de um fundo diferente para o conteúdo das abas */
+  /* padding: var(--space-md); */
+  /* border-radius: var(--border-radius-sm); */
+}
+
+.tab-info-content {
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.info-main-column {
+  flex: 2; /* Ocupa 2/3 do espaço */
+}
+
+.info-sidebar-column {
+  flex: 1; /* Ocupa 1/3 do espaço */
+  background-color: var(--color-bg-dark-accent); /* Fundo levemente diferente para a sidebar */
+  padding: var(--space-md);
+  border-radius: var(--border-radius-sm);
+  align-self: flex-start; /* Para não esticar além do conteúdo */
+}
+
+.info-main-column h2,
+.info-sidebar-column h3,
+.tab-local-content h2,
+.tab-categorias-content h2 {
+  font-family: var(--font-family-secondary);
+  color: var(--color-primary);
+  margin-top: 0;
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-xs);
+  border-bottom: 2px solid var(--color-secondary);
+  display: inline-block;
+}
+
+.info-main-column p,
+.info-main-column ul,
+.info-sidebar-column ul {
+  font-size: var(--font-size-md);
   line-height: 1.6;
+  color: var(--color-text-dark);
+  margin-bottom: var(--space-md);
 }
+
+.info-main-column ul,
+.info-sidebar-column ul {
+  list-style: disc;
+  padding-left: var(--space-md);
+}
+.info-main-column ul li,
+.info-sidebar-column ul li {
+  margin-bottom: var(--space-xs);
+}
+.info-sidebar-column ul li strong {
+  color: var(--color-text-dark);
+}
+
+.external-link {
+  color: var(--color-primary);
+  text-decoration: underline;
+  font-weight: 500;
+}
+.external-link:hover {
+  color: var(--color-primary-darker);
+}
+
+/* Responsividade */
+@media (max-width: 992px) {
+  .champ-header-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .champ-image-container {
+    flex-basis: auto;
+    width: 100%;
+    max-width: 400px; /* Limitar tamanho da imagem em telas menores */
+  }
+  .champ-info-container {
+    align-items: center; /* Centralizar conteúdo de info */
+  }
+  .button--inscricao-principal {
+    align-self: center;
+  }
+  .tab-info-content {
+    flex-direction: column;
+  }
+  .info-sidebar-column {
+    margin-top: var(--space-lg);
+  }
+}
+
+@media (max-width: 768px) {
+  .champ-tabs-nav {
+    overflow-x: auto; /* Permitir scroll horizontal nas abas em telas pequenas */
+    white-space: nowrap;
+    justify-content: flex-start;
+  }
+  .tab-button {
+    font-size: var(--font-size-md);
+  }
+}
+
+/* Mensagens de feedback (reutilizadas de outras páginas) */
+.loading-message,
+.error-message,
+.empty-message {
+    text-align: center;
+    padding: var(--space-xl);
+    font-size: var(--font-size-lg);
+    color: var(--color-text-medium);
+    width: 100%;
+}
+.error-message {
+    color: var(--color-error);
+}
+/* Estilos para a aba de Inscritos */
+.tab-inscritos-content {
+  padding: var(--space-lg);
+}
+
+.tab-inscritos-content h2 {
+  color: var(--color-primary-darker);
+  margin-bottom: var(--space-lg);
+  font-family: var(--font-family-secondary);
+  font-size: 2rem;
+}
+
+.loading-message, .error-message {
+  text-align: center;
+  padding: var(--space-xl);
+  border-radius: var(--border-radius-sm);
+}
+
+.loading-message {
+  background-color: var(--color-bg-light);
+  color: var(--color-text-secondary);
+}
+
+.error-message {
+  background-color: #fee;
+  color: #c53030;
+  border: 1px solid #feb2b2;
+}
+
+.inscritos-count {
+  background-color: var(--color-bg-light);
+  padding: var(--space-md);
+  border-radius: var(--border-radius-sm);
+  margin-bottom: var(--space-lg);
+  border-left: 4px solid var(--color-primary);
+}
+
+.inscritos-count p {
+  margin: 0;
+  color: var(--color-primary-darker);
+  font-size: 1.1rem;
+}
+
+.no-inscritos {
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-style: italic;
+  padding: var(--space-xl);
+  background-color: var(--color-bg-light);
+  border-radius: var(--border-radius-sm);
+  border: 2px dashed var(--color-border-light);
+}
+
+/* Estilos para a lista de inscritos */
+.inscritos-lista {
+  background-color: white;
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  box-shadow: var(--box-shadow-light);
+  border: 1px solid var(--color-border-light);
+}
+
+.lista-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--color-primary);
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.header-item {
+  padding: var(--space-md) var(--space-lg);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.header-item:last-child {
+  border-right: none;
+}
+
+.inscrito-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--color-border-light);
+  transition: background-color 0.2s ease;
+}
+
+.inscrito-item:hover {
+  background-color: var(--color-bg-light);
+}
+
+.inscrito-item:last-child {
+  border-bottom: none;
+}
+
+.inscrito-nome, .inscrito-data {
+  padding: var(--space-md) var(--space-lg);
+  border-right: 1px solid var(--color-border-light);
+  display: flex;
+  align-items: center;
+}
+
+.inscrito-data {
+  border-right: none;
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+}
+
+.inscrito-nome {
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+/* Responsividade para a lista */
+@media (max-width: 768px) {
+  .lista-header,
+  .inscrito-item {
+    grid-template-columns: 1fr;
+  }
+  
+  .header-item,
+  .inscrito-nome,
+  .inscrito-data {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .inscrito-item .inscrito-nome {
+    border-bottom: 1px solid var(--color-border-light);
+  }
+  
+  .inscrito-item .inscrito-data {
+    border-bottom: none;
+    padding-top: var(--space-sm);
+  }
+  
+  .tab-inscritos-content {
+    padding: var(--space-md);
+  }
+}
+

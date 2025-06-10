@@ -1,0 +1,43 @@
+/* src/performance-improvements.css */
+
+/* Animação de Skeleton Loading */
+@keyframes pulse {
+  0% {
+    background-color: var(--color-bg-dark-accent);
+  }
+  50% {
+    background-color: var(--color-bg-medium);
+  }
+  100% {
+    background-color: var(--color-bg-dark-accent);
+  }
+}
+
+.skeleton-loading {
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* Melhorias de Acessibilidade */
+/* Foco visível para elementos interativos */
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(var(--color-secondary-rgb), 0.5);
+}
+
+/* Esconder visualmente, mas manter para leitores de tela */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Transições suaves para todas as propriedades */
+* {
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}

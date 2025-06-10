@@ -2,7 +2,7 @@
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center; /* Mudança para centralizar */
   flex-wrap: wrap;
   background-color: var(--color-primary); /* Var */
   padding: var(--space-sm) clamp(var(--space-sm), 5vw, var(--space-lg)); /* Var + clamp */
@@ -12,10 +12,14 @@
   position: sticky; /* Opcional: Deixar o header fixo no topo */
   top: 0;
   z-index: 100; /* Necessário se for sticky */
+  position: relative; /* Para posicionamento absoluto dos elementos */
 }
 
 .header__logo {
-  margin-left: 2rem; 
+  position: absolute;
+  left: clamp(var(--space-sm), 5vw, var(--space-lg));
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .header__logo img {
@@ -26,6 +30,9 @@
 
 .header__nav {
   margin: var(--space-xs) 0; /* Espaço vertical em telas pequenas */
+  flex: 1;
+  display: flex;
+  justify-content: center;
 }
 
 .header__nav ul {
@@ -68,7 +75,6 @@
 }
 /* Fim do efeito animado */
 
-
 .header__nav a:hover,
 .header__nav a:focus {
    color: var(--color-secondary); /* Var */
@@ -76,7 +82,17 @@
    outline: none; /* O foco global do index.css cuidará disso */
 }
 
+.header__nav a.active-nav-link {
+  color: var(--color-secondary); /* Cor de destaque para o link ativo */
+  /* Você pode adicionar outros estilos, como um sublinhado sutil, se desejar */
+  /* border-bottom: 2px solid var(--color-secondary); */
+}
+
 .header__actions {
+  position: absolute;
+  right: clamp(var(--space-sm), 5vw, var(--space-lg));
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   gap: var(--space-sm); /* Var */
 }
@@ -115,6 +131,21 @@
   box-shadow: var(--box-shadow-light);
 }
 
+/* Botão Criar Campeonato (apenas para admins) */
+.header__actions .button--create-championship {
+  background-color: var(--color-secondary);
+  color: var(--color-text-on-primary);
+  margin-right: var(--space-sm);
+  border: none;
+  box-shadow: var(--box-shadow-light);
+  transition: all 0.3s ease;
+}
+.header__actions .button--create-championship:hover {
+  background-color: var(--color-secondary-darker);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  transform: translateY(-2px);
+}
+
 /* Media Queries */
 @media (max-width: 992px) {
   .header {
@@ -123,13 +154,27 @@
     gap: var(--space-sm); /* Var */
     position: static; /* Remover sticky em mobile se causar problemas */
   }
+  
+  .header__logo {
+    position: static;
+    transform: none;
+    margin-bottom: var(--space-sm);
+  }
+  
+  .header__nav {
+    flex: none;
+  }
+  
   .header__nav ul {
     gap: var(--space-xs) var(--space-sm); /* Var */
   }
-   .header__actions {
-     width: 100%;
-     justify-content: center;
-     gap: var(--space-md); /* Var */
+  
+  .header__actions {
+    position: static;
+    transform: none;
+    width: 100%;
+    justify-content: center;
+    gap: var(--space-md); /* Var */
   }
 }
 
@@ -149,3 +194,4 @@
       text-align: center;
    }
 }
+

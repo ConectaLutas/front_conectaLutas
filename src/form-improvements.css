@@ -1,0 +1,83 @@
+/* src/form-improvements.css */
+.form-group {
+  margin-bottom: var(--space-md);
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: var(--space-xs);
+  font-weight: 600;
+  color: var(--color-text-dark);
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="date"],
+.form-group input[type="number"],
+.form-group input[type="tel"],
+.form-group select {
+  width: 100%;
+  padding: var(--space-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-md);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.2);
+  outline: none;
+}
+
+.field-error {
+  color: var(--color-error);
+  font-size: var(--font-size-sm);
+  margin-top: var(--space-xxs);
+}
+
+.register-form button[type="submit"] {
+  width: 100%;
+  padding: var(--space-md);
+  font-size: var(--font-size-lg);
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
+  border: none;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.register-form button[type="submit"]:hover {
+  background-color: var(--color-primary-darker);
+}
+
+.register-form button[type="submit"]:disabled {
+  background-color: var(--color-bg-dark-accent);
+  cursor: not-allowed;
+}
+
+.login-prompt {
+  text-align: center;
+  margin-top: var(--space-md);
+  font-size: var(--font-size-md);
+}
+
+.login-prompt a {
+  color: var(--color-primary);
+  font-weight: bold;
+}
+
+/* Responsividade para formulários */
+@media (max-width: 600px) {
+  .register-container, .login-container {
+    padding: var(--space-md);
+  }
+
+  .register-form button[type="submit"] {
+    padding: var(--space-sm);
+    font-size: var(--font-size-md);
+  }
+}

@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import UserEventsPage from './pages/UserEventsPage/UserEventsPage';
+import EditProfilePage from './pages/EditProfilePage/EditProfilePage';
 
 // Layout Components
 import Header from './components/Header/Header';
@@ -13,6 +15,8 @@ import AboutPage from './pages/AboutPage/AboutPage';
 import PromoteAcademyPage from './pages/PromoteAcademyPage/PromoteAcademyPage'; // <<< IMPORTAR A NOVA PÁGINA
 import ChampionshipDetails  from './pages/ChampionshipDetails/ChampionshipDetails'; 
 import PerfilPage from './pages/PerfilPage/PerfilPage'// <<< IMPORTAR A NOVA PÁGINA
+import CreateChampionshipPage from './pages/CreateChampionshipPage/CreateChampionshipPage'; // <<< NOVA PÁGINA
+import ChavesPage from './pages/ChavesPage/ChavesPage'; // <<< PÁGINA DE CHAVES
 
 // import NovidadesPage from './pages/NovidadesPage/NovidadesPage';
 // import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
@@ -30,14 +34,18 @@ function App() {
             {/* Rota da Home para ver detalhes do campeoanto */}
             <Route path="/campeonato/:id" element={<ChampionshipDetails />} />
             <Route path="/perfil/:id" element={<PerfilPage />} />
-
+            <Route path="/perfil/editar" element={<EditProfilePage />} />
             {/* Rotas existentes */}
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/quem-somos" element={<AboutPage />} />
-
+            <Route path="/eventos" element={<UserEventsPage />} />
             {/* <<< NOVA ROTA para a página "Divulgue sua Academia" >>> */}
             <Route path="/divulgue" element={<PromoteAcademyPage />} />
+            {/* <<< NOVA ROTA para criar campeonatos (apenas admins) >>> */}
+            <Route path="/criar-campeonato" element={<CreateChampionshipPage />} />
+            {/* <<< NOVA ROTA para chaves (apenas admins) >>> */}
+            <Route path="/chaves" element={<ChavesPage />} />
 
             {/* Adicione outras rotas aqui */}
             {/* <Route path="/novidades" element={<NovidadesPage />} /> */}

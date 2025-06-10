@@ -1,132 +1,226 @@
 /* src/pages/LoginPage/LoginPage.css */
 .login-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-    padding: var(--space-lg) var(--space-sm); /* Var */
-    background-image:
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Manter centralizado verticalmente pois o formulário é menor */
+  flex-grow: 1;
+  padding: var(--space-lg) var(--space-sm);
+  /* Reutilizando o fundo da RegisterPage */
+  background-image:
         linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), /* Ajustar opacidade */
-        url('../../assets/images/login.png'); /* Mantenha o caminho */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  
-  .login-container {
-    background-color: rgba(255, 255, 255, 0.95); /* Quase opaco */
-    padding: var(--space-lg); /* Var */
-    border-radius: var(--border-radius-md); /* Var */
-    box-shadow: var(--box-shadow-medium); /* Var */
-    width: 100%;
-    max-width: 420px; /* Um pouco mais de espaço */
-    text-align: center;
-    max-height: 95vh; /* Evita cobrir header/footer em telas curtas */
-    overflow-y: auto; /* Scroll interno apenas se necessário */
-  }
-  
-  .login-container h2 {
-    margin-top: 0;
-    margin-bottom: var(--space-md); /* Var */
-    color: var(--color-primary); /* Var */
-    font-size: var(--font-size-h2); /* Var */
-  }
-  
-  .login-form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm); /* Espaço entre os grupos */
-  }
-  
-  .form-group {
-    margin-bottom: 0; /* Removido, usando gap no form */
-    text-align: left;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: var(--space-xs); /* Var */
-    color: var(--color-text-dark); /* Var */
-    font-weight: 600;
-    font-size: var(--font-size-sm); /* Var */
-  }
-  
-  .form-group input[type="email"],
-  .form-group input[type="password"] {
-    width: 100%;
-    padding: var(--space-xs) var(--space-sm); /* Var */
-    border: 1px solid var(--color-border); /* Var */
-    border-radius: var(--border-radius-sm); /* Var */
-    font-size: var(--font-size-md); /* Var */
-    line-height: 1.5;
-  }
-  .form-group input:focus {
-    outline: none;
-    border-color: var(--color-primary); /* Var */
-    box-shadow: 0 0 0 2px rgba(0, 117, 74, 0.2); /* Foco sutil */
-  }
-  .form-group input:disabled {
-      background-color: #e9ecef; /* Fundo cinza para desabilitado */
-      cursor: not-allowed;
-  }
-  
-  
-  /* Estilo botão de submit */
-  .button--submit {
-    width: 100%;
-    padding: var(--space-sm); /* Var */
-    background-color: var(--color-primary); /* Var */
-    color: var(--color-text-on-primary); /* Var */
-    border: none;
-    font-size: var(--font-size-lg); /* Var */
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color var(--transition-duration) var(--transition-timing),
-                opacity var(--transition-duration) var(--transition-timing); /* Var */
-    margin-top: var(--space-xs); /* Var */
-  }
-  .button--submit:hover:not(:disabled) {
-    background-color: #005c3a; /* Verde mais escuro */
-    transform: translateY(-1px);
-  }
-  .button--submit:disabled {
-    opacity: 0.7;
-    cursor: wait; /* Cursor de espera */
-  }
-  
-  
-  /* Estilo para links abaixo do form */
-  .form-link {
-    margin-top: var(--space-md); /* Var */
-    font-size: var(--font-size-sm); /* Var */
-    color: var(--color-text-medium); /* Var */
-  }
-  .form-link a {
-    color: var(--color-primary); /* Var */
-    text-decoration: none;
-    font-weight: 600;
-  }
-  .form-link a:hover,
-  .form-link a:focus {
-    text-decoration: underline;
-  }
-  .form-link--secondary a {
-      font-weight: 400;
-      color: var(--color-text-medium); /* Var */
-  }
-  .form-link--secondary a:hover,
-  .form-link--secondary a:focus {
-      color: var(--color-text-dark); /* Var */
-  }
-  
-  /* Estilo para mensagem de erro geral */
-  .form-error {
-      background-color: rgba(220, 53, 69, 0.1); /* Fundo vermelho claro */
-      color: var(--color-error); /* Var */
-      border: 1px solid rgba(220, 53, 69, 0.3);
-      border-radius: var(--border-radius-sm); /* Var */
-      padding: var(--space-sm); /* Var */
-      margin-bottom: var(--space-sm); /* Var */
-      text-align: center;
-      font-size: var(--font-size-sm); /* Var */
-  }
+        url('../../assets/images/login.png'); /* Ou login.png se preferir */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Mantém fundo fixo */
+}
+
+.login-container {
+  background-color: var(--color-bg-light);
+  padding: var(--space-xl) var(--space-lg);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--box-shadow-medium);
+  width: 100%;
+  max-width: 480px; /* AUMENTADO: de 420px para 480px (ou outro valor que preferir) */
+  text-align: center;
+}
+
+.login-container h2 {
+  margin-top: 0;
+  margin-bottom: var(--space-lg);
+  color: var(--color-text-dark); /* Título escuro */
+  font-family: var(--font-family-secondary);
+  font-size: var(--font-size-h2); /* Tamanho do Figma parece um pouco maior */
+  font-weight: 700;
+}
+
+.login-form .form-group {
+  margin-bottom: var(--space-md);
+  text-align: left; /* Labels e inputs à esquerda */
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: var(--space-xs);
+  color: var(--color-text-medium);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+}
+
+/* Estilo de input reutilizado da RegisterPage */
+.login-form input[type="email"],
+.login-form input[type="password"] {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-md);
+  line-height: 1.5;
+  background-color: var(--color-bg-light);
+  color: var(--color-text-dark);
+  transition: border-color var(--transition-duration) ease-in-out,
+              box-shadow var(--transition-duration) ease-in-out;
+}
+
+.login-form input::placeholder {
+  color: var(--color-text-medium);
+  opacity: 0.8;
+}
+
+.login-form input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb, 13, 59, 102), 0.25);
+}
+
+.login-form input.input-error {
+  border-color: var(--color-error);
+}
+.login-form input.input-error:focus {
+  box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.25);
+}
+
+.error-msg { /* Reutilizado da RegisterPage */
+  color: var(--color-error);
+  font-size: var(--font-size-sm);
+  margin-top: var(--space-xxs);
+  display: block;
+  text-align: left;
+}
+
+.form-error-api { /* Reutilizado da RegisterPage */
+  background-color: rgba(220, 53, 69, 0.1);
+  color: var(--color-error);
+  border: 1px solid rgba(220, 53, 69, 0.3);
+  border-radius: var(--border-radius-sm);
+  padding: var(--space-sm);
+  margin-bottom: var(--space-md);
+  text-align: center;
+  font-size: var(--font-size-sm);
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-md);
+  font-size: var(--font-size-sm);
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+}
+
+.form-check input[type="checkbox"] {
+  margin-right: var(--space-xs);
+  /* Estilos customizados para checkbox podem ser adicionados aqui se desejar */
+}
+
+.form-check label {
+  margin-bottom: 0; /* Remover margem padrão do label */
+  color: var(--color-text-medium);
+  font-weight: normal;
+}
+
+.forgot-password-link {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+.forgot-password-link:hover {
+  text-decoration: underline;
+}
+
+/* Botão Entrar */
+.button--submit-login {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--color-text-dark); /* Fundo escuro */
+  color: var(--color-bg-light); /* Texto claro */
+  border: none;
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-lg);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color var(--transition-duration) ease-in-out, transform 0.2s ease;
+  margin-bottom: var(--space-md);
+}
+
+.button--submit-login:hover:not(:disabled) {
+  background-color: var(--color-primary); /* Azul no hover */
+  transform: translateY(-2px);
+}
+
+.button--submit-login:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Separador OU */
+.separator-or {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: var(--color-text-medium);
+  margin: var(--space-md) 0;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+}
+.separator-or .line {
+  flex-grow: 1;
+  height: 1px;
+  background-color: var(--color-border);
+}
+.separator-or span:not(.line) {
+  padding: 0 var(--space-sm);
+}
+
+/* Botão Entrar com Google */
+.button--google-login {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--color-bg-light);
+  color: var(--color-text-dark);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-md); /* Um pouco menor que o principal */
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transition-duration) ease-in-out, border-color var(--transition-duration) ease-in-out;
+  margin-bottom: var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+}
+.button--google-login:hover:not(:disabled) {
+  background-color: var(--color-bg-medium);
+  border-color: var(--color-text-medium);
+}
+.button--google-login:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+.google-icon-placeholder { /* Estilo para o 'G' placeholder */
+  font-weight: bold;
+  /* Adicione aqui a imagem real do ícone do Google quando tiver */
+  /* width: 20px; height: 20px; background-image: url(path/to/google-icon.svg); background-size: contain; */
+}
+
+
+/* Link Criar Conta */
+.register-link-login {
+  margin-top: var(--space-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-medium);
+}
+.register-link-login a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+.register-link-login a:hover,
+.register-link-login a:focus {
+  text-decoration: underline;
+}

@@ -1,8 +1,11 @@
+// src/pages/LoginPage/LoginPage.jsx
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
-import api from '../../api/api';           // importe seu axios configurado
+import api from '../../api/api';
 import './LoginPage.css';
+// Se você for usar um ícone real do Google, importe-o aqui
+// import GoogleIcon from '../../assets/icons/google-icon.svg'; // Exemplo
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -29,76 +32,113 @@ const LoginPage = () => {
     if (!validateForm()) return;
 
     setIsLoading(true);
-    try {
-      // login usando api (axios)
+try {
       const { data } = await api.post('/Usuario/login', { email, password });
-
       const token = data.token;
       localStorage.setItem('authToken', token);
 
       const decoded = jwtDecode(token);
-      const usuarioId = decoded.userId || decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
-      const atletaResponse = await api.get(`/api/Atleta/por-usuario/${usuarioId}`);
-      const atleta = atletaResponse.data;
+      console.log('Token decodificado:', decoded); 
 
-      navigate(`/perfil/${atleta.id}`);
+      const usuarioId = decoded.userId || decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+      
+      try {
+        const atletaResponse = await api.get(`/api/Atleta/por-usuario/${usuarioId}`);
+        const atleta = atletaResponse.data;
+        if (atleta && atleta.id) {
+          localStorage.setItem('loggedInAtletaId', atleta.id);
+          
+          window.dispatchEvent(new CustomEvent('authChange')); // <<< DISPARAR EVENTO
+          
+          navigate(`/perfil/${atleta.id}`);
+        } else {
+          // ... (tratamento se atleta não encontrado)
+          window.dispatchEvent(new CustomEvent('authChange')); // Disparar mesmo se atleta não encontrado, mas login OK
+          navigate('/'); 
+        }
+      } catch (atletaError) {
+        // ... (tratamento de erro ao buscar atleta)
+        window.dispatchEvent(new CustomEvent('authChange')); // Disparar para garantir que o header reaja ao token
+        navigate('/'); 
+      }
     } catch (err) {
-      console.error("Erro no login:", err);
-      setError(err.response?.data?.message || err.message || 'Erro ao tentar fazer login.');
+      // ... (seu tratamento de erro de login)
     } finally {
       setIsLoading(false);
     }
   };
 
-  return (
+    return (
     <div className="login-page">
       <div className="login-container">
-        <h2 id="login-title">Login</h2>
+        <h2 id="login-title">Bem-vindo de volta!</h2>
         <form onSubmit={handleSubmit} className="login-form" noValidate aria-labelledby="login-title">
-          {error && <p className="form-error">{error}</p>}
+          {error && <p className="form-error-api">{error}</p>}
 
           <div className="form-group">
-            <label htmlFor="email">Email:</label>
+            <label htmlFor="email">E-mail</label>
             <input
               type="email"
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              aria-required="true"
+              placeholder="Digite seu e-mail"
               disabled={isLoading}
               autoComplete="email"
+              className={fieldErrors.email ? 'input-error' : ''}
+              aria-required="true"
               aria-invalid={!!fieldErrors.email}
               aria-describedby={fieldErrors.email ? "email-login-error" : undefined}
             />
-            {fieldErrors.email && <p id="email-login-error" className="field-error">{fieldErrors.email}</p>}
+            {fieldErrors.email && <p id="email-login-error" className="error-msg">{fieldErrors.email}</p>}
           </div>
 
           <div className="form-group">
-            <label htmlFor="password">Senha:</label>
+            <label htmlFor="password">Senha</label>
             <input
               type="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              aria-required="true"
+              placeholder="Digite sua senha"
               disabled={isLoading}
               autoComplete="current-password"
+              className={fieldErrors.password ? 'input-error' : ''}
+              aria-required="true"
               aria-invalid={!!fieldErrors.password}
               aria-describedby={fieldErrors.password ? "password-login-error" : undefined}
             />
-            {fieldErrors.password && <p id="password-login-error" className="field-error">{fieldErrors.password}</p>}
+            {fieldErrors.password && <p id="password-login-error" className="error-msg">{fieldErrors.password}</p>}
           </div>
 
-          <button type="submit" className="button button--submit" disabled={isLoading}>
+          <div className="form-options">
+            <div className="form-check">
+              <input type="checkbox" id="rememberLogin" />
+              <label htmlFor="rememberLogin">Lembrar login</label>
+            </div>
+            <Link to="/esqueci-senha" className="forgot-password-link">Esqueceu a senha?</Link>
+          </div>
+
+          <button type="submit" className="button button--submit-login" disabled={isLoading}>
             {isLoading ? 'Entrando...' : 'Entrar'}
           </button>
+
+          {/* REMOVIDO: Separador "OU" e Botão "Entrar com Google"
+          <div className="separator-or">
+            <span className="line"></span>
+            <span>OU</span>
+            <span className="line"></span>
+          </div>
+
+          <button type="button" className="button button--google-login" disabled={isLoading}>
+            <span className="google-icon-placeholder">G</span>
+            Entrar com Google
+          </button>
+          */}
         </form>
 
-        <p className="form-link">
-          Não tem uma conta? <Link to="/register">Cadastre-se</Link>
-        </p>
-        <p className="form-link form-link--secondary">
-          <Link to="/">Voltar para a Home</Link>
+        <p className="register-link-login">
+          Não tem uma conta? <Link to="/register">Criar uma conta</Link>
         </p>
       </div>
     </div>

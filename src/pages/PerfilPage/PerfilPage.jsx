@@ -37,7 +37,7 @@ const PerfilPage = () => {
           // --- Campos que AINDA PRECISAM de confirmação/dados da API ou serão simulados ---
           fotoUrl: dadosApi.usuario?.fotoUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(dadosApi.usuario?.nomeCompleto || 'Atleta')}&background=0D3B66&color=fff&size=100`, // Usar ui-avatars se fotoUrl não vier
           
-          localizacao: dadosApi.usuario?.localizacao || "Localização não informada", // CAMPO PENDENTE NA API (simulado)
+          localizacao: dadosApi.usuario?.localizacao || "Brasil", // CAMPO PENDENTE NA API (simulado)
           
           // "Modalidade" virá de esporteNome
           // "Faixa e Peso" será formatado no JSX
@@ -47,9 +47,9 @@ const PerfilPage = () => {
                                                                       // CONFIRMAR se 'inscricoes' sempre vem e se é a contagem correta.
 
           estatisticas: dadosApi.estatisticas || { // CAMPO PENDENTE NA API (simulado)
-            primeiroLugar: Math.floor(Math.random() * 50) + 20, // Simulação aleatória
-            segundoLugar: Math.floor(Math.random() * 30) + 10,  // Simulação aleatória
-            terceiroLugar: Math.floor(Math.random() * 20) + 5,   // Simulação aleatória
+            primeiroLugar: Math.floor(Math.random() * 0) + 0, // Simulação aleatória
+            segundoLugar: Math.floor(Math.random() * 0) + 0,  // Simulação aleatória
+            terceiroLugar: Math.floor(Math.random() * 0) + 0,   // Simulação aleatória
           },
 
           // Processar 'inscricoes' para 'Últimos Eventos'

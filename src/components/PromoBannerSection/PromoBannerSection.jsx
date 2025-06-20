@@ -15,10 +15,10 @@ const PromoBannerSection = () => {
       <div className="promo-banner__overlay"> {/* Camada para escurecer/filtrar fundo */}
         <div className="promo-banner__content">
           {/* Usando o estilo Poppins 77px Verde com sombra do Figma */}
-          <h1 className="promo-banner__title">Jiu-Jitsu Online</h1>
+          <h1 className="promo-banner__title">Conecta Lutas</h1>
           {/* Usando o estilo Poppins 30px Preto */}
           <p className="promo-banner__subtitle">
-            Transforme a gestão de campeonatos de Jiu-Jitsu em uma experiência épica!
+            Transforme a gestão de campeonatos de lutas em uma experiência épica!
           </p>
         </div>
       </div>

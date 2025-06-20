@@ -136,7 +136,7 @@ const CreateChampionshipPage = () => {
         }
       });
 
-      const response = await api.post('/api/Campeonato', formDataToSend, {
+      const response = await api.post('/Campeonato', formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

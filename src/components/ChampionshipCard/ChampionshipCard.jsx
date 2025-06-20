@@ -8,7 +8,7 @@ const ChampionshipCard = ({ title, date, location, image, detailsLink }) => {
     <div className="champ-card">
       <Link to={detailsLink || '#'} className="champ-card__link">
         <img
-          src={image || 'https://via.placeholder.com/400x250/cccccc/999999?text=Sem+Imagem'}
+          src={image || 'https://picsum.photos/200/300' }
           alt={`Banner do evento ${title}`}
           className="champ-card__image"
           loading="lazy"

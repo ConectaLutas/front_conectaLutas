@@ -83,7 +83,7 @@ const Header = () => {
 
   const navLinksLoggedIn = [
     { to: "/", label: "Início", end: true },
-    { to: "/eventos", label: "Eventos" },
+    //{ to: "/eventos", label: "Eventos" },
     // { to: "/atletas", label: "Atletas" }, // Comentado conforme solicitado
     // { to: "/ranking", label: "Ranking" }, // Comentado conforme solicitado
   ];

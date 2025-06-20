@@ -81,27 +81,7 @@ const UserMenu = ({ onLogout }) => {
               >
                 <IconPlaceholder>🧑</IconPlaceholder> Meu Perfil
               </NavLink>
-            </li>
-            <li>
-              <NavLink to="/perfil/editar" className="dropdown-item" onClick={closeDropdown}> {/* Rota placeholder */}
-                <IconPlaceholder>📝</IconPlaceholder> Editar Perfil
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/notificacoes" className="dropdown-item" onClick={closeDropdown}> {/* Rota placeholder */}
-                <IconPlaceholder>🔔</IconPlaceholder> Notificações
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/preferencias" className="dropdown-item" onClick={closeDropdown}> {/* Rota placeholder */}
-                <IconPlaceholder>⚙️</IconPlaceholder> Preferências
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/meus-campeonatos" className="dropdown-item" onClick={closeDropdown}> {/* Rota placeholder */}
-                <IconPlaceholder>🏆</IconPlaceholder> Campeonatos
-              </NavLink>
-            </li>
+            </li>          
             <li>
               <button onClick={handleLogout} className="dropdown-item dropdown-item-button">
                 <IconPlaceholder>🚪</IconPlaceholder> Sair

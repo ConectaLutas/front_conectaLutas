@@ -31,7 +31,6 @@ Plataforma web para gestão de campeonatos de Lutas, com funcionalidades como ca
 ### ✅ MVP (Versão Inicial)
 
 - Cadastro de Atletas e Campeonatos
-- Categorias por idade, peso e graduação
 - Geração Automática de Chaves 
 - Visualização das Chaves por PDF
 
@@ -50,7 +49,6 @@ Plataforma web para gestão de campeonatos de Lutas, com funcionalidades como ca
 
 - **React**
 - **Axios** (requisições HTTP)
-- **TailwindCSS** (estilização)
 - **React Router DOM** (rotas)
 - **Netlify** (deploy)
 

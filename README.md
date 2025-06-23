@@ -96,3 +96,48 @@ npm install
 npm run start
 
 
+
+🧪 Rodando os Testes
+O projeto utiliza Jest e React Testing Library para testes automatizados.
+
+Para rodar todos os testes:
+
+Você pode rodar um teste específico usando:
+
+Exemplo:
+
+🧹 Rodando o Linter
+O projeto utiliza ESLint para padronização de código.
+
+Instalando o ESLint
+Se aparecer erro dizendo que o comando eslint não foi encontrado, instale o ESLint:
+
+Adicionando o script no package.json
+Se não existir o script lint no seu package.json, adicione em "scripts":
+
+Rodando o linter
+Para rodar o linter, use:
+
+Regras do Linter
+As principais regras de padronização usadas no projeto são:
+
+Obrigatório uso de ponto e vírgula:
+"semi": ["error", "always"]
+Aviso para variáveis não utilizadas:
+"no-unused-vars": ["warn"]
+Aviso para funções vazias:
+"no-empty-function": ["warn"]
+Preferência por funções como expressão:
+"func-style": ["warn", "expression"]
+Preferência por arrow functions em callbacks:
+"prefer-arrow-callback": ["warn"]
+Arrow function sem chaves se possível:
+"arrow-body-style": ["warn", "as-needed"]
+Aviso para uso de console.log:
+"no-console": ["warn"]
+Essas regras estão configuradas no bloco "eslintConfig" do package.json do projeto.
+
+🛠️ Dicas
+Sempre rode o linter antes de subir código para manter o padrão do projeto.
+Mantenha os testes atualizados ao criar novas funcionalidades.
+Consulte a documentação da API no Swagger para detalhes dos endpoints.

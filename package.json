@@ -12,7 +12,7 @@
     "prop-types": "^15.8.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-router-dom": "^7.4.1",
+    "react-router-dom": "^6.30.1",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
@@ -20,13 +20,23 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+    "semi": ["error", "always"],                
+    "no-unused-vars": ["warn"],                 
+    "no-empty-function": ["warn"],              
+    "func-style": ["warn", "expression"],       
+    "prefer-arrow-callback": ["warn"],          
+    "arrow-body-style": ["warn", "as-needed"],  
+    "no-console": ["warn"]                      
+    }
   },
   "browserslist": {
     "production": [
@@ -39,5 +49,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1"
   }
 }

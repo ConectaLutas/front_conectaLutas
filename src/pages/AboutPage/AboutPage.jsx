@@ -40,7 +40,7 @@ const AboutPage = () => {
             Nossa plataforma foi criada para atletas em busca de eventos e locais
             de treino, organizadores que desejam simplificar a gestão de seus campeonatos,
             donos de academia que querem aumentar sua visibilidade, e todos os apaixonados
-            pelo Jiu-Jitsu
+            por lutas.
           </p>
         </section>
       </div>

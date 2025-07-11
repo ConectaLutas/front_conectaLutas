@@ -87,7 +87,7 @@ O projeto foi desenvolvido utilizando uma **Arquitetura em Camadas**, separando 
 
 ###  Frontend
 
-```bash
+
 
 cd frontend
 npm install
@@ -146,7 +146,6 @@ Nosso grupo segue um fluxo padronizado de contribuição via Pull Requests (PRs)
 
 ### 💬 Exemplo de commit
 
-```bash
 feat: adiciona botão de inscrição no card de campeonato
 fix: corrige erro no cálculo de chaves ao cadastrar lutas
 # 📌 Descrição da Pull Request
@@ -162,13 +161,7 @@ Descreva brevemente o que esta PR faz. Explique o contexto e por que essa mudan�
 - [ ] O sistema foi testado manualmente e está funcionando
 - [ ] Não há conflitos com a branch `main`
 - [ ] A documentação foi atualizada (quando necessário)
-- [ ] Esta PR está relacionada a uma issue? Se sim, link abaixo.
 
----
-
-## 🔗 Issue Relacionada
-
-Closes #[número da issue]
 
 ---
 
@@ -192,38 +185,40 @@ O projeto utiliza Jest e React Testing Library para testes automatizados.
 Para rodar todos os testes:
 
 Você pode rodar um teste específico usando:
+NPM RUN TEST
 
-Exemplo:
 
 🧹 Rodando o Linter
 O projeto utiliza ESLint para padronização de código.
+npm run lint
 
-Instalando o ESLint
-Se aparecer erro dizendo que o comando eslint não foi encontrado, instale o ESLint:
-
-Adicionando o script no package.json
-Se não existir o script lint no seu package.json, adicione em "scripts":
-
-Rodando o linter
-Para rodar o linter, use:
 
 Regras do Linter
 As principais regras de padronização usadas no projeto são:
 
 Obrigatório uso de ponto e vírgula:
 "semi": ["error", "always"]
+
 Aviso para variáveis não utilizadas:
 "no-unused-vars": ["warn"]
+
 Aviso para funções vazias:
 "no-empty-function": ["warn"]
+
 Preferência por funções como expressão:
 "func-style": ["warn", "expression"]
+
 Preferência por arrow functions em callbacks:
 "prefer-arrow-callback": ["warn"]
+
 Arrow function sem chaves se possível:
 "arrow-body-style": ["warn", "as-needed"]
+
 Aviso para uso de console.log:
 "no-console": ["warn"]
+
+<img width="694" height="602" alt="image" src="https://github.com/user-attachments/assets/09185df9-6184-4c29-b221-c71ee00530e6" />
+
 Essas regras estão configuradas no bloco "eslintConfig" do package.json do projeto.
 
 🛠️ Dicas

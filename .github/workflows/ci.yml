@@ -1,0 +1,19 @@
+# .github/workflows/trigger-e2e-tests.yml
+name: Trigger Cypress Tests on Front Commit
+
+on:
+  push:
+    branches:
+      - main  # ou a branch que você usa
+
+jobs:
+  trigger-cypress-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger Cypress tests in separate repo
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.DISPATCH_TOKEN }}
+          repository: https://github.com/ConectaLutas/Cypress_ConectaLutas
+          event-type: run-e2e-tests

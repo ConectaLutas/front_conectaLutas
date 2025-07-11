@@ -4,7 +4,7 @@ name: Trigger Cypress Tests on Front Commit
 on:
   push:
     branches:
-      - main  # ou a branch que você usa
+      - master  
 
 jobs:
   trigger-cypress-tests:

@@ -14,7 +14,7 @@ import RegisterPage from './pages/RegisterPage/RegisterPage';
 import AboutPage from './pages/AboutPage/AboutPage';
 import PromoteAcademyPage from './pages/PromoteAcademyPage/PromoteAcademyPage'; // <<< IMPORTAR A NOVA PÁGINA
 import ChampionshipDetails  from './pages/ChampionshipDetails/ChampionshipDetails'; 
-import PerfilPage from './pages/PerfilPage/PerfilPage'// <<< IMPORTAR A NOVA PÁGINA
+import PerfilPage from './pages/PerfilPage/PerfilPage';// <<< IMPORTAR A NOVA PÁGINA
 import CreateChampionshipPage from './pages/CreateChampionshipPage/CreateChampionshipPage'; // <<< NOVA PÁGINA
 import ChavesPage from './pages/ChavesPage/ChavesPage'; // <<< PÁGINA DE CHAVES
 

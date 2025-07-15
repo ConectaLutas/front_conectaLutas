@@ -29,13 +29,30 @@
       "react-app/jest"
     ],
     "rules": {
-    "semi": ["error", "always"],                
-    "no-unused-vars": ["warn"],                 
-    "no-empty-function": ["warn"],              
-    "func-style": ["warn", "expression"],       
-    "prefer-arrow-callback": ["warn"],          
-    "arrow-body-style": ["warn", "as-needed"],  
-    "no-console": ["warn"]                      
+      "semi": [
+        "error",
+        "always"
+      ],
+      "no-unused-vars": [
+        "warn"
+      ],
+      "no-empty-function": [
+        "warn"
+      ],
+      "func-style": [
+        "warn",
+        "expression"
+      ],
+      "prefer-arrow-callback": [
+        "warn"
+      ],
+      "arrow-body-style": [
+        "warn",
+        "as-needed"
+      ],
+      "no-console": [
+        "warn"
+      ]
     }
   },
   "browserslist": {
@@ -51,6 +68,9 @@
     ]
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.28.0",
+    "@babel/preset-react": "^7.27.1",
+    "babel-jest": "^30.0.4",
     "eslint": "^8.57.1"
   }
 }

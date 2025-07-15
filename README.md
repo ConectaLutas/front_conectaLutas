@@ -10,7 +10,7 @@ Plataforma web para gestão de campeonatos de Lutas, com funcionalidades como ca
 - 💻 **Repositório:** [GitHub Conecta Lutas](https://github.com/ConectaLutas?tab=repositories)
 - 📘 **Documentação da API:** [Swagger API](https://api-conectalutas.onrender.com/index.html)
 - 🎨 **Figma (Design):** [Protótipo no Figma](https://www.figma.com/design/GzKxuvujzeReJ3KLgFHfkd/Untitled?node-id=0-1&p=f&t=s7NSq7EbysF0BWx5-0)
-- 📋 **Planejamento:** [Notion do Projeto](https://www.notion.so/1a85e27ae34280bcb100dff9fffb2af2?pvs=21)
+- 📋 **Documentação:** [Notion do Projeto](https://roan-gallium-9e1.notion.site/Conecta-Lutas-1a85e27ae34280529309d48350f3ab0e)
 
 ---
 
